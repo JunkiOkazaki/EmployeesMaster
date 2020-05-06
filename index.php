@@ -15,7 +15,29 @@
     <meta name="msapplication-wide310x150logo" content="wide.jpg"/>
     <meta name="msapplication-square310x310logo" content="large.jpg"/>
     <meta name="msapplication-TileColor" content="#FAA500"/>
-    <title>従業員一覧</title>
+    
+    <!-- jQuery Datepicker -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+            $( "#datepicker" ).datepicker({
+            dateFormat: 'yy-mm-dd',
+            yearSuffix: '年',
+            showMonthAfterYear: true,
+            monthNames: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+            dayNames: ['日', '月', '火', '水', '木', '金', '土'],
+            dayNamesMin: ['日', '月', '火', '水', '木', '金', '土']
+            
+            });
+        } );
+    </script>
+    
+<title>従業員一覧</title>
+
 </head>
 <body>
 <h1>従業員一覧</h1>
@@ -37,7 +59,7 @@ foreach ($_POST as $key => $value){
     <div>氏　　名&nbsp;&thinsp;&thinsp;<input type="text" name="employee_name" size="30"></div>
     <div>部　署ID&nbsp;&thinsp;<input type="text" name="department_id" size="30"></div>
     <!-- <div>削除フラグ <input type="text" name="delete_flag" size="50"></div> -->
-    <!-- <div>データ登録日時 <input type="text" name="created_at" size="50"></div> -->
+    <div>登録日時&nbsp;&thinsp;&thinsp;<input type="text" name="created_at" id="datepicker" size="30"></div>
     <!-- <div>データ更新日時 <input type="text" name="updated_at" size="50"></div> -->
     <div><input type="submit" name="search" value="検索"></div>
 <br/>    
