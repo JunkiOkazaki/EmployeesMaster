@@ -15,10 +15,10 @@
     <meta name="msapplication-wide310x150logo" content="wide.jpg"/>
     <meta name="msapplication-square310x310logo" content="large.jpg"/>
     <meta name="msapplication-TileColor" content="#FAA500"/>
-    <title>従業員一覧</title>
+    <title>従業員検索結果</title>
 </head>
 <body>
-<h1>従業員一覧</h1>
+<h1>従業員検索結果</h1>
 
 <?php
 session_start();
@@ -55,20 +55,39 @@ try{
 
 <?php
 try{
-    //$sql = "SELECT * FROM company.employees WHERE employee_id=? OR employee_code=? OR employee_name=? OR department_id=? OR delete_flag=? OR created_at=? OR updated_at=?";
+    $employee_id = $_SESSION['employee_id'];
+    $employee_code = $_SESSION['employee_code'];
+    $employee_name = $_SESSION['employee_name'];
+    $department_id = $_SESSION['department_id'];
+    $delete_flag = $_SESSION['delete_flag'];
+    $created_at = $_SESSION['created_at'];
+    $updated_at = $_SESSION['updated_at'];
+    //$sql = "SELECT * FROM company.employees WHERE employee_id=? OR employee_code=? OR employee_name LIKE ? OR department_id=? OR delete_flag=? OR created_at=? OR updated_at=?";
     //$sql = "SELECT * FROM company.employees WHERE employee_id=?";
-    $sql = "SELECT * FROM company.employees";
-    
+    if(is_numeric($_SESSION['employee_id'])){
+    $sql = "SELECT * FROM company.employees WHERE employee_id=:employee_id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);
+    }elseif(is_numeric($_SESSION['department_id'])){
+    $sql = "SELECT * FROM company.employees WHERE department_id=:department_id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':department_id', $department_id, PDO::PARAM_INT);
+    }elseif(is_string($_SESSION['employee_name'])) {$sql = "SELECT * FROM company.employees WHERE employee_name LIKE :employee_name";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(':employee_name', '%'.$employee_name.'%', PDO::PARAM_STR);
+    }else{$sql = "SELECT * FROM company.employees";
+    $stmh = $pdo->prepare($sql);
+    }
     
     //$sql = "SELECT * FROM company.employees WHERE employee_name LIKE ?";
+    //$stmt = $pdo->prepare($sql);
     //$stmt->bindParam(1, $employee_id, PDO::PARAM_INT);
     //$stmt->bindParam(2, $employee_code, PDO::PARAM_INT);
-    //$stmt->bindValue(3, $employee_name, PDO::PARAM_STR);
+    //$stmt->bindValue(1, '%'.$employee_name.'%', PDO::PARAM_STR);
     //$stmt->bindParam(4, $department_id, PDO::PARAM_INT);
     //$stmt->bindParam(5, $delete_flag, PDO::PARAM_INT);
     //$stmt->bindParam(6, $created_at, PDO::PARAM_STR);
     //$stmt->bindParam(7, $updated_at, PDO::PARAM_STR);
-    $stmt = $pdo->prepare($sql);
     $stmt->execute();
     
 }catch(PDOException $Exception){

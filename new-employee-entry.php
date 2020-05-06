@@ -2,6 +2,19 @@
 <head>
   <meta name="robots" content="noindex">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- ファビコン -->
+  <link rel="icon" href="favicon.ico">
+ 
+  <!-- スマホ用アイコン -->
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+ 
+  <!-- Windows用アイコン -->
+  <meta name="application-name" content="従業員マスター"/>
+  <meta name="msapplication-square70x70logo" content="small.jpg"/>
+  <meta name="msapplication-square150x150logo" content="medium.jpg"/>
+  <meta name="msapplication-wide310x150logo" content="wide.jpg"/>
+  <meta name="msapplication-square310x310logo" content="large.jpg"/>
+  <meta name="msapplication-TileColor" content="#FAA500"/>
   <title>従業員新規登録</title>
  </head>
 <body>
