@@ -2,6 +2,8 @@
 <head>
   <meta name="robots" content="noindex">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
   <!-- ファビコン -->
   <link rel="icon" href="favicon.ico">
  
@@ -15,21 +17,40 @@
   <meta name="msapplication-wide310x150logo" content="wide.jpg"/>
   <meta name="msapplication-square310x310logo" content="large.jpg"/>
   <meta name="msapplication-TileColor" content="#FAA500"/>
+  
+  <!--スタイルシート-->
+  <link rel="stylesheet" href="menu.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+    
   <title>従業員新規登録</title>
  </head>
 <body>
+    
+<ul>
+	<li><a href="http://dev.jokazaki.net:8080/index.php">従業員一覧</a></li>
+	<li><a class="active" href="http://dev.jokazaki.net:8080/new-employee-entry.php">従業員新規登録</a></li>
+	<li><a href="http://dev.jokazaki.net:8080/edit-employee-entry.php">従業員編集</a></li>
+	<li><a href="http://dev.jokazaki.net:8080/employees-master-manual.html">マニュアル</a></li>
+</ul>    
+
+<div class="mycontents">
+    
+    
 <h1>従業員新規登録</h1>
 <div id="post_page">
   <form method="post" action="new-employee-check.php">
-      <div>従業員ID <input type="text" name="employee_id" size="50"></div>
-      <div>従業員コード <input type="text" name="employee_code" size="50"></div>
-    <div>氏名 <input type="text" name="employee_name" size="50"></div>
-    <div>部署ID <input type="text" name="department_id" size="50"></div>
-    <div>削除フラグ <input type="text" name="delete_flag" size="50"></div>
-    <div>データ登録日時 <input type="text" name="created_at" size="50"></div>
-    <div>データ更新日時 <input type="text" name="updated_at" size="50"></div>
-    <div><input type="submit" name="submit" value="確認"></div>
+    <div  class="cp_iptxt"><input class="ef" type="text" name="employee_id" size="30" placeholder=""><label>従業員ID</label><span class="focus_line"></span></div>
+    <!-- <div>従業員コード <input type="text" name="employee_code" size="50"></div> -->
+    <div  class="cp_iptxt"><input class="ef" type="text" name="employee_name" size="30" placeholder=""><label>氏　　名</label><span class="focus_line"></span></div>
+    <div  class="cp_iptxt"><input class="ef" type="text" name="department_id" size="30" placeholder=""><label>部　署ID</label><span class="focus_line"></span></div>
+    <!-- <div>削除フラグ <input type="text" name="delete_flag" size="50"></div> -->
+    <div  class="cp_iptxt"><input class="ef" id="datepicker" type="text" name="created_at" size="30" placeholder="" ><label>登録日時</label><span class="focus_line"></span></div>
+    <!-- <div>データ更新日時 <input type="text" name="updated_at" size="50"></div> -->
+    <div><input type="submit" name="submit" value="確認" class="button"></div>
   </form>
+    
+</div>
 </div>
 </body>
 </html>
