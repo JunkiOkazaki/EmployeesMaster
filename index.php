@@ -125,13 +125,13 @@ try{
     
 <table><tbody>
     <tr>
-        <th>従業員ID</th>
-        <th>従業員コード</th>
-        <th>氏名</th>
-        <th>部署ID</th>
-        <th>削除フラグ</th>
-        <th>データ登録日時</th>
-        <th>データ更新日時</th>
+        <th class="midashi">従業員ID</th>
+        <th class="midashi">従業員コード</th>
+        <th class="midashi">氏名</th>
+        <th class="midashi">部署ID</th>
+        <th class="midashi">削除フラグ</th>
+        <th class="midashi">データ登録日時</th>
+        <th class="midashi">データ更新日時</th>
     </tr>
 
 <?php

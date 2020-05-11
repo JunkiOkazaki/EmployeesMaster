@@ -139,3 +139,11 @@ li a:hover:not(.active) {
 	transition: 0.3s;
 	color: #da3c41;
 }
+
+
+/* 表見出し */
+.midashi {
+         border-bottom: solid 2px #da3c41;
+         padding-right: 15px;
+         padding-left: 15px;
+}
