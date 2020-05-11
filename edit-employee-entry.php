@@ -27,12 +27,12 @@
  </head>
 <body>
     
-<ul>
-	<li><a href="http://dev.jokazaki.net:8080/index.php">従業員一覧</a></li>
-	<li><a href="http://dev.jokazaki.net:8080/new-employee-entry.php">従業員新規登録</a></li>
-	<li><a class="active" href="http://dev.jokazaki.net:8080/edit-employee-entry.php">従業員編集</a></li>
-	<li><a href="http://dev.jokazaki.net:8080/employees-master-manual.html">マニュアル</a></li>
-</ul>    
+    <ul>
+	<li><a class="active" href="https://dev.jokazaki.biz:8443/index.php">従業員一覧</a></li>
+	<li><a href="https://dev.jokazaki.biz:8443/new-employee-entry.php">従業員新規登録</a></li>
+	<li><a href="https://dev.jokazaki.biz:8443/edit-employee-entry.php">従業員編集</a></li>
+        <li><a href="https://dev.jokazaki.biz:8443/employees-master-manual.html">マニュアル</a></li>
+    </ul>    
 
     
 <div class="mycontents">
