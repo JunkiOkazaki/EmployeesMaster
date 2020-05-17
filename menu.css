@@ -147,3 +147,27 @@ li a:hover:not(.active) {
          padding-right: 15px;
          padding-left: 15px;
 }
+
+/* 説明部分 */
+.setsumei {
+        margin-top: 1em;
+        padding-left: 1.5em;
+        padding-top: 0.5em;
+        padding-bottom: 2em;
+        color: #5d627b;
+        background: white;
+        border-top: solid 5px #5d627b;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+}
+.setsumei p {
+    margin: 0; 
+    padding: 0;
+}
+
+.setsumei h3 {
+        border-left: double 5px #3CDAD5;
+        border-right:double 5px #3CDAD5;
+        background: whitesmoke;
+        margin-right:1210px;
+        padding:3px 15px;
+}

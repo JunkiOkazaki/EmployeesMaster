@@ -38,6 +38,19 @@
             });
         } );
     </script>
+        <script>
+        $( function() {
+            $( "#datepicker2" ).datepicker({
+            dateFormat: 'yy-mm-dd',
+            yearSuffix: '年',
+            showMonthAfterYear: true,
+            monthNames: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+            dayNames: ['日', '月', '火', '水', '木', '金', '土'],
+            dayNamesMin: ['日', '月', '火', '水', '木', '金', '土']
+            
+            });
+        } );
+    </script>
     
 <title>従業員検索結果</title>
 </head>
@@ -56,7 +69,8 @@ foreach ($_POST as $key => $value){
 	<li><a class="active" href="https://dev.jokazaki.biz:8443/index.php">従業員一覧</a></li>
 	<li><a href="https://dev.jokazaki.biz:8443/new-employee.php">従業員新規登録</a></li>
 	<li><a href="https://dev.jokazaki.biz:8443/edit-employee.php">従業員編集</a></li>
-        <li><a href="https://dev.jokazaki.biz:8443/employees-master-manual.html">マニュアル</a></li>
+        <li><a href="https://dev.jokazaki.biz:8443/delete-employee.php">従業員削除</a></li>
+        <li><a href="https://dev.jokazaki.biz:8443/employees-master-manual.php">マニュアル</a></li>
     </ul>
 
     
@@ -68,91 +82,15 @@ foreach ($_POST as $key => $value){
 
 <form method="post" action="index.php">
     <div  class="cp_iptxt"><input class="ef" type="text" name="employee_id" size="30" placeholder=""><label>従業員ID</label><span class="focus_line"></span></div>
+    <div  class="cp_iptxt"><input class="ef" type="text" name="employee_code" size="30" placeholder=""><label>従業員コード</label><span class="focus_line"></span></div>
     <div  class="cp_iptxt"><input class="ef" type="text" name="employee_name" size="30" placeholder=""><label>氏　　名</label><span class="focus_line"></span></div>
     <div  class="cp_iptxt"><input class="ef" type="text" name="department_id" size="30" placeholder=""><label>部　署ID</label><span class="focus_line"></span></div>
     <div  class="cp_iptxt"><input class="ef" id="datepicker" type="text" name="created_at" size="30" placeholder="" ><label>登録日時</label><span class="focus_line"></span></div>
+    <div  class="cp_iptxt"><input class="ef" id="datepicker2" type="text" name="updated_at" size="30" placeholder="" ><label>更新日時</label><span class="focus_line"></span></div>
     <div><input type="submit" name="filter" value="フィルタ" class="button"></div>
 <br/>
 
-<?php
-
-try{
-    $pdo = new PDO('mysql:host=dev.jokazaki.net;dbname=company;charset=utf8', 'devs', '9876');
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-}catch(PDOException $Exception){
-    die('接続エラー：' .$Exception->getMessage());
-}
-?>
-
-<?php
-try{
-    $employee_id = $_SESSION['employee_id'];
-    $employee_code = $_SESSION['employee_code'];
-    $employee_name = $_SESSION['employee_name'];
-    $department_id = $_SESSION['department_id'];
-    $delete_flag = $_SESSION['delete_flag'];
-    $created_at = $_SESSION['created_at'];
-    $updated_at = $_SESSION['updated_at'];
-    
-     
-    if(!empty($employee_id)){
-    $sql = "SELECT * FROM company.employees WHERE employee_id=:employee_id";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);
-    }elseif(!empty($employee_name)){
-    $sql = "SELECT * FROM company.employees WHERE employee_name LIKE :employee_name";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':employee_name', '%'.$employee_name.'%', PDO::PARAM_STR);
-    }elseif(!empty($department_id)){
-    $sql = "SELECT * FROM company.employees WHERE department_id=:department_id";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':department_id', $department_id, PDO::PARAM_INT);
-    }elseif(!empty($created_at)){
-    $sql = "SELECT * FROM company.employees WHERE created_at LIKE :created_at";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':created_at', $created_at, PDO::PARAM_STR);
-    }else{
-    $sql = "SELECT * FROM company.employees";
-    $stmt = $pdo->prepare($sql);
-    }
-    $stmt->execute();
-        
-}catch(PDOException $Exception){
-    die('接続エラー：' .$Exception->getMessage());
-}
-?>
-    
-<table><tbody>
-    <tr>
-        <th class="midashi">従業員ID</th>
-        <th class="midashi">従業員コード</th>
-        <th class="midashi">氏名</th>
-        <th class="midashi">部署ID</th>
-        <th class="midashi">削除フラグ</th>
-        <th class="midashi">データ登録日時</th>
-        <th class="midashi">データ更新日時</th>
-    </tr>
-
-<?php
-    while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-?>
-
-    <tr>
-        <th><?=htmlspecialchars($row['employee_id'])?></th>
-        <th><?=htmlspecialchars($row['employee_code'])?></th>
-        <th><?=htmlspecialchars($row['employee_name'])?></th>
-        <th><?=htmlspecialchars($row['department_id'])?></th>
-        <th><?=htmlspecialchars($row['delete_flag'])?></th>
-        <th><?=htmlspecialchars($row['created_at'])?></th>
-        <th><?=htmlspecialchars($row['updated_at'])?></th>
-    </tr>
-    
-<?php
-    }
-    $pdo = null;
-?>
-</tbody></table>
+<?php include('table-employees-access-display.php'); ?>
 
 </div>
 </body>

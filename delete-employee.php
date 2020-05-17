@@ -52,7 +52,7 @@
         } );
     </script>
     
-<title>従業員編集</title>
+<title>従業員削除</title>
 </head>
 
 <body>
@@ -68,8 +68,8 @@ foreach ($_POST as $key => $value){
     <ul>
 	<li><a href="https://dev.jokazaki.biz:8443/index.php">従業員一覧</a></li>
 	<li><a href="https://dev.jokazaki.biz:8443/new-employee.php">従業員新規登録</a></li>
-	<li><a class="active" href="https://dev.jokazaki.biz:8443/edit-employee.php">従業員編集</a></li>
-        <li><a href="https://dev.jokazaki.biz:8443/delete-employee.php">従業員削除</a></li>
+	<li><a href="https://dev.jokazaki.biz:8443/edit-employee.php">従業員編集</a></li>
+        <li><a class="active" href="https://dev.jokazaki.biz:8443/delete-employee.php">従業員削除</a></li>
         <li><a href="https://dev.jokazaki.biz:8443/employees-master-manual.php">マニュアル</a></li>
     </ul>
 
@@ -77,7 +77,7 @@ foreach ($_POST as $key => $value){
 <div class="mycontents">
     
     
-<h1>従業員編集</h1>
+<h1>従業員削除</h1>
 
 
 <form method="post" action="index.php">
