@@ -44,7 +44,14 @@
 <h1>マニュアル</h1>
 
 <div class="setsumei">
-<h2>従業員新規登録時の注意事項</h2>
+<h2>従業員一覧ページについて</h2>
+<p>
+<img src="manual1.png" alt="従業員一覧ページの画像">
+</p>
+</div>
+
+<div class="setsumei">
+<h2>従業員登録ページについて</h2>
 <p>
 従業員新規登録時は、すでに登録されている部署IDしか登録できません。<br/>
 下記一覧に表示されているいずれかの部署IDを指定してください。
@@ -52,7 +59,16 @@
 
 
 <?php include('table-departments-access-display.php'); ?>
+<br/><img src="manual2.png" alt="従業員登録ページの画像">
 </div>
+
+<div class="setsumei">
+<h2>従業員削除ページについて</h2>
+<p>
+削除したい従業員の従業員IDを入力し、「確認」を押下してください。
+</p>
+</div>
+
 
 <div class="setsumei">
 <h2>従業員マスタに関するご連絡</h2>

@@ -87,7 +87,7 @@ li a:hover:not(.active) {
 	box-sizing: border-box;
 	width: 100%;
 	letter-spacing: 1px;
-	padding-left: 5em;
+	padding-left: 7em;
 }
 .cp_iptxt input[type='text']:focus {
 	outline: none;

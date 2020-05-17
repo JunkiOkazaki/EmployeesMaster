@@ -52,7 +52,7 @@
         } );
     </script>
     
-<title>従業員検索結果</title>
+<title>従業員一覧</title>
 </head>
 
 <body>

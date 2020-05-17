@@ -52,7 +52,7 @@
         } );
     </script>
     
-<title>従業員新規登録</title>
+<title>従業員登録</title>
 </head>
 
 <body>
