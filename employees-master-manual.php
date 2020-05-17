@@ -55,7 +55,7 @@
 </div>
 
 <div class="setsumei">
-<h2>サポート営業時間</h2>
+<h2>従業員マスタに関するご連絡</h2>
 <p>
 <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc_W3mrjvGmZOuT2_7dw3AnMTBF3cTZCtt1zZ_FURqSBaHBew/viewform?embedded=true" width="640" height="709" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
 </p>
