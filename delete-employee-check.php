@@ -1,8 +1,15 @@
 <html>
 <head>
-  <meta name="robots" content="noindex">
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <!-- ファビコン -->
+    <!-- クローラインデックス拒否 -->
+    <meta name="robots" content="noindex">
+    
+    <!-- 文字コード -->
+    <meta charset="utf-8">
+    
+    <!--スタイルシート-->
+    <link rel="stylesheet" href="menu.css">
+    
+    <!-- ファビコン -->
     <link rel="icon" href="favicon.ico">
  
     <!-- スマホ用アイコン -->
@@ -15,60 +22,102 @@
     <meta name="msapplication-wide310x150logo" content="wide.jpg"/>
     <meta name="msapplication-square310x310logo" content="large.jpg"/>
     <meta name="msapplication-TileColor" content="#FAA500"/>
- 
-  <title>新規登録確認画面</title>
+
+<title>従業員削除確認画面</title>
 </head>
 <body>
-<h1>新規登録確認画面</h1>
-<?php
-session_start();
-//if (isset($_POST['name'])) {
-//    $_SESSION['name'] = $_POST['name'];//入力された値をセッションに代入する
-//}
 
-foreach ($_POST as $key => $value){
-    $_SESSION[$key] = $value;
-}
+<?php include('session-start.php'); ?>
+    
+<ul>
+    <li><a href="https://dev.jokazaki.biz:8443/index.php">従業員一覧</a></li>
+    <li><a href="https://dev.jokazaki.biz:8443/new-employee.php">従業員登録</a></li>
+    <li><a href="https://dev.jokazaki.biz:8443/edit-employee.php">従業員編集</a></li>
+    <li><a class="active" href="https://dev.jokazaki.biz:8443/delete-employee.php">従業員削除</a></li>
+    <li><a href="https://dev.jokazaki.biz:8443/employees-master-manual.php">マニュアル</a></li>
+</ul>
+
+
+<div class="mycontents">
+    
+    
+<h1>従業員削除確認画面</h1>
+
+<?php include('db-login.php'); ?>
+
+<?php
+
+    $employee_id = $_SESSION['employee_id'];
+    $flag=0;
+    $class="";
+     
+    if(!empty($employee_id)){
+        if(preg_match('/^[0-9]{1,4}$/', $employee_id)){
+            $employee_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_id);
+            $sql = "SELECT * FROM company.employees WHERE employee_id=:employee_id AND delete_flag=0";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);
+            $stmt->execute();
+            }else{
+                $flag=1;
+                echo "<div class ='error2'>「従業員ID」欄には1～3文字の数字を入力してください</div>";
+        }
+    }else{
+        $flag=1;
+        echo "<div class ='error2'>「従業員ID」欄が未入力です</div>";
+    }
+    
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    if(empty($result['employee_id'])){
+        $flag=1;
+        echo "<p class='error2'>該当するレコードがありませんでした</p>";
+    }
+    
+    if ($flag==1){
+    $class="hide";
+    }
+    elseif($flag==0){
+        echo "<p class='comment'>以下のレコードを削除します</p>";
+    }
 ?>
 
+
+<form method="post" action="delete-employee-process.php">
+<input type="submit" name="delete" value="削除" class="button <?PHP echo $class; ?>">
+<input type="button" onclick="history.back()" value="戻る" class="button">
+<br/>
+
+<table><tbody>
+    <tr>
+        <th class="midashi">従業員ID</th>
+        <th class="midashi">従業員コード</th>
+        <th class="midashi">氏名</th>
+        <th class="midashi">部署ID</th>
+        <th class="midashi">データ登録日時</th>
+        <th class="midashi">データ更新日時</th>
+    </tr>
+
+    
+    <?php
+    $count;
+    while($count <=0){
+    ?>
+    
+    <tr>
+        <th><?=htmlspecialchars($result['employee_id'])?></th>
+        <th><?=htmlspecialchars($result['employee_code'])?></th>
+        <th><?=htmlspecialchars($result['employee_name'])?></th>
+        <th><?=htmlspecialchars($result['department_id'])?></th>
+        <th><?=htmlspecialchars($result['created_at'])?></th>
+        <th><?=htmlspecialchars($result['updated_at'])?></th>
+    </tr>
     
 <?php
-    $employee_id = $_SESSION['employee_id'];
-    $employee_code = $_SESSION['employee_code'];
-    $employee_name = $_SESSION['employee_name'];
-    $department_id = $_SESSION['department_id'];
-    $delete_flag = $_SESSION['delete_flag'];
-    $created_at = $_SESSION['created_at'];
-    $updated_at = $_SESSION['updated_at'];
- ?>
-
-<form method="post" action="new-employee-process.php">    
-
-<table>
-    <tr>
-        <th>従業員ID</th>
-        <th>従業員コード</th>
-        <th>氏名</th>
-        <th>部署ID</th>
-        <th>削除フラグ</th>
-        <th>データ登録日時</th>
-        <th>データ更新日時</th>
-    </tr>        
-    
-    <tr>
-        <td><?=htmlspecialchars($employee_id)?></td>
-        <td><?=htmlspecialchars($employee_code)?></td>
-        <td><?=htmlspecialchars($employee_name)?></td>
-        <td><?=htmlspecialchars($department_id)?></td>
-        <td><?=htmlspecialchars($delete_flag)?></td>
-        <td><?=htmlspecialchars($created_at)?></td>
-        <td><?=htmlspecialchars($updated_at)?></td>
-    </tr>
-</table>
- 
-<input type="hidden" name="postkey" value="<?php echo $post[$key]; ?>">
-<div><input type="submit" name="submit" value="登録"></div>
-<div><input type="button" value="戻る" onclick="history.back()"></div>    
-
+    $count++;
+        }
+    $pdo = null; 
+?>
+</tbody></table>
+</div>
 </body>
 </html>

@@ -78,7 +78,7 @@ try{
     $pdo = null; 
 ?>
 
-<button onclick="location.href='https://dev.jokazaki.biz:8443/new-employee.php'" class="button">「従業員登録」に戻る</button>
+<input type="button" onclick="location.href='https://dev.jokazaki.biz:8443/new-employee.php'" value="「従業員登録」に戻る" class="button">
 
 </div>
 </body>

@@ -1,8 +1,13 @@
 <html>
 <head>
+    <!-- クローラインデックス拒否 -->
     <meta name="robots" content="noindex">
+    
+    <!-- 文字コード -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!--スタイルシート-->
+    <link rel="stylesheet" href="menu.css">
     
     <!-- ファビコン -->
     <link rel="icon" href="favicon.ico">
@@ -17,30 +22,23 @@
     <meta name="msapplication-wide310x150logo" content="wide.jpg"/>
     <meta name="msapplication-square310x310logo" content="large.jpg"/>
     <meta name="msapplication-TileColor" content="#FAA500"/>
-    
-    <!--スタイルシート-->
-    <link rel="stylesheet" href="menu.css">
    
 <title>マニュアル</title>
-
 </head>
 <body>
 
-
-
-    <ul>
-	<li><a href="https://dev.jokazaki.biz:8443/index.php">従業員一覧</a></li>
-	<li><a href="https://dev.jokazaki.biz:8443/new-employee.php">従業員登録</a></li>
-	<li><a href="https://dev.jokazaki.biz:8443/edit-employee.php">従業員編集</a></li>
-        <li><a href="https://dev.jokazaki.biz:8443/delete-employee.php">従業員削除</a></li>
-        <li><a class="active" href="https://dev.jokazaki.biz:8443/employees-master-manual.php">マニュアル</a></li>
-    </ul>
-
+<ul>
+    <li><a href="https://dev.jokazaki.biz:8443/index.php">従業員一覧</a></li>
+    <li><a href="https://dev.jokazaki.biz:8443/new-employee.php">従業員登録</a></li>
+    <li><a href="https://dev.jokazaki.biz:8443/edit-employee.php">従業員編集</a></li>
+    <li><a href="https://dev.jokazaki.biz:8443/delete-employee.php">従業員削除</a></li>
+    <li><a class="active" href="https://dev.jokazaki.biz:8443/employees-master-manual.php">マニュアル</a></li>
+</ul>
 
  
 <div class="mycontents">   
      
- 
+
 <h1>マニュアル</h1>
 
 <div class="setsumei">
@@ -58,9 +56,52 @@
 </p>
 
 
-<?php include('table-departments-access-process-display.php'); ?>
+<?php include('db-login.php'); ?>
+
+<?php
+try{    
+    $sql = "SELECT department_id, department_code, department_name, created_at, updated_at FROM company.departments WHERE delete_flag=0";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+        
+}catch(PDOException $Exception){
+    die('接続エラー：' .$Exception->getMessage());
+}
+?>
+
+<?php
+    echo "<h3>".date("Y年m月d日")."時点で登録されている部署"."</h3>";
+?>
+    
+<table><tbody>
+    <tr>
+        <th class="midashi">部署ID</th>
+        <th class="midashi">部署コード</th>
+        <th class="midashi">部署名</th>
+        <th class="midashi">データ登録日時</th>
+        <th class="midashi">データ更新日時</th>
+    </tr>
+
+<?php
+    while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+?>
+    
+    <tr>
+        <th><?=htmlspecialchars($row['department_id'])?></th>
+        <th><?=htmlspecialchars($row['department_code'])?></th>
+        <th><?=htmlspecialchars($row['department_name'])?></th>
+        <th><?=htmlspecialchars($row['created_at'])?></th>
+        <th><?=htmlspecialchars($row['updated_at'])?></th>
+    </tr>
+    
+<?php
+    }
+    $pdo = null;
+?>
+</tbody></table>
 <br/><img src="manual2.png" alt="従業員登録ページの画像">
 </div>
+
 
 <div class="setsumei">
 <h2>従業員削除ページについて</h2>
@@ -75,7 +116,8 @@
 <p>
 <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc_W3mrjvGmZOuT2_7dw3AnMTBF3cTZCtt1zZ_FURqSBaHBew/viewform?embedded=true" width="640" height="709" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
 </p>
-    
+
+
 </div>
 </body>
 </html>
