@@ -53,7 +53,7 @@
 
 <form method="post" action="delete-employee-check.php">
     <div  class="cp_iptxt"><input class="ef" type="text" name="employee_id" size="30" placeholder=""><label>従業員ID</label><span class="focus_line"></span></div>
-    <div><input type="submit" name="confirm" value="確認" class="button"></div>
+    <div><input type="submit" name="confirm" value="確認画面へ" class="button"></div>
 <br/>
 
 </div>

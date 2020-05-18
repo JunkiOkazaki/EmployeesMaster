@@ -54,38 +54,36 @@
     if(!empty($employee_id)){
         if(preg_match('/^[0-9]{1,4}$/', $employee_id)){
             $employee_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_id);
-            $sql = "SELECT * FROM company.employees WHERE employee_id=:employee_id AND delete_flag=0";
-            $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);
-            $stmt->execute();
-            }else{
-                $flag=1;
-                echo "<div class ='error2'>「従業員ID」欄には1～3文字の数字を入力してください</div>";
+        }else{
+            $flag=1;
+            echo "<div class ='error2'>「従業員ID」欄には1～4文字の数字を入力してください</div>";
         }
     }else{
         $flag=1;
         echo "<div class ='error2'>「従業員ID」欄が未入力です</div>";
     }
-    
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    if(empty($result['employee_id'])){
-        $flag=1;
-        echo "<p class='error2'>該当するレコードがありませんでした</p>";
-    }
-    
+        
     if ($flag==1){
-    $class="hide";
+        $class="hide";
+    }else{
+        try{
+                $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM company.employees WHERE delete_flag=0 AND employee_id=:employee_id";
+                $stmt = $pdo->prepare($sql);
+                $stmt->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);
+                $stmt->execute();
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            }catch(PDOException $Exception){
+                die('接続エラー：' .$Exception->getMessage());
+            }
+        if(empty($result)){
+            $class="hide";
+            echo "<div class ='error2'>該当するレコードがありませんでした</div>";
+        }else{
+            echo "<p class='comment'>以下のレコードを削除します</p>";
+        }
     }
-    elseif($flag==0){
-        echo "<p class='comment'>以下のレコードを削除します</p>";
-    }
+
 ?>
-
-
-<form method="post" action="delete-employee-process.php">
-<input type="submit" name="delete" value="削除" class="button <?PHP echo $class; ?>">
-<input type="button" onclick="history.back()" value="戻る" class="button">
-<br/>
 
 <table><tbody>
     <tr>
@@ -96,12 +94,6 @@
         <th class="midashi">データ登録日時</th>
         <th class="midashi">データ更新日時</th>
     </tr>
-
-    
-    <?php
-    $count;
-    while($count <=0){
-    ?>
     
     <tr>
         <th><?=htmlspecialchars($result['employee_id'])?></th>
@@ -112,12 +104,17 @@
         <th><?=htmlspecialchars($result['updated_at'])?></th>
     </tr>
     
-<?php
-    $count++;
-        }
+<?php            
     $pdo = null; 
 ?>
+
 </tbody></table>
+
+<form method="post" action="delete-employee-process.php">
+<input type="submit" name="delete" value="レコード削除" class="button <?php echo $class; ?>">
+<input type="button" onclick="history.back()" value="戻る" class="button">
+<br/>
+
 </div>
 </body>
 </html>

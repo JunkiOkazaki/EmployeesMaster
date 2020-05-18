@@ -55,7 +55,7 @@ li a:hover:not(.active) {
 
 /* ボタン装飾 */
 .button {
-  margin        : 5px 0 5px 5px;
+  margin        : 0 0 0.5em 0;
   display       : inline-block;
   font-size     : 13pt;        /* 文字サイズ */
   text-align    : center;      /* 文字位置   */

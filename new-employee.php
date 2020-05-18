@@ -74,7 +74,7 @@
 <div class="mycontents">
     
     
-<h1>従業員新規登録</h1>
+<h1>従業員登録</h1>
 
 
 <form method="post" action="new-employee-check.php">
@@ -83,7 +83,7 @@
     <div class="cp_iptxt"><input class="ef" type="text" name="employee_name" size="30" placeholder=""><label>氏　　名</label><span class="focus_line"></span></div>
     <div class="cp_iptxt"><input class="ef" type="text" name="department_id" size="30" placeholder=""><label>部　署ID</label><span class="focus_line"></span></div>
     <div>
-<input type="submit" name="filter" value="確認" class="button"></div>
+<input type="submit" name="filter" value="確認画面へ" class="button"></div>
 <br/>
 
 </div>

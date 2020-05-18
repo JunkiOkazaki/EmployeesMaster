@@ -62,7 +62,7 @@
             $employee_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_id);
             }else{
                 $flag=1;
-                echo "<div class ='error2'>「従業員ID」欄には1～3文字の数字を入力してください</div>";
+                echo "<div class ='error2'>「従業員ID」欄には1～4文字の数字を入力してください</div>";
         }
     }else{
         $flag=1;
@@ -74,7 +74,7 @@
             $employee_code = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_code);
         }else{
             $flag=1;
-            echo "<div class='error2'>「従業員コード」欄には1～3文字の数字を入力してください</div>";
+            echo "<div class='error2'>「従業員コード」欄には1～4文字の数字を入力してください</div>";
         }
     }else{
         $flag=1;
@@ -95,7 +95,7 @@
     }
     
     if(!empty($department_id)){
-        if(preg_match('/^[0-9]{1,4}$/', $department_id)){
+        if(preg_match('/^[0-9]{1,3}$/', $department_id)){
             $department_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $department_id);
         }else{
             $flag=1;
@@ -108,16 +108,10 @@
     
     if ($flag==1){
         $class="hide";
-    }
-    elseif($flag==0){
-        echo "<p class='comment'>以下の内容で登録します</p>";
     }else{
-        echo "<p class='comment'>予期せぬエラーが発生しました</p>";
+        echo "<p class='comment'>以下の内容で登録します</p>";
     }
-?>
-
-    
-    
+?>    
 
 <table><tbody>
     <tr>
