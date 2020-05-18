@@ -60,13 +60,7 @@
 
 <body>
 
-<?php
-session_start();
-
-foreach ($_POST as $key => $value){
-    $_SESSION[$key] = $value;
-}
-?>
+<?php include('session-start.php'); ?>
     
     <ul>
 	<li><a href="https://dev.jokazaki.biz:8443/index.php">従業員一覧</a></li>

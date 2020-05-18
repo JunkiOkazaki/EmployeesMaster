@@ -55,26 +55,19 @@
         } );
     </script>
     
-<title>従業員一覧</title>
+    <title>従業員一覧</title>
 </head>
-
 <body>
 
-<?php
-session_start();
-
-foreach ($_POST as $key => $value){
-    $_SESSION[$key] = $value;
-}
-?>
+<?php include('session-start.php'); ?>
     
-    <ul>
-	<li><a class="active" href="https://dev.jokazaki.biz:8443/index.php">従業員一覧</a></li>
-	<li><a href="https://dev.jokazaki.biz:8443/new-employee.php">従業員登録</a></li>
-	<li><a href="https://dev.jokazaki.biz:8443/edit-employee.php">従業員編集</a></li>
-        <li><a href="https://dev.jokazaki.biz:8443/delete-employee.php">従業員削除</a></li>
-        <li><a href="https://dev.jokazaki.biz:8443/employees-master-manual.php">マニュアル</a></li>
-    </ul>
+<ul>
+    <li><a class="active" href="https://dev.jokazaki.biz:8443/index.php">従業員一覧</a></li>
+    <li><a href="https://dev.jokazaki.biz:8443/new-employee.php">従業員登録</a></li>
+    <li><a href="https://dev.jokazaki.biz:8443/edit-employee.php">従業員編集</a></li>
+    <li><a href="https://dev.jokazaki.biz:8443/delete-employee.php">従業員削除</a></li>
+    <li><a href="https://dev.jokazaki.biz:8443/employees-master-manual.php">マニュアル</a></li>
+</ul>
 
     
 <div class="mycontents">
@@ -93,8 +86,111 @@ foreach ($_POST as $key => $value){
     <div><input type="submit" name="filter" value="フィルタ" class="button"></div>
 <br/>
 
-<?php include('table-employees-access-process-display.php'); ?>
+<?php include('db-login.php'); ?>
 
+<?php
+try{
+    $employee_id = $_SESSION['employee_id'];
+    $employee_code = $_SESSION['employee_code'];
+    $employee_name = $_SESSION['employee_name'];
+    $department_id = $_SESSION['department_id'];
+    $delete_flag = $_SESSION['delete_flag'];
+    $created_at = $_SESSION['created_at'];
+    $updated_at = $_SESSION['updated_at'];
+    
+     
+    if(!empty($employee_id)){
+        if(preg_match('/^[0-9]{1,3}$/', $employee_id)){
+            $employee_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_id);
+            $sql = "SELECT * FROM company.employees WHERE employee_id=:employee_id AND delete_flag=0";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);
+        }else{
+            echo "<div class ='error'>「従業員ID」欄には1～3文字の数字を入力してください</div>";
+        }
+    }elseif(!empty($employee_code)){
+        if(preg_match('/^[0-9]{1,3}$/', $employee_code)){
+            $employee_code = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_code);
+            $sql = "SELECT * FROM company.employees WHERE employee_code=:employee_code AND delete_flag=0";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':employee_code', $employee_code, PDO::PARAM_INT);
+        }else{
+            echo "<div class='error'>「従業員コード」欄には1～3文字の数字を入力してください</div>";
+        }
+    }elseif(!empty($employee_name)){
+        if(preg_match('/^[ぁ-んァ-ヶー一-龠]+$/u', $employee_name)){
+            $sql = "SELECT * FROM company.employees WHERE employee_name LIKE :employee_name AND delete_flag=0";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':employee_name', '%'.$employee_name.'%', PDO::PARAM_STR);
+        }else{
+            echo "<div class='error'>「氏名」欄には1～30文字の全角文字列を入力してください</div>";
+        }
+    }elseif(!empty($department_id)){
+        if(preg_match('/^[0-9]{1,3}$/', $department_id)){
+            $sql = "SELECT * FROM company.employees WHERE department_id=:department_id AND delete_flag=0";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':department_id', $department_id, PDO::PARAM_INT);
+        }else{
+            echo "<div class='error'>「部署ID」欄には1～3文字の数字を入力してください</div>";
+        }
+    }elseif(!empty($created_at)){
+        if(preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $created_at)){
+            $sql = "SELECT * FROM company.employees WHERE created_at LIKE :created_at AND delete_flag=0";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':created_at', $created_at, PDO::PARAM_STR);
+        }else{
+            echo "<div class='error'>「登録日時」欄は（例）&quot;2020-05-01&quot;&nbsp;のように入力してください</div>";
+        }
+    }elseif(!empty($updated_at)){
+        if(preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $updated_at)){
+            $sql = "SELECT * FROM company.employees WHERE updated_at LIKE :updated_at AND delete_flag=0";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':updated_at', $updated_at, PDO::PARAM_STR);
+        }else{
+            echo "<div class='error'>「更新日時」欄は（例）&quot;2020-05-01&quot;&nbsp;のように入力してください</div>";
+        }
+    }else{
+        $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM company.employees WHERE delete_flag=0";
+        $stmt = $pdo->prepare($sql);
+    }
+    
+    $stmt->execute();
+        
+}catch(PDOException $Exception){
+    die('接続エラー：' .$Exception->getMessage());
+}
+?>
+
+
+<table><tbody>
+    <tr>
+        <th class="midashi">従業員ID</th>
+        <th class="midashi">従業員コード</th>
+        <th class="midashi">氏名</th>
+        <th class="midashi">部署ID</th>
+        <th class="midashi">データ登録日時</th>
+        <th class="midashi">データ更新日時</th>
+    </tr>
+
+<?php
+    while($row = $stmt->fetch(PDO::FETCH_ASSOC)){  
+?>
+    
+    <tr>
+        <th><?=htmlspecialchars($row['employee_id'])?></th>
+        <th><?=htmlspecialchars($row['employee_code'])?></th>
+        <th><?=htmlspecialchars($row['employee_name'])?></th>
+        <th><?=htmlspecialchars($row['department_id'])?></th>
+        <th><?=htmlspecialchars($row['created_at'])?></th>
+        <th><?=htmlspecialchars($row['updated_at'])?></th>
+    </tr>
+    
+<?php            
+        }
+    $pdo = null; 
+?>
+
+</tbody></table>
 
 </div>
 </body>

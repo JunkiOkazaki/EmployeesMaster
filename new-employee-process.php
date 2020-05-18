@@ -23,26 +23,19 @@
     <meta name="msapplication-square310x310logo" content="large.jpg"/>
     <meta name="msapplication-TileColor" content="#FAA500"/>
     
-<title>従業員登録完了</title>
+    <title>従業員登録完了</title>
 </head>
-
 <body>
 
-<?php
-session_start();
-
-foreach ($_POST as $key => $value){
-    $_SESSION[$key] = $value;
-}
-?>
+<?php include('session-start.php'); ?>
     
-    <ul>
-	<li><a href="https://dev.jokazaki.biz:8443/index.php">従業員一覧</a></li>
-	<li><a class="active" href="https://dev.jokazaki.biz:8443/new-employee.php">従業員登録</a></li>
-	<li><a href="https://dev.jokazaki.biz:8443/edit-employee.php">従業員編集</a></li>
-        <li><a href="https://dev.jokazaki.biz:8443/delete-employee.php">従業員削除</a></li>
-        <li><a href="https://dev.jokazaki.biz:8443/employees-master-manual.php">マニュアル</a></li>
-    </ul>
+<ul>
+    <li><a href="https://dev.jokazaki.biz:8443/index.php">従業員一覧</a></li>
+    <li><a class="active" href="https://dev.jokazaki.biz:8443/new-employee.php">従業員登録</a></li>
+    <li><a href="https://dev.jokazaki.biz:8443/edit-employee.php">従業員編集</a></li>
+    <li><a href="https://dev.jokazaki.biz:8443/delete-employee.php">従業員削除</a></li>
+    <li><a href="https://dev.jokazaki.biz:8443/employees-master-manual.php">マニュアル</a></li>
+</ul>
 
     
 <div class="mycontents">
@@ -50,15 +43,9 @@ foreach ($_POST as $key => $value){
     
 <h1>従業員新規登録完了</h1>
 
-<?php
-try{
-    $pdo = new PDO('mysql:host=dev.jokazaki.net;dbname=company;charset=utf8', 'devs', '9876');
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-}catch(PDOException $Exception){
-    die('接続エラー：' .$Exception->getMessage());
-}
-?>
+
+<?php include('db-login.php'); ?>
+
 
 <?php
 try{
