@@ -58,7 +58,7 @@
 </p>
 
 
-<?php include('table-departments-access-display.php'); ?>
+<?php include('table-departments-access-process-display.php'); ?>
 <br/><img src="manual2.png" alt="従業員登録ページの画像">
 </div>
 

@@ -1,7 +1,11 @@
 <html>
 <head>
+    <!-- クローラインデックス拒否 -->
     <meta name="robots" content="noindex">
+    
+    <!-- 文字コード -->
     <meta charset="utf-8">
+    
     <!-- ファビコン -->
     <link rel="icon" href="favicon.ico">
  
@@ -22,12 +26,11 @@
     <!-- jQuery Datepicker -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
         $( function() {
-            $( "#datepicker" ).datepicker({
+            $( "#datepicker_ca" ).datepicker({
             dateFormat: 'yy-mm-dd',
             yearSuffix: '年',
             showMonthAfterYear: true,
@@ -40,7 +43,7 @@
     </script>
         <script>
         $( function() {
-            $( "#datepicker2" ).datepicker({
+            $( "#datepicker_ua" ).datepicker({
             dateFormat: 'yy-mm-dd',
             yearSuffix: '年',
             showMonthAfterYear: true,
@@ -80,17 +83,14 @@ foreach ($_POST as $key => $value){
 <h1>従業員新規登録</h1>
 
 
-<form method="post" action="index.php">
-    <div  class="cp_iptxt"><input class="ef" type="text" name="employee_id" size="30" placeholder=""><label>従業員ID</label><span class="focus_line"></span></div>
-    <div  class="cp_iptxt"><input class="ef" type="text" name="employee_code" size="30" placeholder=""><label>従業員コード</label><span class="focus_line"></span></div>
-    <div  class="cp_iptxt"><input class="ef" type="text" name="employee_name" size="30" placeholder=""><label>氏　　名</label><span class="focus_line"></span></div>
-    <div  class="cp_iptxt"><input class="ef" type="text" name="department_id" size="30" placeholder=""><label>部　署ID</label><span class="focus_line"></span></div>
-    <div  class="cp_iptxt"><input class="ef" id="datepicker" type="text" name="created_at" size="30" placeholder="" ><label>登録日時</label><span class="focus_line"></span></div>
-    <div  class="cp_iptxt"><input class="ef" id="datepicker2" type="text" name="updated_at" size="30" placeholder="" ><label>更新日時</label><span class="focus_line"></span></div>
-    <div><input type="submit" name="filter" value="確認" class="button"></div>
+<form method="post" action="new-employee-check.php">
+    <div class="cp_iptxt"><input class="ef" type="text" name="employee_id" size="30" placeholder=""><label>従業員ID</label><span class="focus_line"></span></div>
+    <div class="cp_iptxt"><input class="ef" type="text" name="employee_code" size="30" placeholder=""><label>従業員コード</label><span class="focus_line"></span></div>
+    <div class="cp_iptxt"><input class="ef" type="text" name="employee_name" size="30" placeholder=""><label>氏　　名</label><span class="focus_line"></span></div>
+    <div class="cp_iptxt"><input class="ef" type="text" name="department_id" size="30" placeholder=""><label>部　署ID</label><span class="focus_line"></span></div>
+    <div>
+<input type="submit" name="filter" value="確認" class="button"></div>
 <br/>
-
-<?php include('table-employees-access-display.php'); ?>
 
 </div>
 </body>
