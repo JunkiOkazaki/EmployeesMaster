@@ -6,6 +6,9 @@
     <!-- 文字コード -->
     <meta charset="utf-8">
     
+    <!--スマホ画面用設定-->
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    
     <!-- ファビコン -->
     <link rel="icon" href="favicon.ico">
  

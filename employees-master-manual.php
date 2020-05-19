@@ -9,6 +9,9 @@
     <!--スタイルシート-->
     <link rel="stylesheet" href="menu.css">
     
+    <!--スマホ画面用設定-->
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    
     <!-- ファビコン -->
     <link rel="icon" href="favicon.ico">
  
@@ -135,7 +138,7 @@ try{
 <div class="setsumei">
 <h2>従業員マスタに関するご連絡</h2>
 <p>
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc_W3mrjvGmZOuT2_7dw3AnMTBF3cTZCtt1zZ_FURqSBaHBew/viewform?embedded=true" width="640" height="709" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc_W3mrjvGmZOuT2_7dw3AnMTBF3cTZCtt1zZ_FURqSBaHBew/viewform?embedded=true" height="709" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
 </p>
 
 

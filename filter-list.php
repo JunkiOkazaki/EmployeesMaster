@@ -6,6 +6,12 @@
     <!-- 文字コード -->
     <meta charset="utf-8">
     
+    <!--スタイルシート-->
+    <link rel="stylesheet" href="menu.css">
+    
+    <!--スマホ画面用設定-->
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    
     <!-- ファビコン -->
     <link rel="icon" href="favicon.ico">
  
@@ -19,9 +25,6 @@
     <meta name="msapplication-wide310x150logo" content="wide.jpg"/>
     <meta name="msapplication-square310x310logo" content="large.jpg"/>
     <meta name="msapplication-TileColor" content="#FAA500"/>
-    
-    <!--スタイルシート-->
-    <link rel="stylesheet" href="menu.css">
     
     <!-- jQuery Datepicker -->
     <meta name="viewport" content="width=device-width, initial-scale=1">

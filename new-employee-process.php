@@ -6,6 +6,9 @@
     <!-- 文字コード -->
     <meta charset="utf-8">
     
+    <!--スマホ画面用設定-->
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    
     <!--スタイルシート-->
     <link rel="stylesheet" href="menu.css">
     
