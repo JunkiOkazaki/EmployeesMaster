@@ -147,6 +147,14 @@ li a:hover:not(.active) {
          padding-left: 1em;
 }
 
+/* 表見出し */
+.midashi2 {
+         border-bottom: solid 2px #da3c41;
+         padding-top: 0.5em;
+         padding-right: 3em;
+         padding-left: 3em;
+}
+
 /* 説明部分 */
 .setsumei {
         margin-top: 1em;
@@ -166,7 +174,7 @@ li a:hover:not(.active) {
 .setsumei h3 {
         border-left: solid 5px #3CDAD5;
         background: whitesmoke;
-        margin-right:1190px;
+        margin-right:1290px;
         padding:3px 15px;
 }
 

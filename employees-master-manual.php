@@ -45,7 +45,8 @@
 <h2>従業員一覧ページについて</h2>
 <p>
 いずれかのフィールドに入力し、「フィルタ」を押下してください。<br/>
-複数フィールドに入力した場合は、上段のフィールドを優先します。<br/><br/>
+複数フィールドに入力した場合は、上段のフィールドを優先します。<br/>
+「従業員名」については、姓名の一部のみでフィルタ可能です。<br/><br/>
 <img src="man_img1.jpg" alt="従業員一覧ページの画像">
 </p>
 </div>
@@ -53,8 +54,13 @@
 <div class="setsumei">
 <h2>従業員登録ページについて</h2>
 <p>
-従業員新規登録時は、すでに登録されている部署IDしか登録できません。<br/>
+「従業員ID」は重複を許可しない設定となっているため、重複する従業員IDを登録しようとするとエラーになります。<br/>
+各レコードについては論理削除をしているため、「従業員一覧」に表示されていなくても、過去に使用されていた従業員IDを入力するとエラーとなります。<br/>
+エラーとなった場合は、異なる従業員IDを入力してください。<br/>
+<br/>
+また従業員新規登録時は、すでに登録されている部署IDしか指定できません。<br/>
 下記一覧に表示されているいずれかの部署IDを指定してください。<br/>
+部署が一覧にない場合は、システム課へ登録を依頼してください。<br/>
 </p>
 
 
@@ -62,7 +68,7 @@
 
 <?php
 try{    
-    $sql = "SELECT department_id, department_code, department_name, created_at, updated_at FROM company.departments WHERE delete_flag=0";
+    $sql = "SELECT department_id, department_code, department_name FROM company.departments WHERE delete_flag=0";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
         
@@ -77,11 +83,9 @@ try{
     
 <table><tbody>
     <tr>
-        <th class="midashi">部署ID</th>
-        <th class="midashi">部署コード</th>
-        <th class="midashi">部署名</th>
-        <th class="midashi">データ登録日時</th>
-        <th class="midashi">データ更新日時</th>
+        <th class="midashi2">部署ID</th>
+        <th class="midashi2">部署コード</th>
+        <th class="midashi2">部署名</th>
     </tr>
 
 <?php
@@ -121,7 +125,8 @@ try{
 <h2>従業員削除ページについて</h2>
 <p>
 削除したい従業員の従業員IDを入力し、「確認画面へ」を押下してください。<br/>
-従業員IDが一致する従業員のレコードを削除します。<br/><br/>
+従業員IDが一致する従業員のレコードを削除します。<br/>
+確認画面に表示されるレコードに間違いがないか十分に確認してから、実行してください。<br/><br/>
 <img src="man_img4.jpg" alt="従業員削除ページの画像">
 </p>
 </div>
