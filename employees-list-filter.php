@@ -80,7 +80,7 @@
 <h1>フィルタ結果</h1>
 
 
-<form method="post" action="filter-list.php">
+<form method="post" action="employees-list-filter.php">
     <div  class="cp_iptxt"><input class="ef" type="text" name="employee_id" size="30" placeholder=""><label>従業員ID</label><span class="focus_line"></span></div>
     <div  class="cp_iptxt"><input class="ef" type="text" name="employee_code" size="30" placeholder=""><label>従業員コード</label><span class="focus_line"></span></div>
     <div  class="cp_iptxt"><input class="ef" type="text" name="employee_name" size="30" placeholder=""><label>氏　　名</label><span class="focus_line"></span></div>
@@ -119,14 +119,12 @@ try{
             $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM company.employees WHERE employee_code=:employee_code AND delete_flag=0";
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':employee_code', $employee_code, PDO::PARAM_INT);
-            {
-                echo "<div class='error'>フィルタに該当するレコードがみつかりませんでした</div>";
-            }
         }else{
             echo "<div class='error'>「従業員コード」欄には1～3文字の数字を入力してください</div>";
         }
     }elseif(!empty($employee_name)){
         if(preg_match('/^[ぁ-んァ-ヶー一-龠]+$/u', $employee_name)){
+            $employee_name = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_name);
             $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM company.employees WHERE employee_name LIKE :employee_name AND delete_flag=0";
             $stmt = $pdo->prepare($sql);
             $stmt->bindValue(':employee_name', '%'.$employee_name.'%', PDO::PARAM_STR);
@@ -135,6 +133,7 @@ try{
         }
     }elseif(!empty($department_id)){
         if(preg_match('/^[0-9]{1,4}$/', $department_id)){
+            $department_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $department_id);
             $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM company.employees WHERE department_id=:department_id AND delete_flag=0";
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':department_id', $department_id, PDO::PARAM_INT);
@@ -143,6 +142,7 @@ try{
         }
     }elseif(!empty($created_at)){
         if(preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $created_at)){
+            $created_at = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $created_at);
             $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM company.employees WHERE created_at LIKE :created_at AND delete_flag=0";
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':created_at', $created_at, PDO::PARAM_STR);
@@ -151,6 +151,7 @@ try{
         }
     }elseif(!empty($updated_at)){
         if(preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $updated_at)){
+            $updated_at = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $updated_at);
             $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM company.employees WHERE updated_at LIKE :updated_at AND delete_flag=0";
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':updated_at', $updated_at, PDO::PARAM_STR);
@@ -180,9 +181,9 @@ try{
     </tr>
 
 <?php
-    while($row = $stmt->fetch(PDO::FETCH_ASSOC)){  
+    while($row=$stmt->fetch(PDO::FETCH_ASSOC)){      
 ?>
-    
+        
     <tr>
         <th><?=htmlspecialchars($row['employee_id'])?></th>
         <th><?=htmlspecialchars($row['employee_code'])?></th>
@@ -192,11 +193,8 @@ try{
         <th><?=htmlspecialchars($row['updated_at'])?></th>
     </tr>
     
-<?php            
-    }
-if($row==0){
-    echo "<div class='error'>フィルタに該当するレコードがありません</div>";
-}
+<?php 
+    }   
     $pdo = null; 
 ?>
 

@@ -20,7 +20,13 @@ input[type="button"]::focus {
 
 /* コンテンツ余白 */
 .mycontents { 
+        margin: 10px;
+}
+
+@media screen and (min-width:1600px){
+    .mycontents {
         margin: 50px;
+    }
 }
 
 /* メニュー */
@@ -31,6 +37,7 @@ ul {
 	overflow: hidden;
 	background-color: #1b2538;
 }
+
 li {
 	float: left;
 	border-right: 1px solid #bbbbbb;
@@ -80,6 +87,14 @@ li a:hover:not(.active) {
 	width: 80%;
 	margin: 30px 0%;
 }
+
+@media screen and (min-width:1600px){
+    .cp_iptxt {
+        width: 50%;
+    }
+}
+
+
 .cp_iptxt input[type='text'] {
 	font: 15px/24px sans-serif;
 	box-sizing: border-box;
@@ -130,7 +145,6 @@ li a:hover:not(.active) {
 	letter-spacing: 0.5px;
 	color: #aaaaaa;
 }
-
 .ef:focus ~ label, .cp_iptxt.ef ~ label {
 	font-size: 12px;
 	top: -16px;
@@ -147,6 +161,8 @@ li a:hover:not(.active) {
          padding-left: 1rem;
 }
 
+
+
 /* 表見出し */
 .midashi2 {
          border-bottom: solid 2px #da3c41;
@@ -158,7 +174,8 @@ li a:hover:not(.active) {
 /* 説明部分 */
 .setsumei {
         margin-top: 1rem;
-        padding-left: 1.5rem;
+        padding-left: 1rem;
+        padding-right: 0.5rem;
         padding-top: 0.5rem;
         padding-bottom: 2rem;
         color: #5d627b;
@@ -166,18 +183,18 @@ li a:hover:not(.active) {
         border-top: solid 5px #5d627b;
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
 }
-.setsumei p {
-    margin: 0; 
-    padding: 0;
-}
 
 .setsumei h3 {
         border-left: solid 5px #3CDAD5;
         background: whitesmoke;
         padding:3px 15px;
-        margin-right:2rem;
 }
 
+@media screen and (min-width:1600px){
+    .setsumei h3 {
+        width: 48%;
+    }
+}
 
 .error {
         margin-top: 0.5rem;
@@ -188,7 +205,12 @@ li a:hover:not(.active) {
         background: whitesmoke;
         border-left: solid 5px #da863b;
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
-        max-width: 100%; 
+}
+
+@media screen and (min-width:1600px){
+    .error {
+        width: 50%;
+    }
 }
 
 .error2 {
@@ -200,7 +222,12 @@ li a:hover:not(.active) {
         background: whitesmoke;
         border-left: solid 5px #da863b;
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
-        max-width: 100%; 
+}
+
+@media screen and (min-width:1600px){
+    .error2 {
+        width: 50%;
+    }
 }
 
 .comment{
@@ -214,14 +241,32 @@ li a:hover:not(.active) {
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
 }
 
+@media screen and (min-width:1600px){
+    .comment {
+        width: 50%;
+    }
+}
+
 .hide{
     display:none;
 }
 
 img{
-    width:95%;
+    width:98%;
+}
+
+@media screen and (min-width:1600px){
+    img {
+        width: 50%;
+    }
 }
 
 iframe{
     width:100%;
+}
+
+@media screen and (min-width:1600px){
+    iframe {
+        width: 50%;
+    }
 }
