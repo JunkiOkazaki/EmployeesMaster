@@ -48,6 +48,9 @@
     
 <h1>従業員新規登録確認画面</h1>
 
+<?php include('db-login.php'); ?>
+
+
 <?php
 
     $employee_id = $_SESSION['employee_id'];
@@ -62,14 +65,28 @@
      
     if(!empty($employee_id)){
         if(preg_match('/^[0-9]{1,4}$/', $employee_id)){
-            $employee_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_id);
-            }else{
-                $flag=1;
-                echo "<div class ='error2'>「従業員ID」欄には1～4文字の数字を入力してください</div>";
+            try{
+                    $employee_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_id);
+                    $sql = "SELECT employee_id FROM company.employees WHERE employee_id=:employee_id AND delete_flag=0";
+                    $stmt = $pdo->prepare($sql);
+                    $stmt->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);
+                    $stmt->execute();
+                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                }catch(PDOException $Exception){
+            die('接続エラー：' .$Exception->getMessage());
+            }
+        }else{
+            $flag=1;
+            echo "<div class ='error2'>「従業員ID」欄には1～4文字の数字を入力してください</div>";
         }
     }else{
         $flag=1;
         echo "<div class ='error2'>「従業員ID」欄が未入力です</div>";
+    }
+    
+    if($result!==0 && $flag==0){
+        $flag=1;
+        echo "<div class ='error2'>従業員ID:&nbsp;".$employee_id."&nbsp;のレコードはすでに存在します</div>";
     }
     
     if(!empty($employee_code)){

@@ -31,6 +31,7 @@
 <body>
 
 <?php include('session-start.php'); ?>
+
     
 <ul>
     <li><a href="https://dev.jokazaki.biz:8443/index.php">従業員一覧</a></li>
@@ -46,10 +47,11 @@
     
 <h1>従業員編集確認画面</h1>
 
+
 <?php include('db-login.php'); ?>
 
-<?php
 
+<?php 
     $employee_id = $_SESSION['employee_id'];
     $employee_code = $_SESSION['employee_code'];
     $employee_name = $_SESSION['employee_name'];
@@ -58,10 +60,32 @@
     
     $flag=0;
     $class="";
-     
+
+try{
+    $employee_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_id);
+            $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM company.employees WHERE employee_id=:employee_id AND delete_flag=0";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);
+
+        
+    }catch(PDOException $Exception){
+    die('接続エラー：' .$Exception->getMessage());
+}
+
+
     if(!empty($employee_id)){
         if(preg_match('/^[0-9]{1,4}$/', $employee_id)){
-            $employee_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_id);
+            try{
+                    $employee_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_id);
+                    $sql = "SELECT employee_id FROM company.employees WHERE employee_id=:employee_id AND delete_flag=0";
+                    $stmt = $pdo->prepare($sql);
+                    $stmt->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);
+                    $stmt->execute();
+                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                }catch(PDOException $Exception){
+            die('接続エラー：' .$Exception->getMessage());
+        }
+
             }else{
                 $flag=1;
                 echo "<div class ='error2'>「従業員ID」欄には1～4文字の数字を入力してください</div>";
@@ -70,6 +94,13 @@
         $flag=1;
         echo "<div class ='error2'>「従業員ID」欄が未入力です</div>";
     }
+
+    
+    if($result==0 && $flag==0){
+        $flag=1;
+        echo "<div class ='error2'>従業員ID:&nbsp;".$employee_id."&nbsp;に一致するレコードが見つかりませんでした。</div>";
+    }
+
     
     if(!empty($employee_code)){
         if(preg_match('/^[0-9]{1,4}$/', $employee_code)){
@@ -111,7 +142,7 @@
     if($flag==1){
         $class="hide";
     }else{
-        echo "<p class='comment'>以下の内容で登録します</p>";
+        echo "<p class='comment'>従業員ID:&nbsp;".$employee_id."&nbsp;のレコードを以下の内容に変更します。</p>";
     }
 ?>
 
