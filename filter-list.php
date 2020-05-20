@@ -119,6 +119,9 @@ try{
             $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM company.employees WHERE employee_code=:employee_code AND delete_flag=0";
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':employee_code', $employee_code, PDO::PARAM_INT);
+            {
+                echo "<div class='error'>フィルタに該当するレコードがみつかりませんでした</div>";
+            }
         }else{
             echo "<div class='error'>「従業員コード」欄には1～3文字の数字を入力してください</div>";
         }
@@ -155,9 +158,7 @@ try{
             echo "<div class='error'>「更新日時」欄は（例）&quot;2020-05-01&quot;&nbsp;のように入力してください</div>";
         }
     }else{
-        echo "<div class='error'>フィルタに該当するレコードがみつかりませんでした。<br/>全レコードを表示します。</div>";
-        $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM company.employees WHERE delete_flag=0";
-        $stmt = $pdo->prepare($sql);
+        echo "<div class='error'>フィルタ条件が未入力です</div>";
     }
     
     $stmt->execute();
@@ -192,7 +193,10 @@ try{
     </tr>
     
 <?php            
-        }
+    }
+if($row==0){
+    echo "<div class='error'>フィルタに該当するレコードがありません</div>";
+}
     $pdo = null; 
 ?>
 
