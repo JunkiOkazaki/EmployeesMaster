@@ -36,9 +36,9 @@
     
 <ul>
     <li><a href="https://dev.jokazaki.biz:8443/employees-list.php">従業員一覧</a></li>
-    <li><a class="active" href="https://dev.jokazaki.biz:8443/new-employee.php">従業員登録</a></li>
+    <li><a class="active" href="https://dev.jokazaki.biz:8443/new-employee.html">従業員登録</a></li>
     <li><a href="https://dev.jokazaki.biz:8443/edit-employee.html">従業員編集</a></li>
-    <li><a href="https://dev.jokazaki.biz:8443/delete-employee.php">従業員削除</a></li>
+    <li><a href="https://dev.jokazaki.biz:8443/delete-employee.html">従業員削除</a></li>
     <li><a href="https://dev.jokazaki.biz:8443/employees-master-manual.php">マニュアル</a></li>
 </ul>
 
