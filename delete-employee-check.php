@@ -80,7 +80,7 @@
             }
         if(empty($result)){
             $class="hide";
-            echo "<div class ='error2'>該当するレコードがありませんでした</div>";
+            echo "<div class ='error2'>従業員ID:&nbsp;".$employee_id."&nbsp;に該当するレコードがありませんでした</div>";
         }else{
             echo "<p class='comment'>以下のレコードを削除します</p>";
         }
