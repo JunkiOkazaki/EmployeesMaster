@@ -98,7 +98,7 @@ try{
     
     if($result==0 && $flag==0){
         $flag=1;
-        echo "<div class ='error2'>従業員ID:&nbsp;".$employee_id."&nbsp;に一致するレコードが見つかりませんでした。</div>";
+        echo "<div class ='error2'>従業員ID:&nbsp;".$employee_id."&nbsp;に一致するレコードが見つかりませんでした</div>";
     }
 
     
