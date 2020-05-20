@@ -66,7 +66,7 @@
 <?php include('session-start.php'); ?>
     
 <ul>
-    <li><a class="active" href="https://dev.jokazaki.biz:8443/index.php">従業員一覧</a></li>
+    <li><a class="active" href="https://dev.jokazaki.biz:8443/employees-list.php">従業員一覧</a></li>
     <li><a href="https://dev.jokazaki.biz:8443/new-employee.php">従業員登録</a></li>
     <li><a href="https://dev.jokazaki.biz:8443/edit-employee.php">従業員編集</a></li>
     <li><a href="https://dev.jokazaki.biz:8443/delete-employee.php">従業員削除</a></li>
@@ -88,7 +88,7 @@
     <div  class="cp_iptxt"><input class="ef" id="datepicker_ca" type="text" name="created_at" size="30" placeholder="" ><label>登録日時</label><span class="focus_line"></span></div>
     <div  class="cp_iptxt"><input class="ef" id="datepicker_ua" type="text" name="updated_at" size="30" placeholder="" ><label>更新日時</label><span class="focus_line"></span></div>
     <input type="submit" name="filter" value="フィルタ再適用" class="button">
-    <input type="button" onclick="location.href='https://dev.jokazaki.biz:8443/index.php'" value="「従業員一覧」に戻る" class="button">
+    <input type="button" onclick="location.href='https://dev.jokazaki.biz:8443/employees-list.php'" value="「従業員一覧」に戻る" class="button">
 <br/>
 
 <?php include('db-login.php'); ?>

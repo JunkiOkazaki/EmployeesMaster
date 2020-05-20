@@ -66,7 +66,7 @@
 <?php include('session-start.php'); ?>
     
     <ul>
-	<li><a href="https://dev.jokazaki.biz:8443/index.php">従業員一覧</a></li>
+	<li><a href="https://dev.jokazaki.biz:8443/employees-list.php">従業員一覧</a></li>
 	<li><a class="active" href="https://dev.jokazaki.biz:8443/new-employee.php">従業員登録</a></li>
 	<li><a href="https://dev.jokazaki.biz:8443/edit-employee.php">従業員編集</a></li>
         <li><a href="https://dev.jokazaki.biz:8443/delete-employee.php">従業員削除</a></li>
@@ -86,7 +86,7 @@
     <div class="cp_iptxt"><input class="ef" type="text" name="employee_name" size="30" placeholder=""><label>氏　　名</label><span class="focus_line"></span></div>
     <div class="cp_iptxt"><input class="ef" type="text" name="department_id" size="30" placeholder=""><label>部　署ID</label><span class="focus_line"></span></div>
     <div>
-<input type="submit" name="filter" value="確認画面へ" class="button"></div>
+<input type="submit" name="confirm" value="確認画面へ" class="button"></div>
 <br/>
 
 </div>

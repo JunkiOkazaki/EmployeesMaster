@@ -63,7 +63,7 @@
 <body>
     
 <ul>
-    <li><a class="active" href="https://dev.jokazaki.biz:8443/index.php">従業員一覧</a></li>
+    <li><a class="active" href="https://dev.jokazaki.biz:8443/employees-list.php">従業員一覧</a></li>
     <li><a href="https://dev.jokazaki.biz:8443/new-employee.php">従業員登録</a></li>
     <li><a href="https://dev.jokazaki.biz:8443/edit-employee.php">従業員編集</a></li>
     <li><a href="https://dev.jokazaki.biz:8443/delete-employee.php">従業員削除</a></li>
@@ -77,7 +77,7 @@
 <h1>従業員一覧</h1>
 
 
-<form method="post" action="filter-list.php">
+<form method="post" action="employees-list-filter.php">
     <div  class="cp_iptxt"><input class="ef" type="text" name="employee_id" size="30" placeholder=""><label>従業員ID</label><span class="focus_line"></span></div>
     <div  class="cp_iptxt"><input class="ef" type="text" name="employee_code" size="30" placeholder=""><label>従業員コード</label><span class="focus_line"></span></div>
     <div  class="cp_iptxt"><input class="ef" type="text" name="employee_name" size="30" placeholder=""><label>氏　　名</label><span class="focus_line"></span></div>
