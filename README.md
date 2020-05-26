@@ -8,7 +8,7 @@ EmployeesMaster enables you of easily manage the complicated task of labor manag
 - Accountants
 - Department manager
 
-If you interested in using EmployeesMaster detailed document is available at
+If you interested in using EmployeesMaster detailed documents are available at
 [DOCS.](https://dev.jokazaki.biz:8443/employees-master-manual.php)
 
 
