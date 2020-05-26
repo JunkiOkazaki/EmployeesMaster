@@ -66,11 +66,11 @@
 <?php include('session-start.php'); ?>
     
 <ul>
-    <li><a class="active" href="https://dev.jokazaki.biz:8443/employees-list.php">従業員一覧</a></li>
-    <li><a href="https://dev.jokazaki.biz:8443/new-employee.html">従業員登録</a></li>
-    <li><a href="https://dev.jokazaki.biz:8443/edit-employee.html">従業員編集</a></li>
-    <li><a href="https://dev.jokazaki.biz:8443/delete-employee.html">従業員削除</a></li>
-    <li><a href="https://dev.jokazaki.biz:8443/employees-master-manual.php">マニュアル</a></li>
+    <li><a class="active" href="https://dev-laravel.jokazaki.biz:8443/employees-list.php">従業員一覧</a></li>
+    <li><a href="https://dev-laravel.jokazaki.biz:8443/new-employee.html">従業員登録</a></li>
+    <li><a href="https://dev-laravel.jokazaki.biz:8443/edit-employee.html">従業員編集</a></li>
+    <li><a href="https://dev-laravel.jokazaki.biz:8443/delete-employee.html">従業員削除</a></li>
+    <li><a href="https://dev-laravel.jokazaki.biz:8443/employees-master-manual.php">マニュアル</a></li>
 </ul>
 
     
@@ -88,7 +88,7 @@
     <div  class="cp_iptxt"><input class="ef" id="datepicker_ca" type="text" name="created_at" size="30" placeholder="" ><label>登録日時</label><span class="focus_line"></span></div>
     <div  class="cp_iptxt"><input class="ef" id="datepicker_ua" type="text" name="updated_at" size="30" placeholder="" ><label>更新日時</label><span class="focus_line"></span></div>
     <input type="submit" name="filter" value="フィルタ再適用" class="button">
-    <input type="button" onclick="location.href='https://dev.jokazaki.biz:8443/employees-list.php'" value="「従業員一覧」に戻る" class="button">
+    <input type="button" onclick="location.href='https://dev-laravel.jokazaki.biz:8443/employees-list.php'" value="「従業員一覧」に戻る" class="button">
 <br/>
 
 <?php include('db-login.php'); ?>
@@ -107,7 +107,7 @@ try{
     if(!empty($employee_id)){
         if(preg_match('/^[0-9]{1,4}$/', $employee_id)){
             $employee_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_id);
-            $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM company.employees WHERE employee_id=:employee_id AND delete_flag=0";
+            $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM l_company.employees WHERE employee_id=:employee_id AND delete_flag=0";
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);
         }else{
@@ -116,7 +116,7 @@ try{
     }elseif(!empty($employee_code)){
         if(preg_match('/^[0-9]{1,4}$/', $employee_code)){
             $employee_code = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_code);
-            $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM company.employees WHERE employee_code=:employee_code AND delete_flag=0";
+            $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM l_company.employees WHERE employee_code=:employee_code AND delete_flag=0";
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':employee_code', $employee_code, PDO::PARAM_INT);
         }else{
@@ -125,7 +125,7 @@ try{
     }elseif(!empty($employee_name)){
         if(preg_match('/^[ぁ-んァ-ヶー一-龠]+$/u', $employee_name)){
             $employee_name = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_name);
-            $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM company.employees WHERE employee_name LIKE :employee_name AND delete_flag=0";
+            $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM l_company.employees WHERE employee_name LIKE :employee_name AND delete_flag=0";
             $stmt = $pdo->prepare($sql);
             $stmt->bindValue(':employee_name', '%'.$employee_name.'%', PDO::PARAM_STR);
         }else{
@@ -134,7 +134,7 @@ try{
     }elseif(!empty($department_id)){
         if(preg_match('/^[0-9]{1,4}$/', $department_id)){
             $department_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $department_id);
-            $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM company.employees WHERE department_id=:department_id AND delete_flag=0";
+            $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM l_company.employees WHERE department_id=:department_id AND delete_flag=0";
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':department_id', $department_id, PDO::PARAM_INT);
         }else{
@@ -143,7 +143,7 @@ try{
     }elseif(!empty($created_at)){
         if(preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $created_at)){
             $created_at = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $created_at);
-            $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM company.employees WHERE created_at LIKE :created_at AND delete_flag=0";
+            $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM l_company.employees WHERE created_at LIKE :created_at AND delete_flag=0";
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':created_at', $created_at, PDO::PARAM_STR);
         }else{
@@ -152,7 +152,7 @@ try{
     }elseif(!empty($updated_at)){
         if(preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $updated_at)){
             $updated_at = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $updated_at);
-            $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM company.employees WHERE updated_at LIKE :updated_at AND delete_flag=0";
+            $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM l_company.employees WHERE updated_at LIKE :updated_at AND delete_flag=0";
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':updated_at', $updated_at, PDO::PARAM_STR);
         }else{

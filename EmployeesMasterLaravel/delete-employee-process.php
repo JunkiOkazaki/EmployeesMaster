@@ -36,11 +36,11 @@
 <?php include('session-start.php'); ?>
     
     <ul>
-	<li><a href="https://dev.jokazaki.biz:8443/employees-list.php">従業員一覧</a></li>
-	<li><a href="https://dev.jokazaki.biz:8443/new-employee.html">従業員登録</a></li>
-	<li><a href="https://dev.jokazaki.biz:8443/edit-employee.html">従業員編集</a></li>
-        <li><a class="active" href="https://dev.jokazaki.biz:8443/delete-employee.html">従業員削除</a></li>
-        <li><a href="https://dev.jokazaki.biz:8443/employees-master-manual.php">マニュアル</a></li>
+	<li><a href="https://dev-laravel.jokazaki.biz:8443/employees-list.php">従業員一覧</a></li>
+	<li><a href="https://dev-laravel.jokazaki.biz:8443/new-employee.html">従業員登録</a></li>
+	<li><a href="https://dev-laravel.jokazaki.biz:8443/edit-employee.html">従業員編集</a></li>
+        <li><a class="active" href="https://dev-laravel.jokazaki.biz:8443/delete-employee.html">従業員削除</a></li>
+        <li><a href="https://dev-laravel.jokazaki.biz:8443/employees-master-manual.php">マニュアル</a></li>
     </ul>
 
     
@@ -56,7 +56,7 @@
 try{
     $employee_id = $_SESSION['employee_id'];
 
-    $sql = "UPDATE company.employees SET delete_flag=1 WHERE employee_id=:employee_id";
+    $sql = "UPDATE l_company.employees SET delete_flag=1 WHERE employee_id=:employee_id";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);
     $stmt->execute();
@@ -70,7 +70,7 @@ try{
     $pdo = null; 
 ?>
 
-<input type="button" onclick="location.href='https://dev.jokazaki.biz:8443/delete-employee.html'" value="「従業員削除」に戻る" class="button">
+<input type="button" onclick="location.href='https://dev-laravel.jokazaki.biz:8443/delete-employee.html'" value="「従業員削除」に戻る" class="button">
 
 </div>
 </body>

@@ -34,11 +34,11 @@
 <?php include('session-start.php'); ?>
     
 <ul>
-    <li><a href="https://dev.jokazaki.biz:8443/employees-list.php">従業員一覧</a></li>
-    <li><a href="https://dev.jokazaki.biz:8443/new-employee.html">従業員登録</a></li>
-    <li><a class="active" href="https://dev.jokazaki.biz:8443/edit-employee.html">従業員編集</a></li>
-    <li><a href="https://dev.jokazaki.biz:8443/delete-employee.html">従業員削除</a></li>
-    <li><a href="https://dev.jokazaki.biz:8443/employees-master-manual.php">マニュアル</a></li>
+    <li><a href="https://dev-laravel.jokazaki.biz:8443/employees-list.php">従業員一覧</a></li>
+    <li><a href="https://dev-laravel.jokazaki.biz:8443/new-employee.html">従業員登録</a></li>
+    <li><a class="active" href="https://dev-laravel.jokazaki.biz:8443/edit-employee.html">従業員編集</a></li>
+    <li><a href="https://dev-laravel.jokazaki.biz:8443/delete-employee.html">従業員削除</a></li>
+    <li><a href="https://dev-laravel.jokazaki.biz:8443/employees-master-manual.php">マニュアル</a></li>
 </ul>
     
 <div class="mycontents">
@@ -56,7 +56,7 @@ try{
     $department_id = $_SESSION['department_id'];
     $updated_at = date("Y-m-d");
     
-    $sql = "UPDATE company.employees SET employee_code=:employee_code, employee_name=:employee_name, department_id=:department_id, updated_at=:updated_at WHERE employee_id=:employee_id";
+    $sql = "UPDATE l_company.employees SET employee_code=:employee_code, employee_name=:employee_name, department_id=:department_id, updated_at=:updated_at WHERE employee_id=:employee_id";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);
     $stmt->bindParam(':employee_code', $employee_code, PDO::PARAM_INT);
@@ -76,7 +76,7 @@ try{
     $pdo = null; 
 ?>
 
-<input type="button" onclick="location.href='https://dev.jokazaki.biz:8443/edit-employee.html'" value="「従業員編集」に戻る" class="button">
+<input type="button" onclick="location.href='https://dev-laravel.jokazaki.biz:8443/edit-employee.html'" value="「従業員編集」に戻る" class="button">
 
 </div>
 </body>

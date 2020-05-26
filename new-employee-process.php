@@ -72,8 +72,10 @@ try{
     $stmt->execute();
     
 }catch(PDOException $Exception){
-    die('接続エラー：' .$Exception->getMessage());
+    //die('接続エラー：' .$Exception->getMessage());
+    exit("データベース処理時にエラーが発生しました<div class ='error2'>従業員ID:&nbsp;$employee_id&nbsp;のレコードがすでに存在します</div><br/>");
 }
+
 ?>
 
 

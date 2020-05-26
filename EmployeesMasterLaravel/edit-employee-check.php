@@ -34,11 +34,11 @@
 
     
 <ul>
-    <li><a href="https://dev.jokazaki.biz:8443/employees-list.php">従業員一覧</a></li>
-    <li><a href="https://dev.jokazaki.biz:8443/new-employee.html">従業員登録</a></li>
-    <li><a class="active" href="https://dev.jokazaki.biz:8443/edit-employee.html">従業員編集</a></li>
-    <li><a href="https://dev.jokazaki.biz:8443/delete-employee.html">従業員削除</a></li>
-    <li><a href="https://dev.jokazaki.biz:8443/employees-master-manual.php">マニュアル</a></li>
+    <li><a href="https://dev-laravel.jokazaki.biz:8443/employees-list.php">従業員一覧</a></li>
+    <li><a href="https://dev-laravel.jokazaki.biz:8443/new-employee.html">従業員登録</a></li>
+    <li><a class="active" href="https://dev-laravel.jokazaki.biz:8443/edit-employee.html">従業員編集</a></li>
+    <li><a href="https://dev-laravel.jokazaki.biz:8443/delete-employee.html">従業員削除</a></li>
+    <li><a href="https://dev-laravel.jokazaki.biz:8443/employees-master-manual.php">マニュアル</a></li>
 </ul>
 
 
@@ -63,7 +63,7 @@
 
 try{
     $employee_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_id);
-            $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM company.employees WHERE employee_id=:employee_id AND delete_flag=0";
+            $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM l_company.employees WHERE employee_id=:employee_id AND delete_flag=0";
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);
 
@@ -79,7 +79,7 @@ try{
         if(preg_match('/^[0-9]{1,4}$/', $employee_id)){
             try{
                     $employee_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_id);
-                    $sql = "SELECT employee_id FROM company.employees WHERE employee_id=:employee_id AND delete_flag=0";
+                    $sql = "SELECT employee_id FROM l_company.employees WHERE employee_id=:employee_id AND delete_flag=0";
                     $stmt = $pdo->prepare($sql);
                     $stmt->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);
                     $stmt->execute();

@@ -73,7 +73,9 @@
                     $stmt->execute();
                     $result = $stmt->fetch(PDO::FETCH_ASSOC);
                 }catch(PDOException $Exception){
-            die('接続エラー：' .$Exception->getMessage());
+                    die('接続エラー：' .$Exception->getMessage());
+                    echo "データベース処理時にエラーが発生しました。<br/>従業員ID:&nbsp;".$employee_id."&nbsp;はすでに使用されています。";
+                    echo '<input type="button" onclick="history.back()" value="戻る" class="button">';
             }
         }else{
             $flag=1;
@@ -84,10 +86,6 @@
         echo "<div class ='error2'>「従業員ID」欄が未入力です</div>";
     }
     
-    if($result!==0 && $flag==0){
-        $flag=1;
-        echo "<div class ='error2'>従業員ID:&nbsp;".$employee_id."&nbsp;のレコードはすでに存在します</div>";
-    }
     
     if(!empty($employee_code)){
         if(preg_match('/^[0-9]{1,4}$/', $employee_code)){

@@ -31,11 +31,11 @@
 <body>
 
 <ul>
-    <li><a href="https://dev.jokazaki.biz:8443/employees-list.php">従業員一覧</a></li>
-    <li><a href="https://dev.jokazaki.biz:8443/new-employee.html">従業員登録</a></li>
-    <li><a href="https://dev.jokazaki.biz:8443/edit-employee.html">従業員編集</a></li>
-    <li><a href="https://dev.jokazaki.biz:8443/delete-employee.html">従業員削除</a></li>
-    <li><a class="active" href="https://dev.jokazaki.biz:8443/employees-master-manual.php">マニュアル</a></li>
+    <li><a href="https://dev-laravel.jokazaki.biz:8443/employees-list.php">従業員一覧</a></li>
+    <li><a href="https://dev-laravel.jokazaki.biz:8443/new-employee.html">従業員登録</a></li>
+    <li><a href="https://dev-laravel.jokazaki.biz:8443/edit-employee.html">従業員編集</a></li>
+    <li><a href="https://dev-laravel.jokazaki.biz:8443/delete-employee.html">従業員削除</a></li>
+    <li><a class="active" href="https://dev-laravel.jokazaki.biz:8443/employees-master-manual.php">マニュアル</a></li>
 </ul>
 
  
@@ -71,7 +71,7 @@
 
 <?php
 try{    
-    $sql = "SELECT department_id, department_code, department_name FROM company.departments WHERE delete_flag=0";
+    $sql = "SELECT department_id, department_code, department_name FROM l_company.departments WHERE delete_flag=0";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
         
