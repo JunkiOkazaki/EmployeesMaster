@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     
     <!--スタイルシート-->
-    <link rel="stylesheet" href="menu.css">
+    <link rel="stylesheet" href="menu-laravel.css">
     
     <!--スマホ画面用設定-->
     <meta name="viewport" content="width=device-width,initial-scale=1">

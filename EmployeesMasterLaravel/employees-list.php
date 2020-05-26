@@ -24,7 +24,7 @@
     <meta name="msapplication-TileColor" content="#FAA500"/>
     
     <!--スタイルシート-->
-    <link rel="stylesheet" href="menu.css">
+    <link rel="stylesheet" href="menu-laravel.css">
     
     <!-- jQuery Datepicker -->
     <meta name="viewport" content="width=device-width, initial-scale=1">

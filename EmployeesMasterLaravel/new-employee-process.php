@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     
     <!--スタイルシート-->
-    <link rel="stylesheet" href="menu.css">
+    <link rel="stylesheet" href="menu-laravel.css">
     
     <!-- ファビコン -->
     <link rel="icon" href="favicon.ico">

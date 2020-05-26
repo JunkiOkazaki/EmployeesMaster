@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     
     <!--スタイルシート-->
-    <link rel="stylesheet" href="menu.css">
+    <link rel="stylesheet" href="menu-laravel.css">
     
     <!--スマホ画面用設定-->
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -67,11 +67,11 @@
         if(preg_match('/^[0-9]{1,4}$/', $employee_id)){
             try{
                     $employee_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_id);
-                    $sql = "SELECT employee_id FROM l_company.employees WHERE employee_id=:employee_id AND delete_flag=0";
+                    $sql = "SELECT employee_id FROM company.employees WHERE employee_id=:employee_id AND delete_flag=0";
                     $stmt = $pdo->prepare($sql);
                     $stmt->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);
                     $stmt->execute();
-                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 }catch(PDOException $Exception){
                     die('接続エラー：' .$Exception->getMessage());
                     echo "データベース処理時にエラーが発生しました。<br/>従業員ID:&nbsp;".$employee_id."&nbsp;はすでに使用されています。";
@@ -115,6 +115,10 @@
     if(!empty($department_id)){
         if(preg_match('/^[0-9]{1,3}$/', $department_id)){
             $department_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $department_id);
+                if($result[0]['department_id']<>$department_id){
+                    $flag=1;
+                    echo "<div class='error2'>部署ID:&nbsp;".$department_id."&nbspは未登録です。<a href='https://dev-laravel.jokazaki.biz:8443/employees-master-manual.php#about2'>マニュアル</a>を参照し、登録済み部署の中から指定してください。</div>";
+                }
         }else{
             $flag=1;
             echo "<div class='error2'>「部署ID」欄には1～3文字の数字を入力してください</div>";
@@ -123,6 +127,11 @@
         $flag=1;
         echo "<div class ='error2'>「部署ID」欄が未入力です</div>";
     }
+    
+    if($result[0]['employee_id']==$employee_id){
+                $flag=1;
+                echo "<div class=error2>従業員ID:&nbsp;".$employee_id."&nbsp;のレコードはすでに存在します</div>";
+    }        
     
     if ($flag==1){
         $class="hide";
