@@ -1,3 +1,3 @@
 # EmployeesMaster
 テスト用
-[画像テスト]()
+[画像テスト](favicon.ico)
