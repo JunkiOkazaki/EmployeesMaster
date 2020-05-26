@@ -1,4 +1,4 @@
-<div align="center"><img src="https://dev.jokazaki.biz:8443/wide.jpg"></div>
+<div align="center"><img src="https://dev.jokazaki.biz:8443/medium.jpg"></div>
 
 # EmployeesMaster
 
