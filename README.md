@@ -10,7 +10,7 @@
 
 
 ## Contributing
-Thank you for considering contributing to the EmployeesMaster! The contribution guide can be found in the EmployeesMaster documentation.
+Thank you for considering contributing to EmployeesMaster! The contribution guide can be found in the EmployeesMaster documentation.
 
 ## Code of Conduct
 In order to ensure that the EmployeesMaster community is welcoming to all, please review and abide by the Code of Conduct.
