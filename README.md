@@ -10,7 +10,7 @@ EmployeesMaster is for people like:
 - Department manager
 
 If you interested in using EmployeesMaster detailed document is available at
-[DOCUMENTATION](https://dev.jokazaki.biz:8443/employees-master-manual.php)
+[DOCS.](https://dev.jokazaki.biz:8443/employees-master-manual.php)
 
 
 ## Contributing
