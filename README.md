@@ -19,4 +19,4 @@ In order to ensure that the EmployeesMaster community is welcoming to all, pleas
 If you discover a security vulnerability within EmployeesMaster, please send an e-mail to  via admin@mail.jokazaki.biz. All security vulnerabilities will be promptly addressed.
 
 ## License
-The EmployeesMaster framework is open-sourced software licensed under the MIT license.
+EmployeesMaster is open-sourced software licensed under the MIT license.
