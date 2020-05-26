@@ -16,7 +16,7 @@ Thank you for considering contributing to the EmployeesMaster! The contribution 
 In order to ensure that the EmployeesMaster community is welcoming to all, please review and abide by the Code of Conduct.
 
 ## Security Vulnerabilities
-If you discover a security vulnerability within EmployeesMaster, please send an e-mail to Taylor Otwell via admin@mail.jokazaki.biz. All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within EmployeesMaster, please send an e-mail to  via admin@mail.jokazaki.biz. All security vulnerabilities will be promptly addressed.
 
 ## License
 The EmployeesMaster framework is open-sourced software licensed under the MIT license.
