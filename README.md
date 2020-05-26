@@ -1,5 +1,5 @@
 # EmployeesMaster
-<div align="center"><img src="https://drive.google.com/file/d/1oqNaLf8zMNvyiOhFU6rCJlVYm48R4Ex2/view?usp=sharing"></div>
+<div align="center"><img src="https://dev.jokazaki.net/small.jpg"></div>
 
 このプロジェクトはテスト用に作成されました。<br/>
 詳しくは以下のページをご覧ください。
