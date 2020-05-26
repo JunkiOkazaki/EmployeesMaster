@@ -1,12 +1,16 @@
 <div align="center"><img src="https://dev.jokazaki.biz:8443/medium.jpg"></div>
 
-# EmployeesMaster
+# About EmployeesMaster
 
-このプロジェクトはテスト用に作成されました。<br/>
-詳しくは以下のページをご覧ください。
+EmployeesMaster enables you of easily manage the complicated task of labor management with  responsive, intuitive UI.<br/>
+EmployeesMaster is for people like:
 
-[マニュアル](https://dev.jokazaki.biz:8443/employees-master-manual.php)
+- HR
+- Accountants
+- Department manager
 
+If you interested in using EmployeesMaster detailed document is available at
+[DOCUMENTATION](https://dev.jokazaki.biz:8443/employees-master-manual.php)
 
 
 ## Contributing
