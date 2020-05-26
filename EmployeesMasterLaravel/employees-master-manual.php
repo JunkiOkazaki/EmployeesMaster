@@ -26,7 +26,7 @@
     <meta name="msapplication-square310x310logo" content="large.jpg"/>
     <meta name="msapplication-TileColor" content="#FAA500"/>
    
-<title>マニュアル</title>
+<title>Laravel_マニュアル</title>
 </head>
 <body>
 
@@ -67,7 +67,7 @@
 </p>
 
 
-<?php include('db-login.php'); ?>
+<?php include('db-login-laravel.php'); ?>
 
 <?php
 try{    
@@ -140,7 +140,7 @@ try{
 <div class="setsumei">
 <h2>従業員マスタに関するご連絡</h2>
 <p>
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc_W3mrjvGmZOuT2_7dw3AnMTBF3cTZCtt1zZ_FURqSBaHBew/viewform?embedded=true" height="709" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfdFQhvvjQaYKhONboFM5LgzG6UpoZYsx-hlJK0uAdaja_fUA/viewform?embedded=true" height="709" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
 </p>
 
 

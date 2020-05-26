@@ -26,7 +26,7 @@
     <meta name="msapplication-square310x310logo" content="large.jpg"/>
     <meta name="msapplication-TileColor" content="#FAA500"/>
 
-<title>従業員削除確認画面</title>
+<title>Laravel_従業員削除確認画面</title>
 </head>
 <body>
 
@@ -49,7 +49,7 @@
 <h1>従業員削除確認画面</h1>
 
 <!--DBログイン-->
-<?php include('db-login.php'); ?>
+<?php include('db-login-laravel.php'); ?>
 
 
 <!--入力チェック-->

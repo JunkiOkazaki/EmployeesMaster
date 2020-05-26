@@ -26,7 +26,7 @@
     <meta name="msapplication-square310x310logo" content="large.jpg"/>
     <meta name="msapplication-TileColor" content="#FAA500"/>
  
-<title>従業員編集完了</title>
+<title>Laravel_従業員編集完了</title>
 </head>
 
 <body>
@@ -46,7 +46,7 @@
     
 <h1>従業員編集完了</h1>
 
-<?php include('db-login.php'); ?>
+<?php include('db-login-laravel.php'); ?>
 
 <?php
 try{

@@ -59,7 +59,7 @@
         } );
     </script>
     
-    <title>フィルタ結果</title>
+    <title>Laravel_フィルタ結果</title>
 </head>
 <body>
 
@@ -91,7 +91,7 @@
     <input type="button" onclick="location.href='https://dev-laravel.jokazaki.biz:8443/employees-list.php'" value="「従業員一覧」に戻る" class="button">
 <br/>
 
-<?php include('db-login.php'); ?>
+<?php include('db-login-laravel.php'); ?>
 
 <?php
 try{

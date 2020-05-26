@@ -26,7 +26,7 @@
     <meta name="msapplication-square310x310logo" content="large.jpg"/>
     <meta name="msapplication-TileColor" content="#FAA500"/>
     
-    <title>従業員登録完了</title>
+    <title>Laravel_従業員登録完了</title>
 </head>
 <body>
 
@@ -47,7 +47,7 @@
 <h1>従業員新規登録完了</h1>
 
 
-<?php include('db-login.php'); ?>
+<?php include('db-login-laravel.php'); ?>
 
 
 <?php
@@ -72,8 +72,8 @@ try{
     $stmt->execute();
     
 }catch(PDOException $Exception){
-    //die('接続エラー：' .$Exception->getMessage());
-    exit("データベース処理時にエラーが発生しました<div class ='error2'>従業員ID:&nbsp;$employee_id&nbsp;のレコードがすでに存在します</div><br/>");
+    die('接続エラー：' .$Exception->getMessage());
+    //exit("データベース処理時にエラーが発生しました<div class ='error2'>従業員ID:&nbsp;$employee_id&nbsp;のレコードがすでに存在します</div><br/>");
 }
 
 ?>

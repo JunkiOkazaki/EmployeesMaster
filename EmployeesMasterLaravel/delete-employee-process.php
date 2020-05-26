@@ -27,7 +27,7 @@
     <meta name="msapplication-TileColor" content="#FAA500"/>
 
  
-<title>従業員削除完了</title>
+<title>Laravel_従業員削除完了</title>
 </head>
 
 <body>
@@ -50,7 +50,7 @@
 <h1>従業員削除完了</h1>
 
 <!--DBログイン-->
-<?php include('db-login.php'); ?>
+<?php include('db-login-laravel.php'); ?>
 
 <?php
 try{

@@ -58,7 +58,7 @@
         } );
     </script>
     
-    <title>従業員一覧</title>
+    <title>Laravel_従業員一覧</title>
 </head>
 <body>
     
@@ -87,7 +87,7 @@
     <input type="submit" name="filter" value="フィルタ" class="button">
 <br/>
 
-<?php include('db-login.php'); ?>
+<?php include('db-login-laravel.php'); ?>
 
 <?php
 try{
