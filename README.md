@@ -3,4 +3,4 @@
 このプロジェクトはテスト用に作成されました。
 詳しくは以下のページをご覧ください。
 
-[マニュアル] (employees-master-manual.php)
+[マニュアル] (https://dev.jokazaki.biz:8443/employees-master-manual.php)
