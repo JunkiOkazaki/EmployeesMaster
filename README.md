@@ -4,11 +4,11 @@
 
 EmployeesMaster enables you of easily manage the complicated task of labor management with  responsive, intuitive UI. EmployeesMaster is for people like:
 
-- HR
+- HR peaople
 - Accountants
-- Department manager
+- Department managers
 
-If you interested in using EmployeesMaster detailed documents are available at
+If you are interested in using EmployeesMaster detailed document is available at
 [DOCS.](https://dev.jokazaki.biz:8443/employees-master-manual.php)
 
 
