@@ -9,14 +9,14 @@
 
 
 
-##Contributing
+## Contributing
 Thank you for considering contributing to the EmployeesMaster! The contribution guide can be found in the EmployeesMaster documentation.
 
-##Code of Conduct
+## Code of Conduct
 In order to ensure that the EmployeesMaster community is welcoming to all, please review and abide by the Code of Conduct.
 
-##Security Vulnerabilities
+## Security Vulnerabilities
 If you discover a security vulnerability within EmployeesMaster, please send an e-mail to Taylor Otwell via admin@mail.jokazaki.biz. All security vulnerabilities will be promptly addressed.
 
-##License
+## License
 The EmployeesMaster framework is open-sourced software licensed under the MIT license.
