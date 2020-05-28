@@ -1,26 +1,26 @@
 /* iOSデフォルトスタイルリセット */
 input[type="submit"],
 input[type="button"] {
-  border-radius: 0;
-  -webkit-box-sizing: content-box;
-  -webkit-appearance: button;
-  appearance: button;
-  border: none;
-  box-sizing: border-box;
-  cursor: pointer;
+    border-radius: 0;
+    -webkit-box-sizing: content-box;
+    -webkit-appearance: button;
+    appearance: button;
+    border: none;
+    box-sizing: border-box;
+    cursor: pointer;
 }
 input[type="submit"]::-webkit-search-decoration,
 input[type="button"]::-webkit-search-decoration {
-  display: none;
+    display: none;
 }
 input[type="submit"]::focus,
 input[type="button"]::focus {
-  outline-offset: -2px;
+    outline-offset: -2px;
 }
 
 /* コンテンツ余白 */
 .mycontents { 
-        margin: 10px;
+    margin: 10px;
 }
 
 @media screen and (min-width:1600px){
@@ -31,61 +31,61 @@ input[type="button"]::focus {
 
 /* メニュー */
 ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-	background-color: #1b2538;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #1b2538;
 }
 
 li {
-	float: left;
-	border-right: 1px solid #bbbbbb;
+    float: left;
+    border-right: 1px solid #bbbbbb;
 }
 li:last-child {
-	border-right: none;
+    border-right: none;
 }
 li a {
-	display: block;
-	color: white;
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
 }
 li a:hover:not(.active) {
-	background-color: #a9bce2;
+    background-color: #a9bce2;
 }
 .active {
-	background-color: #da3c41;
+    background-color: #da3c41;
 }
 
 
 /* ボタン装飾 */
 .button {
-  margin        : 0 0 0.5rem 0;
-  display       : inline-block;
-  font-size     : 13pt;        /* 文字サイズ */
-  text-align    : center;      /* 文字位置   */
-  cursor        : pointer;     /* カーソル   */
-  padding       : 10px 10px;     /* 余白       */
-  background    : #da3c41;     /* 背景色     */
-  color         : #ffffff;     /* 文字色     */
-  line-height   : 1rem;         /* 1行の高さ  */
-  transition    : .3s;         /* なめらか変化 */
-  box-shadow    : 4px 4px 3px #666666;  /* 影の設定 */
-  border        : 2px solid #da3c41;    /* 枠の指定 */
+    margin        : 0 0 0.5rem 0;
+    display       : inline-block;
+    font-size     : 13pt;        /* 文字サイズ */
+    text-align    : center;      /* 文字位置   */
+    cursor        : pointer;     /* カーソル   */
+    padding       : 10px 10px;     /* 余白       */
+    background    : #da3c41;     /* 背景色     */
+    color         : #ffffff;     /* 文字色     */
+    line-height   : 1rem;         /* 1行の高さ  */
+    transition    : .3s;         /* なめらか変化 */
+    box-shadow    : 4px 4px 3px #666666;  /* 影の設定 */
+    border        : 2px solid #da3c41;    /* 枠の指定 */
 }
 .button:hover {
-  box-shadow    : none;        /* カーソル時の影消去 */
-  color         : #da3c41;     /* 背景色     */
-  background    : #ffffff;     /* 文字色     */
+    box-shadow    : none;        /* カーソル時の影消去 */
+    color         : #da3c41;     /* 背景色     */
+    background    : #ffffff;     /* 文字色     */
 }
 
 /* テキストフォーム用 */
 .cp_iptxt {
-	position: relative;
-	width: 80%;
-	margin: 30px 0%;
+    position: relative;
+    width: 80%;
+    margin: 30px 0%;
 }
 
 @media screen and (min-width:1600px){
@@ -96,98 +96,98 @@ li a:hover:not(.active) {
 
 
 .cp_iptxt input[type='text'] {
-	font: 15px/24px sans-serif;
-	box-sizing: border-box;
-	width: 100%;
-	letter-spacing: 1px;
-	padding-left: 7rem;
+    font: 15px/24px sans-serif;
+    box-sizing: border-box;
+    width: 100%;
+    letter-spacing: 1px;
+    padding-left: 7rem;
 }
 .cp_iptxt input[type='text']:focus {
-	outline: none;
+    outline: none;
 }
 .ef {
-	padding: 4px 0;
-	border: 0;
-	border-bottom: 1px solid #1b2538;
-	background-color: transparent;
+    padding: 4px 0;
+    border: 0;
+    border-bottom: 1px solid #1b2538;
+    background-color: transparent;
 }
 .ef ~ .focus_line {
-	position: absolute;
-	bottom: 0;
-	left: 50%;
-	width: 0;
-	height: 2px;
-	transition: 0.4s;
-	background-color: #da3c41;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    transition: 0.4s;
+    background-color: #da3c41;
 }
 .ef ~ .focus_line {
-	position: absolute;
-	bottom: 0;
-	left: 50%;
-	width: 0;
-	height: 2px;
-	transition: 0.4s;
-	background-color: #da3c41;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    transition: 0.4s;
+    background-color: #da3c41;
 }
 .ef:focus ~ .focus_line,
 .cp_iptxt.ef ~ .focus_line {
-	left: 0;
-	width: 100%;
-	transition: 0.4s;
+    left: 0;
+    width: 100%;
+    transition: 0.4s;
 }
 .ef ~ label {
-	position: absolute;
-	z-index: -1;
-	top: 4px;
-	left: 0;
-	width: 100%;
-	transition: 0.3s;
-	letter-spacing: 0.5px;
-	color: #aaaaaa;
+    position: absolute;
+    z-index: -1;
+    top: 4px;
+    left: 0;
+    width: 100%;
+    transition: 0.3s;
+    letter-spacing: 0.5px;
+    color: #aaaaaa;
 }
 .ef:focus ~ label, .cp_iptxt.ef ~ label {
-	font-size: 12px;
-	top: -16px;
-	transition: 0.3s;
-	color: #da3c41;
+    font-size: 12px;
+    top: -16px;
+    transition: 0.3s;
+    color: #da3c41;
 }
 
 
 /* 表見出し */
 .midashi {
-         border-bottom: solid 2px #da3c41;
-         padding-top: 0.5rem;
-         padding-right: 1rem;
-         padding-left: 1rem;
+    border-bottom: solid 2px #da3c41;
+    padding-top: 0.5rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
 }
 
 
 
 /* 表見出し */
 .midashi2 {
-         border-bottom: solid 2px #da3c41;
-         padding-top: 0.5rem;
-         padding-right: 3rem;
-         padding-left: 3rem;
+    border-bottom: solid 2px #da3c41;
+    padding-top: 0.5rem;
+    padding-right: 3rem;
+    padding-left: 3rem;
 }
 
 /* 説明部分 */
 .setsumei {
-        margin-top: 1rem;
-        padding-left: 1rem;
-        padding-right: 0.5rem;
-        padding-top: 0.5rem;
-        padding-bottom: 2rem;
-        color: #5d627b;
-        background: white;
-        border-top: solid 5px #5d627b;
-        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+    margin-top: 1rem;
+    padding-left: 1rem;
+    padding-right: 0.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 2rem;
+    color: #5d627b;
+    background: white;
+    border-top: solid 5px #5d627b;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
 }
 
 .setsumei h3 {
-        border-left: solid 5px #3CDAD5;
-        background: whitesmoke;
-        padding:3px 15px;
+    border-left: solid 5px #3CDAD5;
+    background: whitesmoke;
+    padding:3px 15px;
 }
 
 @media screen and (min-width:1600px){
@@ -197,14 +197,14 @@ li a:hover:not(.active) {
 }
 
 .error {
-        margin-top: 0.5rem;
-        padding-left: 0.5rem;
-        padding-top: 0.5rem;
-        padding-bottom: 0.5rem;
-        color: #ff0000;
-        background: whitesmoke;
-        border-left: solid 5px #da863b;
-        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+    margin-top: 0.5rem;
+    padding-left: 0.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    color: #ff0000;
+    background: whitesmoke;
+    border-left: solid 5px #da863b;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
 }
 
 @media screen and (min-width:1600px){
@@ -214,14 +214,14 @@ li a:hover:not(.active) {
 }
 
 .error2 {
-        margin-top: 0.5rem;
-        padding-left: 0.5rem;
-        padding-top: 0.5rem;
-        padding-bottom: 0.5rem;
-        color: #ff0000;
-        background: whitesmoke;
-        border-left: solid 5px #da863b;
-        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+    margin-top: 0.5rem;
+    padding-left: 0.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    color: #ff0000;
+    background: whitesmoke;
+    border-left: solid 5px #da863b;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
 }
 
 @media screen and (min-width:1600px){
@@ -231,14 +231,14 @@ li a:hover:not(.active) {
 }
 
 .comment{
-        margin-top: 0.5rem;
-        padding-left: 0.5rem;
-        padding-top: 0.5rem;
-        padding-bottom: 0.5rem;
-        color: #5d627b;
-        background: whitesmoke;
-        border-left: solid 5px #3bda86;
-        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+    margin-top: 0.5rem;
+    padding-left: 0.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    color: #5d627b;
+    background: whitesmoke;
+    border-left: solid 5px #3bda86;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
 }
 
 @media screen and (min-width:1600px){
