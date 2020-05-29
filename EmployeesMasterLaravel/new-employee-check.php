@@ -29,11 +29,12 @@
         <title>Laravel_従業員新規登録確認画面</title>
 
     </head>
-
     <body>
 
+        <!--セッション開始-->
         <?php include('session-start.php'); ?>
 
+        <!---->
         <ul>
             <li><a href="https://dev-laravel.jokazaki.biz:8443/employees-list.php">従業員一覧</a></li>
             <li><a class="active" href="https://dev-laravel.jokazaki.biz:8443/new-employee.html">従業員登録</a></li>
@@ -48,20 +49,22 @@
 
             <h1>従業員新規登録確認画面</h1>
 
+            <!--DBログイン-->
             <?php include('db-login-laravel.php'); ?>
 
-
+            
             <?php
+            //SQL文組み立てには、プレースホルダを使用。
             $employee_id = $_SESSION['employee_id'];
             $employee_code = $_SESSION['employee_code'];
             $employee_name = $_SESSION['employee_name'];
             $department_id = $_SESSION['department_id'];
             $created_at = date("Y-m-d");
             $updated_at = date("Y-m-d");
-
             $flag = 0;
             $class = "";
 
+            //入力チェックで問題なければ、SQL文組み立てと実行
             if (!empty($employee_id)) {
                 if (preg_match('/^[0-9]{1,4}$/', $employee_id)) {
                     try {
@@ -98,7 +101,7 @@
                 echo "<div class ='error2'>「従業員コード」欄が未入力です</div>";
             }
 
-
+            
             if (!empty($employee_name)) {
                 if (preg_match('/^[ぁ-んァ-ヶー一-龠]+$/u', $employee_name)) {
                     $employee_name = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_name);
@@ -111,6 +114,7 @@
                 echo "<div class ='error2'>「氏名」欄が未入力です</div>";
             }
 
+            
             if (!empty($department_id)) {
                 if (preg_match('/^[0-9]{1,3}$/', $department_id)) {
                     $department_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $department_id);
@@ -127,11 +131,13 @@
                 echo "<div class ='error2'>「部署ID」欄が未入力です</div>";
             }
 
+            
             if ($result[0]['employee_id'] == $employee_id) {
                 $flag = 1;
                 echo "<div class=error2>従業員ID:&nbsp;" . $employee_id . "&nbsp;のレコードはすでに存在します</div>";
             }
 
+            
             if ($flag == 1) {
                 $class = "hide";
             } else {
@@ -139,6 +145,7 @@
             }
             ?>    
 
+            <!--表見出し-->
             <table><tbody>
                     <tr>
                         <th class="midashi">従業員ID</th>
@@ -149,6 +156,7 @@
                         <th class="midashi">データ更新日時</th>
                     </tr>
 
+                    <!--SQL文実行結果表示部-->
                     <tr>
                         <th><?= htmlspecialchars($employee_id) ?></th>
                         <th><?= htmlspecialchars($employee_code) ?></th>
@@ -157,14 +165,13 @@
                         <th><?= htmlspecialchars($created_at) ?></th>
                         <th><?= htmlspecialchars($updated_at) ?></th>
                     </tr>
-
                 </tbody></table>
-
+            
+            <!--ボタン-->
             <form method="post" action="new-employee-process.php">
-                <input type="submit" name="filter" value="登録" class="button <?PHP echo $class; ?>">
+                <input type="submit" name="filter" value="登録" class="button <?PHP echo $class; ?>"><!--入力チェックで問題なかった場合のみ表示-->
                 <input type="button" onclick="history.back()" value="戻る" class="button">
                 <br/>
-
 
         </div>
     </body>

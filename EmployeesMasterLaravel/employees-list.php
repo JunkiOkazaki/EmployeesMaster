@@ -62,6 +62,7 @@
     </head>
     <body>
 
+        <!--ナビゲーションバー-->
         <ul>
             <li><a class="active" href="https://dev-laravel.jokazaki.biz:8443/employees-list.php">従業員一覧</a></li>
             <li><a href="https://dev-laravel.jokazaki.biz:8443/new-employee.html">従業員登録</a></li>
@@ -76,7 +77,7 @@
 
             <h1>従業員一覧</h1>
 
-
+            <!--入力欄-->
             <form method="post" action="employees-list-filter.php">
                 <div  class="cp_iptxt"><input class="ef" type="text" name="employee_id" size="30" placeholder=""><label>従業員ID</label><span class="focus_line"></span></div>
                 <div  class="cp_iptxt"><input class="ef" type="text" name="employee_code" size="30" placeholder=""><label>従業員コード</label><span class="focus_line"></span></div>
@@ -86,9 +87,11 @@
                 <div  class="cp_iptxt"><input class="ef" id="datepicker_ua" type="text" name="updated_at" size="30" placeholder="" ><label>更新日時</label><span class="focus_line"></span></div>
                 <input type="submit" name="filter" value="フィルタ" class="button">
                 <br/>
-
+                
+                <!--DBログイン-->
                 <?php include('db-login-laravel.php'); ?>
 
+                <!--SQL文組み立てと実行-->
                 <?php
                 try {
                     $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM l_company.employees WHERE delete_flag=0";
@@ -101,7 +104,7 @@
                 }
                 ?>
 
-
+                <!--表見出し-->
                 <table><tbody>
                         <tr>
                             <th class="midashi">従業員ID</th>
@@ -113,9 +116,10 @@
                         </tr>
 
                         <?php
-                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { //SQL文実行結果を$rowに格納し、順次実行
                             ?>
-
+                            
+                            <!--SQL文実行結果表示部-->
                             <tr>
                                 <th><?= htmlspecialchars($row['employee_id']) ?></th>
                                 <th><?= htmlspecialchars($row['employee_code']) ?></th>
@@ -125,11 +129,10 @@
                                 <th><?= htmlspecialchars($row['updated_at']) ?></th>
                             </tr>
 
-                            <?php
+                        <?php
                         }
-                        $pdo = null;
+                        $pdo = null; //PDOオブジェクト破棄
                         ?>
-
                     </tbody></table>
 
         </div>

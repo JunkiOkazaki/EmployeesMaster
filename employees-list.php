@@ -60,7 +60,8 @@
         <title>従業員一覧</title>
     </head>
     <body>
-
+        
+        <!--ナビゲーションバー-->
         <ul>
             <li><a class="active" href="https://dev.jokazaki.biz:8443/employees-list.php">従業員一覧</a></li>
             <li><a href="https://dev.jokazaki.biz:8443/new-employee.html">従業員登録</a></li>
@@ -90,7 +91,7 @@
                 <!--DBログイン-->
                 <?php include('db-login.php'); ?>
 
-
+                <!--SQL文組み立てと実行-->
                 <?php
                 try {
                     $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM company.employees WHERE delete_flag=0";
@@ -103,7 +104,7 @@
                 }
                 ?>
 
-
+                <!--表見出し-->
                 <table><tbody>
                         <tr>
                             <th class="midashi">従業員ID</th>
@@ -128,10 +129,10 @@
                                 <th><?= htmlspecialchars($row['updated_at']) ?></th>
                             </tr>
 
-                            <?php
+                        <?php
                         }
                         $pdo = null; //PDOオブジェクト破棄
-                        ?>
+                            ?>
 
                     </tbody></table>
 

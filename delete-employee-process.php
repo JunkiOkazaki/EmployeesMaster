@@ -35,6 +35,7 @@
         <!--セッション開始-->
         <?php include('session-start.php'); ?>
 
+        <!--ナビゲーションバー-->
         <ul>
             <li><a href="https://dev.jokazaki.biz:8443/employees-list.php">従業員一覧</a></li>
             <li><a href="https://dev.jokazaki.biz:8443/new-employee.html">従業員登録</a></li>
@@ -51,11 +52,10 @@
 
             <!--DBログイン-->
             <?php include('db-login.php'); ?>
-
+            <!--SQL文組み立てと実行-->
             <?php
             try {
                 $employee_id = $_SESSION['employee_id'];
-
                 $sql = "UPDATE company.employees SET delete_flag=1 WHERE employee_id=:employee_id";
                 $stmt = $pdo->prepare($sql);
                 $stmt->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);
@@ -66,9 +66,10 @@
             ?>
 
             <?php
-            $pdo = null;
+                $pdo = null; //PDOオブジェクト破棄
             ?>
 
+            <!--ボタン-->
             <input type="button" onclick="location.href = 'https://dev.jokazaki.biz:8443/delete-employee.html'" value="「従業員削除」に戻る" class="button">
 
         </div>

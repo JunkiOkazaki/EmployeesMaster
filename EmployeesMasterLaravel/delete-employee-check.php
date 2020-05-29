@@ -54,10 +54,12 @@
 
             <!--入力チェック-->
             <?php
+            //SQL文組み立てには、プレースホルダを使用する。（バインド機構）
             $employee_id = $_SESSION['employee_id'];
             $flag = 0;
             $class = "";
 
+            //入力チェックで問題なければ、SQL文組み立てと実行
             if (!empty($employee_id)) {
                 if (preg_match('/^[0-9]{1,4}$/', $employee_id)) {
                     $employee_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_id);
@@ -109,7 +111,8 @@
                         <th class="midashi">データ更新日時</th>
                     </tr>
 
-                    <?php foreach ($result as $rows) { ?>
+                    <?php foreach ($result as $rows) { //$result配列要素を$rowsに順番に代入し、順次実行。
+                        ?> 
 
                         <tr>
                             <th><?= htmlspecialchars($rows['employee_id']) ?></th>
@@ -120,9 +123,9 @@
                             <th><?= htmlspecialchars($rows['updated_at']) ?></th>
                         </tr>
 
-                        <?php
+                    <?php
                     }
-                    $pdo = null;
+                    $pdo = null; //PDOオブジェクト破棄
                     ?>
 
                 </tbody></table>

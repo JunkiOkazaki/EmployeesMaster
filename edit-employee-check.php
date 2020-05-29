@@ -29,10 +29,11 @@
         <title>従業員編集確認画面</title>
     </head>
     <body>
-
+           
+        <!--セッション開始-->
         <?php include('session-start.php'); ?>
 
-
+        <!--ナビゲーションバー-->
         <ul>
             <li><a href="https://dev.jokazaki.biz:8443/employees-list.php">従業員一覧</a></li>
             <li><a href="https://dev.jokazaki.biz:8443/new-employee.html">従業員登録</a></li>
@@ -47,32 +48,21 @@
 
             <h1>従業員編集確認画面</h1>
 
-
+            <!--DBログイン-->
             <?php include('db-login.php'); ?>
 
-
+            
             <?php
+            //SQL文組み立てにはプレースホルダを用いる
             $employee_id = $_SESSION['employee_id'];
             $employee_code = $_SESSION['employee_code'];
             $employee_name = $_SESSION['employee_name'];
             $department_id = $_SESSION['department_id'];
             $updated_at = date("Y-m-d");
-
             $flag = 0;
             $class = "";
-
-            try {
-                $employee_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_id);
-                $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM company.employees WHERE employee_id=:employee_id AND delete_flag=0";
-                $stmt = $pdo->prepare($sql);
-                $stmt->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);
-            } catch (PDOException $Exception) {
-                die('接続エラー：' . $Exception->getMessage());
-                echo "データベース処理時にエラーが発生しました。";
-                echo '<input type="button" onclick="history.back()" value="戻る" class="button">';
-            }
-
-
+            
+            //入力チェックと条件判定をし、問題なければSQL文組み立てと実行
             if (!empty($employee_id)) {
                 if (preg_match('/^[0-9]{1,4}$/', $employee_id)) {
                     try {
@@ -147,7 +137,7 @@
             }
             ?>
 
-
+            <!--表見出し-->
             <table><tbody>
                     <tr>
                         <th class="midashi">従業員ID</th>
@@ -156,7 +146,7 @@
                         <th class="midashi">部署ID</th>
                         <th class="midashi">データ更新日時</th>
                     </tr>
-
+                    <!--SQL実行結果表示部-->
                     <tr>
                         <th><?= htmlspecialchars($employee_id) ?></th>
                         <th><?= htmlspecialchars($employee_code) ?></th>
@@ -164,11 +154,11 @@
                         <th><?= htmlspecialchars($department_id) ?></th>
                         <th><?= htmlspecialchars($updated_at) ?></th>
                     </tr>
+            </tbody></table>
 
-                </tbody></table>
-
+            <!--ボタン-->
             <form method="post" action="edit-employee-process.php">
-                <input type="submit" name="filter" value="レコード更新" class="button <?PHP echo $class; ?>">
+                <input type="submit" name="filter" value="レコード更新" class="button <?PHP echo $class; ?>"><!--入力チェックで問題があった場合は非表示-->
                 <input type="button" onclick="history.back()" value="戻る" class="button">
                 <br/>
 

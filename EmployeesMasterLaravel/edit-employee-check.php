@@ -30,9 +30,10 @@
     </head>
     <body>
 
+        <!--セッション開始-->
         <?php include('session-start.php'); ?>
 
-
+        <!--ナビゲーションバー-->
         <ul>
             <li><a href="https://dev-laravel.jokazaki.biz:8443/employees-list.php">従業員一覧</a></li>
             <li><a href="https://dev-laravel.jokazaki.biz:8443/new-employee.html">従業員登録</a></li>
@@ -47,20 +48,21 @@
 
             <h1>従業員編集確認画面</h1>
 
-
+            <!--DBログイン-->
             <?php include('db-login-laravel.php'); ?>
 
 
             <?php
+            //SQL文組み立てには、プレースホルダを使用する。(バインド機構)
             $employee_id = $_SESSION['employee_id'];
             $employee_code = $_SESSION['employee_code'];
             $employee_name = $_SESSION['employee_name'];
             $department_id = $_SESSION['department_id'];
             $updated_at = date("Y-m-d");
-
             $flag = 0;
             $class = "";
 
+            //入力チェックで問題なければ、SQL文組み立てと実行
             try {
                 $employee_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_id);
                 $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM l_company.employees WHERE employee_id=:employee_id AND delete_flag=0";
@@ -147,7 +149,7 @@
             }
             ?>
 
-
+            <!--表見出し-->
             <table><tbody>
                     <tr>
                         <th class="midashi">従業員ID</th>
@@ -157,6 +159,7 @@
                         <th class="midashi">データ更新日時</th>
                     </tr>
 
+                    <!--SQL文実行結果表示部（エスケープしてから表示）-->
                     <tr>
                         <th><?= htmlspecialchars($employee_id) ?></th>
                         <th><?= htmlspecialchars($employee_code) ?></th>
@@ -164,11 +167,11 @@
                         <th><?= htmlspecialchars($department_id) ?></th>
                         <th><?= htmlspecialchars($updated_at) ?></th>
                     </tr>
+            </tbody></table>
 
-                </tbody></table>
-
+            <!--ボタン-->
             <form method="post" action="edit-employee-process.php">
-                <input type="submit" name="filter" value="レコード更新" class="button <?PHP echo $class; ?>">
+                <input type="submit" name="filter" value="レコード更新" class="button <?PHP echo $class; ?>"><!--入力チェックで問題なかった場合のみ表示-->
                 <input type="button" onclick="history.back()" value="戻る" class="button">
                 <br/>
 

@@ -31,8 +31,10 @@
 
     <body>
 
+        <!--セッション開始-->
         <?php include('session-start.php'); ?>
-
+        
+        <!--ナビゲーションバー-->
         <ul>
             <li><a href="https://dev-laravel.jokazaki.biz:8443/employees-list.php">従業員一覧</a></li>
             <li><a href="https://dev-laravel.jokazaki.biz:8443/new-employee.html">従業員登録</a></li>
@@ -45,17 +47,20 @@
 
 
             <h1>従業員編集完了</h1>
-
+            
+            <!--セッション開始-->
             <?php include('db-login-laravel.php'); ?>
 
             <?php
             try {
+                //SQL文組み立てには、プレースホルダを使用する
                 $employee_id = $_SESSION['employee_id'];
                 $employee_code = $_SESSION['employee_code'];
                 $employee_name = $_SESSION['employee_name'];
                 $department_id = $_SESSION['department_id'];
                 $updated_at = date("Y-m-d");
 
+                //SQL文組み立てと実行
                 $sql = "UPDATE l_company.employees SET employee_code=:employee_code, employee_name=:employee_name, department_id=:department_id, updated_at=:updated_at WHERE employee_id=:employee_id";
                 $stmt = $pdo->prepare($sql);
                 $stmt->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);
@@ -72,9 +77,10 @@
             ?>
 
             <?php
-            $pdo = null;
+            $pdo = null; //PDOオブジェクト破棄
             ?>
 
+            <!--ボタン-->
             <input type="button" onclick="location.href = 'https://dev-laravel.jokazaki.biz:8443/edit-employee.html'" value="「従業員編集」に戻る" class="button">
 
         </div>

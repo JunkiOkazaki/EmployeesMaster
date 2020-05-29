@@ -1,3 +1,9 @@
+/* 
+サイズ調整等は相対指定とし、画面サイズに関わらず適切に表示されるようにする。
+色の指定については、「色の三要素」を意識し、統一感あるデザインにする。
+*/
+
+
 /* iOSデフォルトスタイルリセット */
 input[type="submit"],
 input[type="button"] {
@@ -22,14 +28,14 @@ input[type="button"]::focus {
 .mycontents { 
     margin: 10px;
 }
-
+/* メディアクエリ */
 @media screen and (min-width:1600px){
     .mycontents {
         margin: 50px;
     }
 }
 
-/* メニュー */
+/* ナビゲーションバー */
 ul {
     list-style-type: none;
     margin: 0;
@@ -37,7 +43,6 @@ ul {
     overflow: hidden;
     background-color: #1b2538;
 }
-
 li {
     float: left;
     border-right: 1px solid #bbbbbb;
@@ -87,14 +92,14 @@ li a:hover:not(.active) {
     width: 80%;
     margin: 30px 0%;
 }
-
+/* メディアクエリ */
 @media screen and (min-width:1600px){
     .cp_iptxt {
         width: 50%;
     }
 }
 
-
+/*入力欄*/
 .cp_iptxt input[type='text'] {
     font: 15px/24px sans-serif;
     box-sizing: border-box;
@@ -161,8 +166,6 @@ li a:hover:not(.active) {
     padding-left: 1rem;
 }
 
-
-
 /* 表見出し */
 .midashi2 {
     border-bottom: solid 2px #da3c41;
@@ -189,13 +192,14 @@ li a:hover:not(.active) {
     background: whitesmoke;
     padding:3px 15px;
 }
-
+/* メディアクエリ */
 @media screen and (min-width:1600px){
     .setsumei h3 {
         width: 48%;
     }
 }
 
+/* エラー表示部1 */
 .error {
     margin-top: 0.5rem;
     padding-left: 0.5rem;
@@ -206,13 +210,14 @@ li a:hover:not(.active) {
     border-left: solid 5px #da863b;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
 }
-
+/* メディアクエリ */
 @media screen and (min-width:1600px){
     .error {
         width: 50%;
     }
 }
 
+/* エラー表示部2 */
 .error2 {
     margin-top: 0.5rem;
     padding-left: 0.5rem;
@@ -223,13 +228,13 @@ li a:hover:not(.active) {
     border-left: solid 5px #da863b;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
 }
-
 @media screen and (min-width:1600px){
     .error2 {
         width: 50%;
     }
 }
 
+/* 通知部分 */
 .comment{
     margin-top: 0.5rem;
     padding-left: 0.5rem;
@@ -240,31 +245,35 @@ li a:hover:not(.active) {
     border-left: solid 5px #3bda86;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
 }
-
+/* メディアクエリ */
 @media screen and (min-width:1600px){
     .comment {
         width: 50%;
     }
 }
 
+/* ボタン非表示 */
 .hide{
     display:none;
 }
 
+/* 画像サイズ調整 */
 img{
     width:98%;
 }
-
+/* メディアクエリ */
 @media screen and (min-width:1600px){
     img {
         width: 50%;
     }
 }
 
+/*Googleフォーム*/
 iframe{
     width:100%;
 }
 
+/* メディアクエリ */
 @media screen and (min-width:1600px){
     iframe {
         width: 50%;

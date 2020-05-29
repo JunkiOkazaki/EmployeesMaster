@@ -1,5 +1,4 @@
 <?php
-
 //DBログイン
 try {
     $pdo = new PDO('mysql:host=dev.jokazaki.net;dbname=company;charset=utf8', 'devs', '9876');

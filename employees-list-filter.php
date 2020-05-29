@@ -63,6 +63,7 @@
     </head>
     <body>
 
+        <!--セッション開始-->
         <?php include('session-start.php'); ?>
 
 
@@ -100,6 +101,7 @@
 
                 <!--入力チェック-->
                 <?php
+                //SQL文組み立てには、プレースホルダを用いる
                 $employee_id = $_SESSION['employee_id'];
                 $employee_code = $_SESSION['employee_code'];
                 $employee_name = $_SESSION['employee_name'];
@@ -108,7 +110,7 @@
                 $created_at = $_SESSION['created_at'];
                 $updated_at = $_SESSION['updated_at'];
 
-
+                //入力チェックで問題なければ、SQL文組み立てと実行
                 if (!empty($employee_id)) {
                     if (preg_match('/^[0-9]{1,4}$/', $employee_id)) {
                         $employee_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_id);
@@ -235,34 +237,37 @@
                 ?>
 
                 <!--表見出し-->
-                <table><tbody>
+                <table>
+                    <tbody>
                         <tr>
-                            <th class="midashi">従業員ID</th>
-                            <th class="midashi">従業員コード</th>
-                            <th class="midashi">氏名</th>
-                            <th class="midashi">部署ID</th>
-                            <th class="midashi">データ登録日時</th>
-                            <th class="midashi">データ更新日時</th>
+                            <th class = "midashi">従業員ID</th>
+                            <th class = "midashi">従業員コード</th>
+                            <th class = "midashi">氏名</th>
+                            <th class = "midashi">部署ID</th>
+                            <th class = "midashi">データ登録日時</th>
+                            <th class = "midashi">データ更新日時</th>
                         </tr>
 
-                        <?php foreach ($result as $rows) { ?>
 
-                            <tr>
-                                <th><?= htmlspecialchars($rows['employee_id']) ?></th>
-                                <th><?= htmlspecialchars($rows['employee_code']) ?></th>
-                                <th><?= htmlspecialchars($rows['employee_name']) ?></th>
-                                <th><?= htmlspecialchars($rows['department_id']) ?></th>
-                                <th><?= htmlspecialchars($rows['created_at']) ?></th>
-                                <th><?= htmlspecialchars($rows['updated_at']) ?></th>
-                            </tr>
+                    <?php foreach ($result as $rows) { ?> <!--$result各要素を$rowsとして取り出し-->
 
-                            <?php
-                        }
-                        $pdo = null; //PDOオブジェクト破棄
-                        ?>
+                        <!--エスケープ処理とSQL実行結果表示-->
+                        <tr>
+                            <th><?= htmlspecialchars($rows['employee_id']) ?></th>
+                            <th><?= htmlspecialchars($rows['employee_code']) ?></th>
+                            <th><?= htmlspecialchars($rows['employee_name']) ?></th>
+                            <th><?= htmlspecialchars($rows['department_id']) ?></th>
+                            <th><?= htmlspecialchars($rows['created_at']) ?></th>
+                            <th><?= htmlspecialchars($rows['updated_at']) ?></th>
+                        </tr>
 
-                    </tbody></table>
-
+                    <?php
+                    }
+                    $pdo = null; //PDOオブジェクト破棄
+                    ?>
+                        
+                </tbody>
+            </table>
         </div>
     </body>
 </html>

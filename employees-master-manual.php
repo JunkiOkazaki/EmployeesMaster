@@ -30,6 +30,7 @@
     </head>
     <body>
 
+        <!--ナビゲーションバー-->
         <ul>
             <li><a href="https://dev.jokazaki.biz:8443/employees-list.php">従業員一覧</a></li>
             <li><a href="https://dev.jokazaki.biz:8443/new-employee.html">従業員登録</a></li>
@@ -50,6 +51,7 @@
                     いずれかのフィールドに入力し、「フィルタ」を押下してください。<br/>
                     複数フィールドに入力した場合は、上段のフィールドを優先します。<br/>
                     「従業員名」については、姓名の一部のみでフィルタ可能です。<br/><br/>
+                    <!--キャプチャ画像-->
                     <img src="man_img1.jpg" alt="従業員一覧ページの画像">
                 </p>
             </div>
@@ -66,9 +68,10 @@
                     部署が一覧にない場合は、システム課へ登録を依頼してください。<br/>
                 </p>
 
-
+                <!--DBログイン-->
                 <?php include('db-login.php'); ?>
-
+                
+                <!--SQL文組み立てと実行-->
                 <?php
                 try {
                     $sql = "SELECT department_id, department_code, department_name FROM company.departments WHERE delete_flag=0";
@@ -80,20 +83,23 @@
                     echo '<input type="button" onclick="history.back()" value="戻る" class="button">';
                 }
                 ?>
-
+                
+                <!--SQL文実行結果表示部-->
                 <?php
                 echo "<h3>登録済み部署&nbsp;&#040;" . date("Y/m/d") . "現在&#041;</h3>";
                 ?>
-
+                
+                <!--表見出し-->
                 <table><tbody>
                         <tr>
                             <th class="midashi2">部署ID</th>
                             <th class="midashi2">部署コード</th>
                             <th class="midashi2">部署名</th>
                         </tr>
-
+                        
+                        <!--SQL文実行結果表示部-->
                         <?php
-                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { //$rowに実行結果を格納し、順次実行
                             ?>
 
                             <tr>
@@ -104,12 +110,13 @@
                                 <th><?= htmlspecialchars($row['updated_at']) ?></th>
                             </tr>
 
-                            <?php
+                        <?php
                         }
-                        $pdo = null;
-                        ?>
+                        $pdo = null; //PDOオブジェクト破棄
+                            ?>
                     </tbody></table>
                 <br/>
+                <!--キャプチャ画像-->
                 <img src="man_img2.jpg" alt="従業員登録ページの画像">
             </div>
 
@@ -120,6 +127,7 @@
                     すべてのフィールドに入力し、「確認画面へ」を押下してください。<br/>
                     従業員IDが一致する従業員の「従業員コード」「従業員名」「部署ID」を変更します。<br/>
                     その他のフィールドは変更できません。<br/>
+                    <!--キャプチャ画像-->
                     <br/><img src="man_img3.jpg" alt="従業員編集ページの画像">
                 </p>
             </div>
@@ -131,6 +139,7 @@
                     削除したい従業員の従業員IDを入力し、「確認画面へ」を押下してください。<br/>
                     従業員IDが一致する従業員のレコードを削除します。<br/>
                     確認画面に表示されるレコードに間違いがないか十分に確認してから、実行してください。<br/><br/>
+                    <!--キャプチャ画像-->
                     <img src="man_img4.jpg" alt="従業員削除ページの画像">
                 </p>
             </div>
@@ -138,11 +147,11 @@
 
             <div class="setsumei">
                 <h2>従業員マスタに関するご連絡</h2>
+                <!--Googleフォーム-->
                 <p>
                     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc_W3mrjvGmZOuT2_7dw3AnMTBF3cTZCtt1zZ_FURqSBaHBew/viewform?embedded=true" height="709" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
                 </p>
-
-
             </div>
+            
     </body>
 </html>

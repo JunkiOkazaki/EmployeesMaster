@@ -66,9 +66,10 @@
             ?>
 
             <?php
-            $pdo = null;
+            $pdo = null; //PDOオブジェクト破棄
             ?>
 
+            <!--ボタン-->
             <input type="button" onclick="location.href = 'https://dev-laravel.jokazaki.biz:8443/delete-employee.html'" value="「従業員削除」に戻る" class="button">
 
         </div>

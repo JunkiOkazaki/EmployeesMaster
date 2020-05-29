@@ -98,7 +98,7 @@
             }
             ?>
 
-            <!--表見出しと結果表示-->
+            <!--表見出し-->
             <table><tbody>
                     <tr>
                         <th class="midashi">従業員ID</th>
@@ -110,7 +110,7 @@
                     </tr>
 
                     <?php foreach ($result as $rows) { ?>
-
+                    <!--SQL文実行結果表示部-->
                         <tr>
                             <th><?= htmlspecialchars($rows['employee_id']) ?></th>
                             <th><?= htmlspecialchars($rows['employee_code']) ?></th>
@@ -122,10 +122,9 @@
 
                         <?php
                     }
-                    $pdo = null;
+                    $pdo = null; //PDOオブジェクト破棄
                     ?>
-
-                </tbody></table>
+            </tbody></table>
             <br/>
 
             <!--ページ下部のボタン-->

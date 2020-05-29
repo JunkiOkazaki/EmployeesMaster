@@ -29,9 +29,11 @@
         <title>従業員登録完了</title>
     </head>
     <body>
-
+        
+        <!--セッション開始-->
         <?php include('session-start.php'); ?>
 
+        <!--ナビゲーションバー-->
         <ul>
             <li><a href="https://dev.jokazaki.biz:8443/employees-list.php">従業員一覧</a></li>
             <li><a class="active" href="https://dev.jokazaki.biz:8443/new-employee.html">従業員登録</a></li>
@@ -46,12 +48,13 @@
 
             <h1>従業員新規登録完了</h1>
 
-
+            <!--DBログイン-->
             <?php include('db-login.php'); ?>
 
-
+            
             <?php
             try {
+                //SQL文組み立てにはプレースホルダを使用
                 $employee_id = $_SESSION['employee_id'];
                 $employee_code = $_SESSION['employee_code'];
                 $employee_name = $_SESSION['employee_name'];
@@ -59,7 +62,8 @@
                 $delete_flag = 0;
                 $created_at = date("Y-m-d");
                 $updated_at = date("Y-m-d");
-
+                
+                //SQL文組み立てと実行
                 $sql = "INSERT INTO company.employees(employee_id, employee_code, employee_name, department_id, delete_flag, created_at, updated_at) VALUES(:employee_id, :employee_code, :employee_name, :department_id, :delete_flag, :created_at, :updated_at)";
                 $stmt = $pdo->prepare($sql);
                 $stmt->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);
@@ -78,9 +82,10 @@
 
 
             <?php
-            $pdo = null;
+                $pdo = null; //PDOオブジェクト破棄
             ?>
 
+            <!--ボタン-->
             <input type="button" onclick="location.href = 'https://dev.jokazaki.biz:8443/new-employee.html'" value="「従業員登録」に戻る" class="button">
 
         </div>

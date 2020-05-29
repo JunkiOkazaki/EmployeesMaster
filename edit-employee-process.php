@@ -30,9 +30,11 @@
     </head>
 
     <body>
-
+        
+        <!--セッション開始-->
         <?php include('session-start.php'); ?>
-
+        
+        <!--ナビゲーションバー-->
         <ul>
             <li><a href="https://dev.jokazaki.biz:8443/employees-list.php">従業員一覧</a></li>
             <li><a href="https://dev.jokazaki.biz:8443/new-employee.html">従業員登録</a></li>
@@ -45,9 +47,11 @@
 
 
             <h1>従業員編集完了</h1>
-
+            
+            <!--DBログイン-->
             <?php include('db-login.php'); ?>
-
+            
+            <!--SQL文組み立てと実行-->
             <?php
             try {
                 $employee_id = $_SESSION['employee_id'];
@@ -72,9 +76,10 @@
             ?>
 
             <?php
-            $pdo = null;
+                $pdo = null; //PDOオブジェクト破棄
             ?>
-
+            
+            <!--ボタン-->
             <input type="button" onclick="location.href = 'https://dev.jokazaki.biz:8443/edit-employee.html'" value="「従業員編集」に戻る" class="button">
 
         </div>
