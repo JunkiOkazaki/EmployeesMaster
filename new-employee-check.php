@@ -68,11 +68,15 @@
                 if (preg_match('/^[0-9]{1,4}$/', $employee_id)) {
                     try {
                         $employee_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_id);
-                        $sql = "SELECT employee_id FROM company.employees WHERE employee_id=:employee_id AND delete_flag=0";
+                        $sql = "SELECT employee_id, department_id FROM company.employees WHERE employee_id=:employee_id AND delete_flag=0";
                         $stmt = $pdo->prepare($sql);
                         $stmt->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);
                         $stmt->execute();
                         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        if ($result[0]['employee_id'] == $employee_id) {
+                            $flag = 1;
+                            echo "<div class=error2>従業員ID:&nbsp;".$employee_id."&nbsp;のレコードはすでに存在します。</div>";
+                        }
                     } catch (PDOException $Exception) {
                         die('接続エラー：' . $Exception->getMessage());
                         echo "データベース処理時にエラーが発生しました。<br/>従業員ID:&nbsp;" . $employee_id . "&nbsp;はすでに使用されています。";
@@ -80,7 +84,7 @@
                     }
                 } else {
                     $flag = 1;
-                    echo "<div class ='error2'>「従業員ID」欄には、1～4文字の数字を入力してください。</div>";
+                    echo "<div class ='error2'>「従業員ID」欄には、1～4桁の半角数字を入力してください。</div>";
                 }
             } else {
                 $flag = 1;
@@ -93,7 +97,7 @@
                     $employee_code = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_code);
                 } else {
                     $flag = 1;
-                    echo "<div class='error2'>「従業員コード」欄には、1～4文字の数字を入力してください。</div>";
+                    echo "<div class='error2'>「従業員コード」欄には、1～4桁の半角数字を入力してください。</div>";
                 }
             } else {
                 $flag = 1;
@@ -116,23 +120,24 @@
             if (!empty($department_id)) {
                 if (preg_match('/^[0-9]{1,3}$/', $department_id)) {
                     $department_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $department_id);
-                    if ($result[0]['department_id'] <> $department_id) {
+                    $sql2 = "SELECT department_id from company.departments WHERE department_id=:department_id AND delete_flag=0";
+                    $stmt2 = $pdo->prepare($sql2);
+                    $stmt2->bindParam(':department_id', $department_id, PDO::PARAM_INT);
+                    $stmt2->execute();
+                    $result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);                    
+                    if (empty($result2[0]['department_id'])) {
                         $flag = 1;
                         echo "<div class='error2'>部署ID:&nbsp;" . $department_id . "&nbspは未登録です。<a href='https://dev.jokazaki.biz:8443/employees-master-manual.php#about2'>マニュアル</a>を参照し、登録済み部署の中から指定してください。</div>";
                     }
                 } else {
                     $flag = 1;
-                    echo "<div class='error2'>「部署ID」欄には、1～3文字の数字を入力してください。</div>";
+                    echo "<div class='error2'>「部署ID」欄には、1～3桁の半角数字を入力してください。</div>";
                 }
             } else {
                 $flag = 1;
                 echo "<div class ='error2'>「部署ID」欄が未入力です。</div>";
             }
-
-            if ($result[0]['employee_id'] == $employee_id) {
-                $flag = 1;
-                echo "<div class=error2>従業員ID:&nbsp;".$employee_id."&nbsp;のレコードはすでに存在します。</div>";
-            }
+            
 
             if ($flag == 1) {
                 $class = "hide";

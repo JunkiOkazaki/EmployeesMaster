@@ -130,7 +130,7 @@
                             echo '<input type="button" onclick="history.back()" value="戻る" class="button">';
                         }
                     } else {
-                        echo "<div class ='error'>「従業員ID」欄には、1～3文字の数字を入力してください。</div>";
+                        echo "<div class ='error'>「従業員ID」欄には、1～3桁の半角数字を入力してください。</div>";
                     }
                 } elseif (!empty($employee_code)) {
                     if (preg_match('/^[0-9]{1,4}$/', $employee_code)) {
@@ -150,7 +150,7 @@
                             echo '<input type="button" onclick="history.back()" value="戻る" class="button">';
                         }
                     } else {
-                        echo "<div class='error'>「従業員コード」欄には、1～3文字の数字を入力してください。</div>";
+                        echo "<div class='error'>「従業員コード」欄には、1～3桁の半角数字を入力してください。</div>";
                     }
                 } elseif (!empty($employee_name)) {
                     if (preg_match('/^[ぁ-んァ-ヶー一-龠]+$/u', $employee_name)) {
@@ -182,7 +182,7 @@
                             $stmt->execute();
                             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             if (empty($result[0]['department_id'])) {
-                                echo "<p class=error2>部署ID:&nbsp;" . $department_id . "&nbsp;のレコードは存在しません。</p>";
+                                echo "<div class='error2'>部署ID:&nbsp;" . $department_id . "&nbspは未登録です。<a href='https://dev.jokazaki.biz:8443/employees-master-manual.php#about2'>マニュアル</a>を参照し、登録済み部署の中から指定してください。</div>";
                             }
                         } catch (PDOException $Exception) {
                             die('接続エラー：' . $Exception->getMessage());
@@ -190,7 +190,7 @@
                             echo '<input type="button" onclick="history.back()" value="戻る" class="button">';
                         }
                     } else {
-                        echo "<div class='error'>「部署ID」欄には、1～3文字の数字を入力してください。</div>";
+                        echo "<div class='error'>「部署ID」欄には、1～3桁の半角数字を入力してください。</div>";
                     }
                 } elseif (!empty($created_at)) {
                     if (preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $created_at)) {
@@ -210,7 +210,7 @@
                             echo '<input type="button" onclick="history.back()" value="戻る" class="button">';
                         }
                     } else {
-                        echo "<div class='error'>「登録日時」欄は（例）&quot;2020-05-01&quot;&nbsp;のように入力してください。</div>";
+                        echo "<div class='error'>「登録日時」欄は（例）&quot;2020-05-01&quot;&nbsp;のように半角で入力してください。</div>";
                     }
                 } elseif (!empty($updated_at)) {
                     if (preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $updated_at)) {
@@ -230,7 +230,7 @@
                             echo '<input type="button" onclick="history.back()" value="戻る" class="button">';
                         }
                     } else {
-                        echo "<div class='error'>「更新日時」欄は（例）&quot;2020-05-01&quot;&nbsp;のように入力してください。</div>";
+                        echo "<div class='error'>「更新日時」欄は（例）&quot;2020-05-01&quot;&nbsp;のように半角で入力してください。</div>";
                     }
                 } else {
                     echo "<div class='error'>フィルタ条件が未入力です。</div>";

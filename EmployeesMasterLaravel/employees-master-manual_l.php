@@ -7,23 +7,23 @@
         <meta charset="utf-8">
 
         <!--スタイルシート-->
-        <link rel="stylesheet" href="menu-laravel.css">
+        <link rel="stylesheet" href="menu_l.css">
 
         <!--スマホ画面用設定-->
         <meta name="viewport" content="width=device-width,initial-scale=1">
 
         <!-- ファビコン -->
-        <link rel="icon" href="favicon.ico">
+        <link rel="icon" href="favicon_l.ico">
 
         <!-- スマホ用アイコン -->
-        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon_l.png">
 
         <!-- Windows用アイコン -->
         <meta name="application-name" content="従業員マスター"/>
-        <meta name="msapplication-square70x70logo" content="small.jpg"/>
-        <meta name="msapplication-square150x150logo" content="medium.jpg"/>
-        <meta name="msapplication-wide310x150logo" content="wide.jpg"/>
-        <meta name="msapplication-square310x310logo" content="large.jpg"/>
+        <meta name="msapplication-square70x70logo" content="small_l.jpg"/>
+        <meta name="msapplication-square150x150logo" content="medium_l.jpg"/>
+        <meta name="msapplication-wide310x150logo" content="wide_l.jpg"/>
+        <meta name="msapplication-square310x310logo" content="large_l.jpg"/>
         <meta name="msapplication-TileColor" content="#FAA500"/>
 
         <title>Laravel_マニュアル</title>
@@ -32,11 +32,11 @@
 
         <!--ナビゲーションバー-->
         <ul>
-            <li><a href="https://dev-laravel.jokazaki.biz:8443/employees-list.php">従業員一覧</a></li>
-            <li><a href="https://dev-laravel.jokazaki.biz:8443/new-employee.html">従業員登録</a></li>
-            <li><a href="https://dev-laravel.jokazaki.biz:8443/edit-employee.html">従業員編集</a></li>
-            <li><a href="https://dev-laravel.jokazaki.biz:8443/delete-employee.html">従業員削除</a></li>
-            <li><a class="active" href="https://dev-laravel.jokazaki.biz:8443/employees-master-manual.php">マニュアル</a></li>
+            <li><a href="https://dev-laravel.jokazaki.biz:8443/employees-list_l.php">従業員一覧</a></li>
+            <li><a href="https://dev-laravel.jokazaki.biz:8443/new-employee_l.html">従業員登録</a></li>
+            <li><a href="https://dev-laravel.jokazaki.biz:8443/edit-employee_l.html">従業員編集</a></li>
+            <li><a href="https://dev-laravel.jokazaki.biz:8443/delete-employee_l.html">従業員削除</a></li>
+            <li><a class="active" href="https://dev-laravel.jokazaki.biz:8443/employees-master-manual_l.php">マニュアル</a></li>
         </ul>
 
 
@@ -53,7 +53,7 @@
                     複数フィールドに入力した場合は、上段のフィールドを優先します。<br/>
                     「従業員名」については、姓名の一部のみでフィルタ可能です。<br/><br/>
                     <!--キャプチャ画像-->
-                    <img src="man_img1.jpg" alt="従業員一覧ページの画像">
+                    <img src="man_img1_l.jpg" alt="従業員一覧ページの画像">
                 </p>
             </div>
 
@@ -70,7 +70,7 @@
                 </p>
 
                 <!--DBログイン-->
-                <?php include('db-login-laravel.php'); ?>
+                <?php include('db-login_l.php'); ?>
 
                 <?php
                 //SQL文組み立てと実行
@@ -120,7 +120,7 @@
                 
                 <br/>
                 <!--キャプチャ画像-->
-                <img src="man_img2.jpg" alt="従業員登録ページの画像">
+                <img src="man_img2_l.jpg" alt="従業員登録ページの画像">
             </div>
 
 
@@ -131,7 +131,7 @@
                     従業員IDが一致する従業員の「従業員コード」「従業員名」「部署ID」を変更します。<br/>
                     その他のフィールドは変更できません。<br/>
                     <!--キャプチャ画像-->
-                    <br/><img src="man_img3.jpg" alt="従業員編集ページの画像">
+                    <br/><img src="man_img3_l.jpg" alt="従業員編集ページの画像">
                 </p>
             </div>
 
@@ -143,7 +143,7 @@
                     従業員IDが一致する従業員のレコードを削除します。<br/>
                     確認画面に表示されるレコードに間違いがないか十分に確認してから、実行してください。<br/><br/>
                     <!--キャプチャ画像-->
-                    <img src="man_img4.jpg" alt="従業員削除ページの画像">
+                    <img src="man_img4_l.jpg" alt="従業員削除ページの画像">
                 </p>
             </div>
 

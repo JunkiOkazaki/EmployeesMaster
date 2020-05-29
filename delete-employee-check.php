@@ -64,7 +64,7 @@
                     $employee_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_id);
                 } else {
                     $flag = 1;
-                    echo "<div class ='error2'>「従業員ID」欄には、1～4文字の数字を入力してください。</div>";
+                    echo "<div class ='error2'>「従業員ID」欄には、1～4桁の半角数字を入力してください。</div>";
                 }
             } else {
                 $flag = 1;

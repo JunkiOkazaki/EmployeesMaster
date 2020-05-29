@@ -7,51 +7,49 @@
         <meta charset="utf-8">
 
         <!--スタイルシート-->
-        <link rel="stylesheet" href="menu-laravel.css">
+        <link rel="stylesheet" href="menu_l.css">
 
         <!--スマホ画面用設定-->
         <meta name="viewport" content="width=device-width,initial-scale=1">
 
         <!-- ファビコン -->
-        <link rel="icon" href="favicon.ico">
+        <link rel="icon" href="favicon_l.ico">
 
         <!-- スマホ用アイコン -->
-        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon_l.png">
 
         <!-- Windows用アイコン -->
         <meta name="application-name" content="従業員マスター"/>
-        <meta name="msapplication-square70x70logo" content="small.jpg"/>
-        <meta name="msapplication-square150x150logo" content="medium.jpg"/>
-        <meta name="msapplication-wide310x150logo" content="wide.jpg"/>
-        <meta name="msapplication-square310x310logo" content="large.jpg"/>
+        <meta name="msapplication-square70x70logo" content="small_l.jpg"/>
+        <meta name="msapplication-square150x150logo" content="medium_l.jpg"/>
+        <meta name="msapplication-wide310x150logo" content="wide_l.jpg"/>
+        <meta name="msapplication-square310x310logo" content="large_l.jpg"/>
         <meta name="msapplication-TileColor" content="#FAA500"/>
 
         <title>Laravel_従業員新規登録確認画面</title>
 
     </head>
     <body>
-
+        
         <!--セッション開始-->
-        <?php include('session-start.php'); ?>
+        <?php include('session-start_l.php'); ?>
 
         <!--ナビゲーションバー-->
         <ul>
-            <li><a href="https://dev-laravel.jokazaki.biz:8443/employees-list.php">従業員一覧</a></li>
-            <li><a class="active" href="https://dev-laravel.jokazaki.biz:8443/new-employee.html">従業員登録</a></li>
-            <li><a href="https://dev-laravel.jokazaki.biz:8443/edit-employee.html">従業員編集</a></li>
-            <li><a href="https://dev-laravel.jokazaki.biz:8443/delete-employee.html">従業員削除</a></li>
-            <li><a href="https://dev-laravel.jokazaki.biz:8443/employees-master-manual.php">マニュアル</a></li>
+            <li><a href="https://dev-laravel.jokazaki.biz:8443/employees-list_l.php">従業員一覧</a></li>
+            <li><a class="active" href="https://dev-laravel.jokazaki.biz:8443/new-employee_l.html">従業員登録</a></li>
+            <li><a href="https://dev-laravel.jokazaki.biz:8443/edit-employee_l.html">従業員編集</a></li>
+            <li><a href="https://dev-laravel.jokazaki.biz:8443/delete-employee_l.html">従業員削除</a></li>
+            <li><a href="https://dev-laravel.jokazaki.biz:8443/employees-master-manual_l.php">マニュアル</a></li>
         </ul>
-
 
         <!--メインコンテンツボックス-->
         <div class="mycontents">
 
-
             <h1>従業員新規登録確認画面</h1>
-
+            
             <!--DBログイン-->
-            <?php include('db-login-laravel.php'); ?>
+            <?php include('db-login_l.php'); ?>
 
             
             <?php
@@ -64,17 +62,21 @@
             $updated_at = date("Y-m-d");
             $flag = 0;
             $class = "";
-
-            //入力チェックで問題なければ、SQL文組み立てと実行。
+            
+            //入力チェック後にSQL文組み立てと実行
             if (!empty($employee_id)) {
                 if (preg_match('/^[0-9]{1,4}$/', $employee_id)) {
                     try {
                         $employee_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_id);
-                        $sql = "SELECT employee_id FROM company.employees WHERE employee_id=:employee_id AND delete_flag=0";
+                        $sql = "SELECT employee_id, department_id FROM l_company.employees WHERE employee_id=:employee_id AND delete_flag=0";
                         $stmt = $pdo->prepare($sql);
                         $stmt->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);
                         $stmt->execute();
                         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        if ($result[0]['employee_id'] == $employee_id) {
+                            $flag = 1;
+                            echo "<div class=error2>従業員ID:&nbsp;".$employee_id."&nbsp;のレコードはすでに存在します。</div>";
+                        }
                     } catch (PDOException $Exception) {
                         die('接続エラー：' . $Exception->getMessage());
                         echo "データベース処理時にエラーが発生しました。<br/>従業員ID:&nbsp;" . $employee_id . "&nbsp;はすでに使用されています。";
@@ -82,7 +84,7 @@
                     }
                 } else {
                     $flag = 1;
-                    echo "<div class ='error2'>「従業員ID」欄には、1～4文字の数字を入力してください。</div>";
+                    echo "<div class ='error2'>「従業員ID」欄には、1～4桁の半角数字を入力してください。</div>";
                 }
             } else {
                 $flag = 1;
@@ -95,14 +97,14 @@
                     $employee_code = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_code);
                 } else {
                     $flag = 1;
-                    echo "<div class='error2'>「従業員コード」欄には、1～4文字の数字を入力してください。</div>";
+                    echo "<div class='error2'>「従業員コード」欄には、1～4桁の半角数字を入力してください。</div>";
                 }
             } else {
                 $flag = 1;
                 echo "<div class ='error2'>「従業員コード」欄が未入力です。</div>";
             }
 
-            
+
             if (!empty($employee_name)) {
                 if (preg_match('/^[ぁ-んァ-ヶー一-龠]+$/u', $employee_name)) {
                     $employee_name = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_name);
@@ -115,30 +117,28 @@
                 echo "<div class ='error2'>「氏名」欄が未入力です。</div>";
             }
 
-            
             if (!empty($department_id)) {
                 if (preg_match('/^[0-9]{1,3}$/', $department_id)) {
                     $department_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $department_id);
-                    if ($result[0]['department_id'] <> $department_id) {
+                    $sql2 = "SELECT department_id from l_company.departments WHERE department_id=:department_id AND delete_flag=0";
+                    $stmt2 = $pdo->prepare($sql2);
+                    $stmt2->bindParam(':department_id', $department_id, PDO::PARAM_INT);
+                    $stmt2->execute();
+                    $result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);                    
+                    if (empty($result2[0]['department_id'])) {
                         $flag = 1;
-                        echo "<div class='error2'>部署ID:&nbsp;" . $department_id . "&nbspは未登録です。<a href='https://dev-laravel.jokazaki.biz:8443/employees-master-manual.php#about2'>マニュアル</a>を参照し、登録済み部署の中から指定してください。</div>";
+                        echo "<div class='error2'>部署ID:&nbsp;" . $department_id . "&nbspは未登録です。<a href='https://dev-laravel.jokazaki.biz:8443/employees-master-manual_l.php#about2'>マニュアル</a>を参照し、登録済み部署の中から指定してください。</div>";
                     }
                 } else {
                     $flag = 1;
-                    echo "<div class='error2'>「部署ID」欄には、1～3文字の数字を入力してください。</div>";
+                    echo "<div class='error2'>「部署ID」欄には、1～3桁の半角数字を入力してください。</div>";
                 }
             } else {
                 $flag = 1;
                 echo "<div class ='error2'>「部署ID」欄が未入力です。</div>";
             }
-
             
-            if ($result[0]['employee_id'] == $employee_id) {
-                $flag = 1;
-                echo "<div class=error2>従業員ID:&nbsp;" . $employee_id . "&nbsp;のレコードはすでに存在します。</div>";
-            }
 
-            
             if ($flag == 1) {
                 $class = "hide";
             } else {
@@ -158,7 +158,7 @@
                         <th class="midashi">データ更新日時</th>
                     </tr>
 
-                    <!--エスケープ処理とSQL文実行結果表示-->
+                    <!--サニタイズ処理とSQL実行結果表示-->
                     <tr>
                         <th><?= htmlspecialchars($employee_id) ?></th>
                         <th><?= htmlspecialchars($employee_code) ?></th>
@@ -169,10 +169,10 @@
                     </tr>
                 </tbody>
             </table>
-            
+
             <!--ボタン-->
-            <form method="post" action="new-employee-process.php">
-                <input type="submit" name="filter" value="登録" class="button <?PHP echo $class; ?>"><!--入力チェックで問題なかった場合のみ表示-->
+            <form method="post" action="new-employee-process_l.php">
+                <input type="submit" name="filter" value="登録" class="button <?PHP echo $class; ?>"> <!--入力チェックで問題がなかった場合のみ表示-->
                 <input type="button" onclick="history.back()" value="戻る" class="button">
                 <br/>
 

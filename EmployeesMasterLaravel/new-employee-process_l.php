@@ -10,20 +10,20 @@
         <meta name="viewport" content="width=device-width,initial-scale=1">
 
         <!--スタイルシート-->
-        <link rel="stylesheet" href="menu-laravel.css">
+        <link rel="stylesheet" href="menu_l.css">
 
         <!-- ファビコン -->
-        <link rel="icon" href="favicon.ico">
+        <link rel="icon" href="favicon_l.ico">
 
         <!-- スマホ用アイコン -->
-        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon_l.png">
 
         <!-- Windows用アイコン -->
         <meta name="application-name" content="従業員マスター"/>
-        <meta name="msapplication-square70x70logo" content="small.jpg"/>
-        <meta name="msapplication-square150x150logo" content="medium.jpg"/>
-        <meta name="msapplication-wide310x150logo" content="wide.jpg"/>
-        <meta name="msapplication-square310x310logo" content="large.jpg"/>
+        <meta name="msapplication-square70x70logo" content="small_l.jpg"/>
+        <meta name="msapplication-square150x150logo" content="medium_l.jpg"/>
+        <meta name="msapplication-wide310x150logo" content="wide_l.jpg"/>
+        <meta name="msapplication-square310x310logo" content="large_l.jpg"/>
         <meta name="msapplication-TileColor" content="#FAA500"/>
 
         <title>Laravel_従業員登録完了</title>
@@ -31,15 +31,15 @@
     <body>
         
         <!--セッション開始-->
-        <?php include('session-start.php'); ?>
+        <?php include('session-start_l.php'); ?>
 
         <!--ナビゲーションバー-->
         <ul>
-            <li><a href="https://dev-laravel.jokazaki.biz:8443/employees-list.php">従業員一覧</a></li>
-            <li><a class="active" href="https://dev-laravel.jokazaki.biz:8443/new-employee.html">従業員登録</a></li>
-            <li><a href="https://dev-laravel.jokazaki.biz:8443/edit-employee.html">従業員編集</a></li>
-            <li><a href="https://dev-laravel.jokazaki.biz:8443/delete-employee.html">従業員削除</a></li>
-            <li><a href="https://dev-laravel.jokazaki.biz:8443/employees-master-manual.php">マニュアル</a></li>
+            <li><a href="https://dev-laravel.jokazaki.biz:8443/employees-list_l.php">従業員一覧</a></li>
+            <li><a class="active" href="https://dev-laravel.jokazaki.biz:8443/new-employee_l.html">従業員登録</a></li>
+            <li><a href="https://dev-laravel.jokazaki.biz:8443/edit-employee_l.html">従業員編集</a></li>
+            <li><a href="https://dev-laravel.jokazaki.biz:8443/delete-employee_l.html">従業員削除</a></li>
+            <li><a href="https://dev-laravel.jokazaki.biz:8443/employees-master-manual_l.php">マニュアル</a></li>
         </ul>
 
 
@@ -50,7 +50,7 @@
             <h1>従業員新規登録完了</h1>
 
             <!--DBログイン-->
-            <?php include('db-login-laravel.php'); ?>
+            <?php include('db-login_l.php'); ?>
 
             
             <?php
@@ -87,7 +87,7 @@
             ?>
             
             <!--ボタン-->
-            <input type="button" onclick="location.href = 'https://dev-laravel.jokazaki.biz:8443/new-employee.html'" value="「従業員登録」に戻る" class="button">
+            <input type="button" onclick="location.href = 'https://dev-laravel.jokazaki.biz:8443/new-employee_l.html'" value="「従業員登録」に戻る" class="button">
 
         </div>
     </body>
