@@ -67,7 +67,7 @@
         <?php include('session-start.php'); ?>
 
 
-        <!--上部ナビゲーションバー-->    
+        <!--ナビゲーションバー-->    
         <ul>
             <li><a class="active" href="https://dev.jokazaki.biz:8443/employees-list.php">従業員一覧</a></li>
             <li><a href="https://dev.jokazaki.biz:8443/new-employee.html">従業員登録</a></li>
@@ -77,6 +77,7 @@
         </ul>
 
 
+        <!--メインコンテンツボックス-->
         <div class="mycontents">
 
 
@@ -101,7 +102,7 @@
 
                 <!--入力チェック-->
                 <?php
-                //SQL文組み立てには、プレースホルダを用いる
+                //SQL文組み立てには、プレースホルダ（バインド機構）を用いる。
                 $employee_id = $_SESSION['employee_id'];
                 $employee_code = $_SESSION['employee_code'];
                 $employee_name = $_SESSION['employee_name'];
@@ -110,7 +111,7 @@
                 $created_at = $_SESSION['created_at'];
                 $updated_at = $_SESSION['updated_at'];
 
-                //入力チェックで問題なければ、SQL文組み立てと実行
+                //入力チェックで問題なければ、SQL文組み立てと実行。
                 if (!empty($employee_id)) {
                     if (preg_match('/^[0-9]{1,4}$/', $employee_id)) {
                         $employee_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_id);
@@ -121,7 +122,7 @@
                             $stmt->execute();
                             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             if (empty($result[0]['employee_id'])) {
-                                echo "<p class=error2>従業員ID:&nbsp;" . $employee_id . "&nbsp;のレコードは存在しません</p>";
+                                echo "<p class=error2>従業員ID:&nbsp;" . $employee_id . "&nbsp;のレコードは存在しません。</p>";
                             }
                         } catch (PDOException $Exception) {
                             die('接続エラー：' . $Exception->getMessage());
@@ -129,7 +130,7 @@
                             echo '<input type="button" onclick="history.back()" value="戻る" class="button">';
                         }
                     } else {
-                        echo "<div class ='error'>「従業員ID」欄には1～3文字の数字を入力してください</div>";
+                        echo "<div class ='error'>「従業員ID」欄には、1～3文字の数字を入力してください。</div>";
                     }
                 } elseif (!empty($employee_code)) {
                     if (preg_match('/^[0-9]{1,4}$/', $employee_code)) {
@@ -141,7 +142,7 @@
                             $stmt->execute();
                             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             if (empty($result[0]['employee_code'])) {
-                                echo "<p class=error2>従業員コード:&nbsp;" . $employee_code . "&nbsp;のレコードは存在しません</p>";
+                                echo "<p class=error2>従業員コード:&nbsp;" . $employee_code . "&nbsp;のレコードは存在しません。</p>";
                             }
                         } catch (PDOException $Exception) {
                             die('接続エラー：' . $Exception->getMessage());
@@ -149,7 +150,7 @@
                             echo '<input type="button" onclick="history.back()" value="戻る" class="button">';
                         }
                     } else {
-                        echo "<div class='error'>「従業員コード」欄には1～3文字の数字を入力してください</div>";
+                        echo "<div class='error'>「従業員コード」欄には、1～3文字の数字を入力してください。</div>";
                     }
                 } elseif (!empty($employee_name)) {
                     if (preg_match('/^[ぁ-んァ-ヶー一-龠]+$/u', $employee_name)) {
@@ -161,7 +162,7 @@
                             $stmt->execute();
                             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             if (empty($result[0]['employee_name'])) {
-                                echo "<p class=error2>従業員名:&nbsp;" . $employee_name . "&nbsp;のレコードは存在しません</p>";
+                                echo "<p class=error2>従業員名:&nbsp;" . $employee_name . "&nbsp;のレコードは存在しません。</p>";
                             }
                         } catch (PDOException $Exception) {
                             die('接続エラー：' . $Exception->getMessage());
@@ -169,7 +170,7 @@
                             echo '<input type="button" onclick="history.back()" value="戻る" class="button">';
                         }
                     } else {
-                        echo "<div class='error'>「氏名」欄には1～30文字の全角文字列を入力してください</div>";
+                        echo "<div class='error'>「氏名」欄には、1～30文字の全角文字列を入力してください。</div>";
                     }
                 } elseif (!empty($department_id)) {
                     if (preg_match('/^[0-9]{1,4}$/', $department_id)) {
@@ -181,7 +182,7 @@
                             $stmt->execute();
                             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             if (empty($result[0]['department_id'])) {
-                                echo "<p class=error2>部署ID:&nbsp;" . $department_id . "&nbsp;のレコードは存在しません</p>";
+                                echo "<p class=error2>部署ID:&nbsp;" . $department_id . "&nbsp;のレコードは存在しません。</p>";
                             }
                         } catch (PDOException $Exception) {
                             die('接続エラー：' . $Exception->getMessage());
@@ -189,7 +190,7 @@
                             echo '<input type="button" onclick="history.back()" value="戻る" class="button">';
                         }
                     } else {
-                        echo "<div class='error'>「部署ID」欄には1～3文字の数字を入力してください</div>";
+                        echo "<div class='error'>「部署ID」欄には、1～3文字の数字を入力してください。</div>";
                     }
                 } elseif (!empty($created_at)) {
                     if (preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $created_at)) {
@@ -201,7 +202,7 @@
                             $stmt->execute();
                             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             if (empty($result[0]['created_at'])) {
-                                echo "<p class=error2>登録日時:&nbsp;" . $created_at . "&nbsp;のレコードは存在しません</p>";
+                                echo "<p class=error2>登録日時:&nbsp;" . $created_at . "&nbsp;のレコードは存在しません。</p>";
                             }
                         } catch (PDOException $Exception) {
                             die('接続エラー：' . $Exception->getMessage());
@@ -209,7 +210,7 @@
                             echo '<input type="button" onclick="history.back()" value="戻る" class="button">';
                         }
                     } else {
-                        echo "<div class='error'>「登録日時」欄は（例）&quot;2020-05-01&quot;&nbsp;のように入力してください</div>";
+                        echo "<div class='error'>「登録日時」欄は（例）&quot;2020-05-01&quot;&nbsp;のように入力してください。</div>";
                     }
                 } elseif (!empty($updated_at)) {
                     if (preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $updated_at)) {
@@ -221,7 +222,7 @@
                             $stmt->execute();
                             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             if (empty($result[0]['updated_at'])) {
-                                echo "<p class=error2>更新日時:&nbsp;" . $updated_at . "&nbsp;のレコードは存在しません</p>";
+                                echo "<p class=error2>更新日時:&nbsp;" . $updated_at . "&nbsp;のレコードは存在しません。</p>";
                             }
                         } catch (PDOException $Exception) {
                             die('接続エラー：' . $Exception->getMessage());
@@ -229,10 +230,10 @@
                             echo '<input type="button" onclick="history.back()" value="戻る" class="button">';
                         }
                     } else {
-                        echo "<div class='error'>「更新日時」欄は（例）&quot;2020-05-01&quot;&nbsp;のように入力してください</div>";
+                        echo "<div class='error'>「更新日時」欄は（例）&quot;2020-05-01&quot;&nbsp;のように入力してください。</div>";
                     }
                 } else {
-                    echo "<div class='error'>フィルタ条件が未入力です</div>";
+                    echo "<div class='error'>フィルタ条件が未入力です。</div>";
                 }
                 ?>
 
@@ -249,7 +250,7 @@
                         </tr>
 
 
-                    <?php foreach ($result as $rows) { ?> <!--$result各要素を$rowsとして取り出し-->
+                    <?php foreach ($result as $rows) { ?> <!--$resultの配列各要素を$rowsとして取り出し、順次実行。-->
 
                         <!--エスケープ処理とSQL実行結果表示-->
                         <tr>

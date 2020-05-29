@@ -40,13 +40,14 @@
         </ul>
 
 
+        <!--メインコンテンツボックス-->
         <div class="mycontents">   
 
 
             <h1>マニュアル</h1>
 
             <div class="setsumei">
-                <h2><a id ="about1">従業員一覧について</a></h2>
+                <h2><a id ="about1">従業員一覧について</a></h2><!--文書内リンク-->
                 <p>
                     いずれかのフィールドに入力し、「フィルタ」を押下してください。<br/>
                     複数フィールドに入力した場合は、上段のフィールドを優先します。<br/>
@@ -57,7 +58,7 @@
             </div>
 
             <div class="setsumei">
-                <h2><a id ="about2">従業員登録について</a></h2>
+                <h2><a id ="about2">従業員登録について</a></h2><!--文書内リンク-->
                 <p>
                     「従業員ID」は重複を許可しない設定となっているため、重複する従業員IDを登録しようとするとエラーになります。<br/>
                     各レコードについては論理削除をしているため、「従業員一覧」に表示されていなくても、過去に使用されていた従業員IDを入力するとエラーとなります。<br/>
@@ -90,7 +91,8 @@
                 ?>
                 
                 <!--表見出し-->
-                <table><tbody>
+                <table>
+                    <tbody>
                         <tr>
                             <th class="midashi2">部署ID</th>
                             <th class="midashi2">部署コード</th>
@@ -98,22 +100,24 @@
                         </tr>
 
                         <?php
-                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { //$rowに実行結果を格納し、順次実行
+                        while ($rows = $stmt->fetch(PDO::FETCH_ASSOC)) { //$rowsに実行結果を格納し、順次実行
                             ?>
-                        <!--SQL実行結果表示部-->
+                        <!--エスケープ処理とSQL文実行結果表示-->
                             <tr>
-                                <th><?= htmlspecialchars($row['department_id']) ?></th>
-                                <th><?= htmlspecialchars($row['department_code']) ?></th>
-                                <th><?= htmlspecialchars($row['department_name']) ?></th>
-                                <th><?= htmlspecialchars($row['created_at']) ?></th>
-                                <th><?= htmlspecialchars($row['updated_at']) ?></th>
+                                <th><?= htmlspecialchars($rows['department_id']) ?></th>
+                                <th><?= htmlspecialchars($rows['department_code']) ?></th>
+                                <th><?= htmlspecialchars($rows['department_name']) ?></th>
+                                <th><?= htmlspecialchars($rows['created_at']) ?></th>
+                                <th><?= htmlspecialchars($rows['updated_at']) ?></th>
                             </tr>
 
                         <?php
                         }
                         $pdo = null; //PDOオブジェクト破棄
                             ?>
-                </tbody></table>
+                    </tbody>
+                </table>
+                
                 <br/>
                 <!--キャプチャ画像-->
                 <img src="man_img2.jpg" alt="従業員登録ページの画像">
@@ -121,7 +125,7 @@
 
 
             <div class="setsumei">
-                <h2><a id ="about3">従業員編集について</a></h2>
+                <h2><a id ="about3">従業員編集について</a></h2><!--文書内リンク-->
                 <p>
                     すべてのフィールドに入力し、「確認画面へ」を押下してください。<br/>
                     従業員IDが一致する従業員の「従業員コード」「従業員名」「部署ID」を変更します。<br/>
@@ -133,7 +137,7 @@
 
 
             <div class="setsumei">
-                <h2><a id ="about4">従業員削除について</a></h2>
+                <h2><a id ="about4">従業員削除について</a></h2><!--文書内リンク-->
                 <p>
                     削除したい従業員の従業員IDを入力し、「確認画面へ」を押下してください。<br/>
                     従業員IDが一致する従業員のレコードを削除します。<br/>

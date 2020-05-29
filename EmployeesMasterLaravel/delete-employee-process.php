@@ -43,7 +43,7 @@
             <li><a href="https://dev-laravel.jokazaki.biz:8443/employees-master-manual.php">マニュアル</a></li>
         </ul>
 
-
+        <!--メインコンテンツボックス-->
         <div class="mycontents">
 
 
@@ -54,8 +54,9 @@
 
             <?php
             try {
+                //SQL文組み立てには、プレースホルダ（バインド機構）を使用する。
+                //SQL文組み立てと実行
                 $employee_id = $_SESSION['employee_id'];
-
                 $sql = "UPDATE l_company.employees SET delete_flag=1 WHERE employee_id=:employee_id";
                 $stmt = $pdo->prepare($sql);
                 $stmt->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);

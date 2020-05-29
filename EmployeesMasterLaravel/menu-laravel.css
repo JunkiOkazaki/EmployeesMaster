@@ -265,7 +265,6 @@ li a:hover:not(.active) {
 img{
     width:98%;
 }
-
 /* メディアクエリ */
 @media screen and (min-width:1600px){
     img {
@@ -277,7 +276,6 @@ img{
 iframe{
     width:100%;
 }
-
 /* メディアクエリ */
 @media screen and (min-width:1600px){
     iframe {

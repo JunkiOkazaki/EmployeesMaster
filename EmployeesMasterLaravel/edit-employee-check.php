@@ -42,7 +42,7 @@
             <li><a href="https://dev-laravel.jokazaki.biz:8443/employees-master-manual.php">マニュアル</a></li>
         </ul>
 
-
+        <!--メインコンテンツボックス-->
         <div class="mycontents">
 
 
@@ -53,7 +53,7 @@
 
 
             <?php
-            //SQL文組み立てには、プレースホルダを使用する。(バインド機構)
+            //SQL文組み立てには、プレースホルダ（バインド機構）を使用する。
             $employee_id = $_SESSION['employee_id'];
             $employee_code = $_SESSION['employee_code'];
             $employee_name = $_SESSION['employee_name'];
@@ -62,7 +62,7 @@
             $flag = 0;
             $class = "";
 
-            //入力チェックで問題なければ、SQL文組み立てと実行
+            //入力チェックで問題なければ、SQL文組み立てと実行。
             try {
                 $employee_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_id);
                 $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM l_company.employees WHERE employee_id=:employee_id AND delete_flag=0";
@@ -91,17 +91,17 @@
                     }
                 } else {
                     $flag = 1;
-                    echo "<div class ='error2'>「従業員ID」欄には1～4文字の数字を入力してください</div>";
+                    echo "<div class ='error2'>「従業員ID」欄には、1～4文字の数字を入力してください。</div>";
                 }
             } else {
                 $flag = 1;
-                echo "<div class ='error2'>「従業員ID」欄が未入力です</div>";
+                echo "<div class ='error2'>「従業員ID」欄が未入力です。</div>";
             }
 
 
             if ($result == 0 && $flag == 0) {
                 $flag = 1;
-                echo "<div class ='error2'>従業員ID:&nbsp;" . $employee_id . "&nbsp;に一致するレコードが見つかりませんでした</div>";
+                echo "<div class ='error2'>従業員ID:&nbsp;".$employee_id."&nbsp;に一致するレコードが見つかりませんでした。</div>";
             }
 
 
@@ -110,11 +110,11 @@
                     $employee_code = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_code);
                 } else {
                     $flag = 1;
-                    echo "<div class='error2'>「従業員コード」欄には1～4文字の数字を入力してください</div>";
+                    echo "<div class='error2'>「従業員コード」欄には、1～4文字の数字を入力してください。</div>";
                 }
             } else {
                 $flag = 1;
-                echo "<div class ='error2'>「従業員コード」欄が未入力です</div>";
+                echo "<div class ='error2'>「従業員コード」欄が未入力です。</div>";
             }
 
 
@@ -123,11 +123,11 @@
                     $employee_name = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_name);
                 } else {
                     $flag = 1;
-                    echo "<div class='error2'>「氏名」欄には1～30文字の全角文字列を入力してください</div>";
+                    echo "<div class='error2'>「氏名」欄には、1～30文字の全角文字列を入力してください。</div>";
                 }
             } else {
                 $flag = 1;
-                echo "<div class ='error2'>「氏名」欄が未入力です</div>";
+                echo "<div class ='error2'>「氏名」欄が未入力です。</div>";
             }
 
             if (!empty($department_id)) {
@@ -135,11 +135,11 @@
                     $department_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $department_id);
                 } else {
                     $flag = 1;
-                    echo "<div class='error2'>「部署ID」欄には1～3文字の数字を入力してください</div>";
+                    echo "<div class='error2'>「部署ID」欄には、1～3文字の数字を入力してください。</div>";
                 }
             } else {
                 $flag = 1;
-                echo "<div class ='error2'>「部署ID」欄が未入力です</div>";
+                echo "<div class ='error2'>「部署ID」欄が未入力です。</div>";
             }
 
             if ($flag == 1) {
@@ -150,7 +150,8 @@
             ?>
 
             <!--表見出し-->
-            <table><tbody>
+            <table>
+                <tbody>
                     <tr>
                         <th class="midashi">従業員ID</th>
                         <th class="midashi">従業員コード</th>
@@ -167,7 +168,8 @@
                         <th><?= htmlspecialchars($department_id) ?></th>
                         <th><?= htmlspecialchars($updated_at) ?></th>
                     </tr>
-            </tbody></table>
+                </tbody>
+            </table>
 
             <!--ボタン-->
             <form method="post" action="edit-employee-process.php">

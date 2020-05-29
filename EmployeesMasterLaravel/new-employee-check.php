@@ -34,7 +34,7 @@
         <!--セッション開始-->
         <?php include('session-start.php'); ?>
 
-        <!---->
+        <!--ナビゲーションバー-->
         <ul>
             <li><a href="https://dev-laravel.jokazaki.biz:8443/employees-list.php">従業員一覧</a></li>
             <li><a class="active" href="https://dev-laravel.jokazaki.biz:8443/new-employee.html">従業員登録</a></li>
@@ -44,6 +44,7 @@
         </ul>
 
 
+        <!--メインコンテンツボックス-->
         <div class="mycontents">
 
 
@@ -54,7 +55,7 @@
 
             
             <?php
-            //SQL文組み立てには、プレースホルダを使用。
+            //SQL文組み立てには、プレースホルダ（バインド機構）を使用。
             $employee_id = $_SESSION['employee_id'];
             $employee_code = $_SESSION['employee_code'];
             $employee_name = $_SESSION['employee_name'];
@@ -64,7 +65,7 @@
             $flag = 0;
             $class = "";
 
-            //入力チェックで問題なければ、SQL文組み立てと実行
+            //入力チェックで問題なければ、SQL文組み立てと実行。
             if (!empty($employee_id)) {
                 if (preg_match('/^[0-9]{1,4}$/', $employee_id)) {
                     try {
@@ -81,11 +82,11 @@
                     }
                 } else {
                     $flag = 1;
-                    echo "<div class ='error2'>「従業員ID」欄には1～4文字の数字を入力してください</div>";
+                    echo "<div class ='error2'>「従業員ID」欄には、1～4文字の数字を入力してください。</div>";
                 }
             } else {
                 $flag = 1;
-                echo "<div class ='error2'>「従業員ID」欄が未入力です</div>";
+                echo "<div class ='error2'>「従業員ID」欄が未入力です。</div>";
             }
 
 
@@ -94,11 +95,11 @@
                     $employee_code = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_code);
                 } else {
                     $flag = 1;
-                    echo "<div class='error2'>「従業員コード」欄には1～4文字の数字を入力してください</div>";
+                    echo "<div class='error2'>「従業員コード」欄には、1～4文字の数字を入力してください。</div>";
                 }
             } else {
                 $flag = 1;
-                echo "<div class ='error2'>「従業員コード」欄が未入力です</div>";
+                echo "<div class ='error2'>「従業員コード」欄が未入力です。</div>";
             }
 
             
@@ -107,11 +108,11 @@
                     $employee_name = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_name);
                 } else {
                     $flag = 1;
-                    echo "<div class='error2'>「氏名」欄には1～30文字の全角文字列を入力してください</div>";
+                    echo "<div class='error2'>「氏名」欄には、1～30文字の全角文字列を入力してください。</div>";
                 }
             } else {
                 $flag = 1;
-                echo "<div class ='error2'>「氏名」欄が未入力です</div>";
+                echo "<div class ='error2'>「氏名」欄が未入力です。</div>";
             }
 
             
@@ -124,29 +125,30 @@
                     }
                 } else {
                     $flag = 1;
-                    echo "<div class='error2'>「部署ID」欄には1～3文字の数字を入力してください</div>";
+                    echo "<div class='error2'>「部署ID」欄には、1～3文字の数字を入力してください。</div>";
                 }
             } else {
                 $flag = 1;
-                echo "<div class ='error2'>「部署ID」欄が未入力です</div>";
+                echo "<div class ='error2'>「部署ID」欄が未入力です。</div>";
             }
 
             
             if ($result[0]['employee_id'] == $employee_id) {
                 $flag = 1;
-                echo "<div class=error2>従業員ID:&nbsp;" . $employee_id . "&nbsp;のレコードはすでに存在します</div>";
+                echo "<div class=error2>従業員ID:&nbsp;" . $employee_id . "&nbsp;のレコードはすでに存在します。</div>";
             }
 
             
             if ($flag == 1) {
                 $class = "hide";
             } else {
-                echo "<p class='comment'>以下の内容で登録します</p>";
+                echo "<p class='comment'>以下の内容で登録します。</p>";
             }
             ?>    
 
             <!--表見出し-->
-            <table><tbody>
+            <table>
+                <tbody>
                     <tr>
                         <th class="midashi">従業員ID</th>
                         <th class="midashi">従業員コード</th>
@@ -156,7 +158,7 @@
                         <th class="midashi">データ更新日時</th>
                     </tr>
 
-                    <!--SQL文実行結果表示部-->
+                    <!--エスケープ処理とSQL文実行結果表示-->
                     <tr>
                         <th><?= htmlspecialchars($employee_id) ?></th>
                         <th><?= htmlspecialchars($employee_code) ?></th>
@@ -165,7 +167,8 @@
                         <th><?= htmlspecialchars($created_at) ?></th>
                         <th><?= htmlspecialchars($updated_at) ?></th>
                     </tr>
-                </tbody></table>
+                </tbody>
+            </table>
             
             <!--ボタン-->
             <form method="post" action="new-employee-process.php">

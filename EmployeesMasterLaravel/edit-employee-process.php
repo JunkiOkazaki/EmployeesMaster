@@ -43,6 +43,7 @@
             <li><a href="https://dev-laravel.jokazaki.biz:8443/employees-master-manual.php">マニュアル</a></li>
         </ul>
 
+        <!--メインコンテンツボックス-->
         <div class="mycontents">
 
 
@@ -53,7 +54,7 @@
 
             <?php
             try {
-                //SQL文組み立てには、プレースホルダを使用する
+                //SQL文組み立てには、プレースホルダ（バインド機構）を使用する
                 $employee_id = $_SESSION['employee_id'];
                 $employee_code = $_SESSION['employee_code'];
                 $employee_name = $_SESSION['employee_name'];

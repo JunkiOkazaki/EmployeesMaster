@@ -29,7 +29,6 @@
 
         <title>従業員削除完了</title>
     </head>
-
     <body>
 
         <!--セッション開始-->
@@ -45,6 +44,7 @@
         </ul>
 
 
+        <!--メインコンテンツボックス-->
         <div class="mycontents">
 
 
@@ -52,6 +52,7 @@
 
             <!--DBログイン-->
             <?php include('db-login.php'); ?>
+            
             <!--SQL文組み立てと実行-->
             <?php
             try {

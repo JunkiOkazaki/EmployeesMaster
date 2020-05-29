@@ -43,6 +43,7 @@
             <li><a href="https://dev.jokazaki.biz:8443/employees-master-manual.php">マニュアル</a></li>
         </ul>
 
+        <!--メインコンテンツボックス-->
         <div class="mycontents">
 
 
@@ -51,15 +52,17 @@
             <!--DBログイン-->
             <?php include('db-login.php'); ?>
             
-            <!--SQL文組み立てと実行-->
+            
             <?php
             try {
+                //SQL文組み立てには、プレースホルダ（バインド機構）を使用する。
                 $employee_id = $_SESSION['employee_id'];
                 $employee_code = $_SESSION['employee_code'];
                 $employee_name = $_SESSION['employee_name'];
                 $department_id = $_SESSION['department_id'];
                 $updated_at = date("Y-m-d");
 
+                //--SQL文組み立てと実行
                 $sql = "UPDATE company.employees SET employee_code=:employee_code, employee_name=:employee_name, department_id=:department_id, updated_at=:updated_at WHERE employee_id=:employee_id";
                 $stmt = $pdo->prepare($sql);
                 $stmt->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);

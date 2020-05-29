@@ -52,24 +52,23 @@
             <?php include('db-login-laravel.php'); ?>
 
 
-            <!--入力チェック-->
             <?php
-            //SQL文組み立てには、プレースホルダを使用する。（バインド機構）
+            //SQL文組み立てには、プレースホルダ（バインド機構）を使用する。
             $employee_id = $_SESSION['employee_id'];
             $flag = 0;
             $class = "";
 
-            //入力チェックで問題なければ、SQL文組み立てと実行
+            //入力チェックで問題なければ、SQL文組み立てと実行。
             if (!empty($employee_id)) {
                 if (preg_match('/^[0-9]{1,4}$/', $employee_id)) {
                     $employee_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_id);
                 } else {
                     $flag = 1;
-                    echo "<div class ='error2'>「従業員ID」欄には1～4文字の数字を入力してください</div>";
+                    echo "<div class ='error2'>「従業員ID」欄には、1～4文字の数字を入力してください。</div>";
                 }
             } else {
                 $flag = 1;
-                echo "<div class ='error2'>「従業員ID」欄が未入力です</div>";
+                echo "<div class ='error2'>「従業員ID」欄が未入力です。</div>";
             }
 
             if ($flag == 1) {
@@ -89,9 +88,9 @@
 
                 if (empty($result[0]['employee_id'])) {
                     $flag = 1;
-                    echo "<p class=error2>従業員ID:&nbsp;" . $employee_id . "&nbsp;のレコードが存在しません</p>";
+                    echo "<p class=error2>従業員ID:&nbsp;" . $employee_id . "&nbsp;のレコードが存在しません。</p>";
                 } else {
-                    echo "<p class='comment'>以下のレコードを削除します</p>";
+                    echo "<p class='comment'>以下のレコードを削除します。</p>";
                 }
 
                 if ($flag == 1) {
@@ -101,7 +100,8 @@
             ?>
 
             <!--表見出しと結果表示-->
-            <table><tbody>
+            <table>
+                <tbody>
                     <tr>
                         <th class="midashi">従業員ID</th>
                         <th class="midashi">従業員コード</th>
@@ -113,7 +113,8 @@
 
                     <?php foreach ($result as $rows) { //$result配列要素を$rowsに順番に代入し、順次実行。
                         ?> 
-
+                    
+                        <!--エスケープ処理とSQL文実行結果表示-->
                         <tr>
                             <th><?= htmlspecialchars($rows['employee_id']) ?></th>
                             <th><?= htmlspecialchars($rows['employee_code']) ?></th>
@@ -128,7 +129,8 @@
                     $pdo = null; //PDOオブジェクト破棄
                     ?>
 
-                </tbody></table>
+                </tbody>
+            </table>
             <br/>
 
             <!--ページ下部のボタン-->

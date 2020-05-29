@@ -71,6 +71,7 @@
         </ul>
 
 
+        <!--メインコンテンツボックス-->
         <div class="mycontents">
 
 
@@ -105,7 +106,8 @@
                 ?>
 
                 <!--表見出し-->
-                <table><tbody>
+                <table>
+                    <tbody>
                         <tr>
                             <th class="midashi">従業員ID</th>
                             <th class="midashi">従業員コード</th>
@@ -116,25 +118,25 @@
                         </tr>
 
                         <?php
-                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { //$rowに連想配列を格納
+                        while ($rows = $stmt->fetch(PDO::FETCH_ASSOC)) { //$rowsに連想配列を格納
                             ?>
 
-                            <!--SQL実行結果表示部-->
+                            <!--エスケープ処理とSQL文実行結果表示-->
                             <tr>
-                                <th><?= htmlspecialchars($row['employee_id']) ?></th>
-                                <th><?= htmlspecialchars($row['employee_code']) ?></th>
-                                <th><?= htmlspecialchars($row['employee_name']) ?></th>
-                                <th><?= htmlspecialchars($row['department_id']) ?></th>
-                                <th><?= htmlspecialchars($row['created_at']) ?></th>
-                                <th><?= htmlspecialchars($row['updated_at']) ?></th>
+                                <th><?= htmlspecialchars($rows['employee_id']) ?></th>
+                                <th><?= htmlspecialchars($rows['employee_code']) ?></th>
+                                <th><?= htmlspecialchars($rows['employee_name']) ?></th>
+                                <th><?= htmlspecialchars($rows['department_id']) ?></th>
+                                <th><?= htmlspecialchars($rows['created_at']) ?></th>
+                                <th><?= htmlspecialchars($rows['updated_at']) ?></th>
                             </tr>
 
                         <?php
                         }
                         $pdo = null; //PDOオブジェクト破棄
                             ?>
-
-                    </tbody></table>
+                    </tbody>
+                </table>
 
         </div>
     </body>

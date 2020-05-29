@@ -43,6 +43,7 @@
         </ul>
 
 
+        <!--メインコンテンツボックス-->
         <div class="mycontents">
 
 
@@ -54,7 +55,7 @@
             
             <?php
             try {
-                //SQL文組み立てにはプレースホルダを使用
+                //SQL文組み立てにはプレースホルダ（バインド機構）を使用。
                 $employee_id = $_SESSION['employee_id'];
                 $employee_code = $_SESSION['employee_code'];
                 $employee_name = $_SESSION['employee_name'];
@@ -76,7 +77,7 @@
                 $stmt->execute();
             } catch (PDOException $Exception) {
                 //die('接続エラー：' .$Exception->getMessage());
-                exit("データベース処理時にエラーが発生しました<div class ='error2'>従業員ID:&nbsp;$employee_id&nbsp;のレコードがすでに存在します</div><br/>");
+                exit("データベース処理時にエラーが発生しました。<div class ='error2'>従業員ID:&nbsp;$employee_id&nbsp;のレコードがすでに存在します。</div><br/>");
             }
             ?>
 
