@@ -2,7 +2,7 @@
 
 # About EmployeesMaster
 
-EmployeesMaster enables you of easily manage the complicated task of labor management with  responsive, intuitive UI. EmployeesMaster is for people like:
+EmployeesMaster enables you of easily managing the complicated task of labor management with  responsive, intuitive UI. EmployeesMaster is for people like:
 
 - HR people
 - Accountants
