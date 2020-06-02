@@ -82,8 +82,8 @@
             <form method="post" action="employees-list-filter.php">
                 <div  class="cp_iptxt"><input class="ef" type="text" name="employee_id" size="30" placeholder=""><label>従業員ID</label><span class="focus_line"></span></div>
                 <div  class="cp_iptxt"><input class="ef" type="text" name="employee_code" size="30" placeholder=""><label>従業員コード</label><span class="focus_line"></span></div>
-                <div  class="cp_iptxt"><input class="ef" type="text" name="employee_name" size="30" placeholder=""><label>氏　　名</label><span class="focus_line"></span></div>
-                <div  class="cp_iptxt"><input class="ef" type="text" name="department_id" size="30" placeholder=""><label>部　署ID</label><span class="focus_line"></span></div>
+                <div  class="cp_iptxt"><input class="ef" type="text" name="employee_name" size="30" placeholder=""><label>氏&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</label><span class="focus_line"></span></div>
+                <div  class="cp_iptxt"><input class="ef" type="text" name="department_id" size="30" placeholder=""><label>部&nbsp;署&nbsp;名</label><span class="focus_line"></span></div>
                 <div  class="cp_iptxt"><input class="ef" id="datepicker_ca" type="text" name="created_at" size="30" placeholder="" ><label>登録日時</label><span class="focus_line"></span></div>
                 <div  class="cp_iptxt"><input class="ef" id="datepicker_ua" type="text" name="updated_at" size="30" placeholder="" ><label>更新日時</label><span class="focus_line"></span></div>
                 <input type="submit" name="filter" value="フィルタ" class="button">
@@ -95,7 +95,7 @@
                 <!--SQL文組み立てと実行-->
                 <?php
                 try {
-                    $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM company.employees WHERE delete_flag=0";
+                    $sql = "SELECT employees.employee_id, employees.employee_code, employees.employee_name, departments.department_name, employees.created_at, employees.updated_at FROM employees LEFT JOIN departments ON employees.department_id = departments.department_id WHERE employees.delete_flag=0";
                     $stmt = $pdo->prepare($sql);
                     $stmt->execute();
                 } catch (PDOException $Exception) {
@@ -112,7 +112,7 @@
                             <th class="midashi">従業員ID</th>
                             <th class="midashi">従業員コード</th>
                             <th class="midashi">氏名</th>
-                            <th class="midashi">部署ID</th>
+                            <th class="midashi">部署名</th>
                             <th class="midashi">データ登録日時</th>
                             <th class="midashi">データ更新日時</th>
                         </tr>
@@ -126,7 +126,7 @@
                                 <th><?= htmlspecialchars($rows['employee_id']) ?></th>
                                 <th><?= htmlspecialchars($rows['employee_code']) ?></th>
                                 <th><?= htmlspecialchars($rows['employee_name']) ?></th>
-                                <th><?= htmlspecialchars($rows['department_id']) ?></th>
+                                <th><?= htmlspecialchars($rows['department_name']) ?></th>
                                 <th><?= htmlspecialchars($rows['created_at']) ?></th>
                                 <th><?= htmlspecialchars($rows['updated_at']) ?></th>
                             </tr>

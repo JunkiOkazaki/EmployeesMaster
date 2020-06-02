@@ -114,7 +114,7 @@
                     if (preg_match('/^[0-9]{1,4}$/', $employee_id)) {
                         $employee_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_id);
                         try {
-                            $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM company.employees WHERE employee_id=:employee_id AND delete_flag=0";
+                            $sql = "SELECT employees.employee_id, employees.employee_code, employees.employee_name, departments.department_name, employees.created_at, employees.updated_at FROM company.employees LEFT JOIN company.departments ON employees.department_id=departments.department_id WHERE employees.employee_id=:employee_id AND employees.delete_flag=0";
                             $stmt = $pdo->prepare($sql);
                             $stmt->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);
                             $stmt->execute();
@@ -134,7 +134,7 @@
                     if (preg_match('/^[0-9]{1,4}$/', $employee_code)) {
                         $employee_code = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_code);
                         try {
-                            $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM company.employees WHERE employee_code=:employee_code AND delete_flag=0";
+                            $sql = "SELECT employees.employee_id, employees.employee_code, employees.employee_name, departments.department_name, employees.created_at, employees.updated_at FROM company.employees LEFT JOIN company.departments ON employees.department_id=departments.department_id WHERE employees.employee_code=:employee_code AND employees.delete_flag=0";
                             $stmt = $pdo->prepare($sql);
                             $stmt->bindParam(':employee_code', $employee_code, PDO::PARAM_INT);
                             $stmt->execute();
@@ -154,7 +154,7 @@
                     if (preg_match('/^[ぁ-んァ-ヶー一-龠]+$/u', $employee_name)) {
                         $employee_name = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_name);
                         try {
-                            $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM company.employees WHERE employee_name LIKE :employee_name AND delete_flag=0";
+                            $sql = "SELECT employees.employee_id, employees.employee_code, employees.employee_name, departments.department_name, employees.created_at, employees.updated_at FROM company.employees LEFT JOIN company.departments ON employees.department_id=departments.department_id WHERE employees.employee_name LIKE :employee_name AND employees.delete_flag=0";
                             $stmt = $pdo->prepare($sql);
                             $stmt->bindValue(':employee_name', '%' . $employee_name . '%', PDO::PARAM_STR);
                             $stmt->execute();
@@ -255,7 +255,7 @@
                             <th><?= htmlspecialchars($rows['employee_id']) ?></th>
                             <th><?= htmlspecialchars($rows['employee_code']) ?></th>
                             <th><?= htmlspecialchars($rows['employee_name']) ?></th>
-                            <th><?= htmlspecialchars($rows['department_id']) ?></th>
+                            <th><?= htmlspecialchars($rows['department_name']) ?></th>
                             <th><?= htmlspecialchars($rows['created_at']) ?></th>
                             <th><?= htmlspecialchars($rows['updated_at']) ?></th>
                         </tr>
