@@ -68,12 +68,13 @@
 
             <!--入力欄-->
             <form method="post" action="new-employee-check.php">
-                <div class="cp_iptxt"><input class="ef" type="text" name="employee_id" size="30" placeholder=""><label>従業員ID</label><span class="focus_line"></span></div>
+                <!--<div class="cp_iptxt"><input class="ef" type="text" name="employee_id" size="30" placeholder=""><label>従業員ID</label><span class="focus_line"></span></div>-->
                 <div class="cp_iptxt"><input class="ef" type="text" name="employee_code" size="30" placeholder=""><label>従業員コード</label><span class="focus_line"></span></div>
                 <div class="cp_iptxt"><input class="ef" type="text" name="employee_name" size="30" placeholder=""><label>氏　　名</label><span class="focus_line"></span></div>
-                <div  class="cp_iptxt"><select class="ef" name="department_name"><option label="部署名" value="">部署名を選択</option><?php foreach ($result2 as $rows2) { ?><option label="部署名" value="<?= htmlspecialchars($rows2['department_name']) ?>"><?= htmlspecialchars($rows2['department_name']) ?></option><?php } ?></select><span class="focus_line"></span></div>
+                <div  class="cp_iptxt"><select class="ef" name="department_name"><option label="部署名" value="" hidden>部署名を選択</option><?php foreach ($result2 as $rows2) { ?><option label="部署名" value="<?= htmlspecialchars($rows2['department_name']) ?>"><?= htmlspecialchars($rows2['department_name']) ?></option><?php } ?></select><span class="focus_line"></span></div>
                 <div><input type="submit" name="confirm" value="確認画面へ" class="button"></div><!--ボタン-->
                 <br/>
+
         </div>
     </body>
 </html>

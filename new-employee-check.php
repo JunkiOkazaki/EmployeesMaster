@@ -30,7 +30,7 @@
 
     </head>
     <body>
-        
+
         <!--セッション開始-->
         <?php include('session-start.php'); ?>
 
@@ -47,14 +47,13 @@
         <div class="mycontents">
 
             <h1>従業員新規登録確認画面</h1>
-            
+
             <!--DBログイン-->
             <?php include('db-login.php'); ?>
 
-            
+
             <?php
             //SQL文組み立てには、プレースホルダ（バインド機構）を使用。
-            $employee_id = $_SESSION['employee_id'];
             $employee_code = $_SESSION['employee_code'];
             $employee_name = $_SESSION['employee_name'];
             $department_name = $_SESSION['department_name'];
@@ -62,8 +61,9 @@
             $updated_at = date("Y-m-d");
             $flag = 0;
             $class = "";
-            
+
             //入力チェック後にSQL文組み立てと実行
+            /*
             if (!empty($employee_id)) {
                 if (preg_match('/^[0-9]{1,4}$/', $employee_id)) {
                     try {
@@ -75,7 +75,7 @@
                         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         if ($result[0]['employee_id'] == $employee_id) {
                             $flag = 1;
-                            echo "<div class=error2>従業員ID:&nbsp;".$employee_id."&nbsp;のレコードはすでに存在します。</div>";
+                            echo "<div class=error2>従業員ID:&nbsp;" . $employee_id . "&nbsp;のレコードはすでに存在します。</div>";
                         }
                     } catch (PDOException $Exception) {
                         die('接続エラー：' . $Exception->getMessage());
@@ -90,6 +90,7 @@
                 $flag = 1;
                 echo "<div class ='error2'>「従業員ID」欄が未入力です。</div>";
             }
+             */
 
 
             if (!empty($employee_code)) {
@@ -119,12 +120,16 @@
 
             if (!empty($department_name)) {
                 if (preg_match('/^[ぁ-んァ-ヶー一-龠]+$/u', $department_name)) {
-                    $department_name = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $department_name);
-                    $sql2 = "SELECT employees.employee_id, employees.employee_code, employees.employee_name, departments.department_name, employees.created_at, employees.updated_at FROM company.employees LEFT JOIN company.departments ON employees.department_id = departments.department_id WHERE employees.delete_flag=0";
-                    $stmt2 = $pdo->prepare($sql2);
-                    $stmt2->bindParam(':department_name', $department_name, PDO::PARAM_INT);
-                    $stmt2->execute();
-                    $result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);                    
+                    try {
+                        $department_name = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $department_name);
+                        $sql2 = "SELECT employees.employee_id, employees.employee_code, employees.employee_name, departments.department_name, employees.created_at, employees.updated_at FROM company.employees LEFT JOIN company.departments ON employees.department_id = departments.department_id WHERE employees.delete_flag=0";
+                        $stmt2 = $pdo->prepare($sql2);
+                        $stmt2->bindParam(':department_name', $department_name, PDO::PARAM_INT);
+                        $stmt2->execute();
+                        $result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+                    } catch (PDOException $Exception) {
+                        die('接続エラー：' . $Exception->getMessage());
+                    }
                     if (empty($result2[0]['department_name'])) {
                         $flag = 1;
                         echo "<div class='error2'>部署名:&nbsp;" . $department_name . "&nbspは未登録です。<a href='https://dev.jokazaki.biz:8443/employees-master-manual.php#about2'>マニュアル</a>を参照し、登録済み部署の中から指定してください。</div>";
@@ -137,14 +142,31 @@
                 $flag = 1;
                 echo "<div class ='error2'>「部署名」欄が未入力です。</div>";
             }
-            
+
 
             if ($flag == 1) {
                 $class = "hide";
             } else {
                 echo "<p class='comment'>以下の内容で登録します。</p>";
+                try {
+                    $sql = "SELECT MAX(employee_id) FROM company.employees WHERE employees.delete_flag=0";
+                    $stmt = $pdo->prepare($sql);
+                    $stmt->execute();
+                    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    $employee_id=$result[0]["MAX(employee_id)"];
+                    $employee_id++;
+                    $_SESSION['employee_id']=$employee_id;
+                } catch (PDOException $Exception) {
+                    die('接続エラー：' . $Exception->getMessage());
+                }
             }
-            ?>    
+            var_dump($stmt);
+            var_dump($result);
+            var_dump($result[0]["MAX(employee_id)"]);
+            
+            $pdo = null; //PDOオブジェクト破棄
+            ?>
+                
 
             <!--表見出し-->
             <table>
@@ -157,6 +179,7 @@
                         <th class="midashi">データ登録日時</th>
                         <th class="midashi">データ更新日時</th>
                     </tr>
+
 
                     <!--サニタイズ処理とSQL実行結果表示-->
                     <tr>
