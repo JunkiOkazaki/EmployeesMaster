@@ -29,7 +29,7 @@
         <title>従業員編集確認画面</title>
     </head>
     <body>
-           
+
         <!--セッション開始-->
         <?php include('session-start.php'); ?>
 
@@ -52,30 +52,65 @@
             <!--DBログイン-->
             <?php include('db-login.php'); ?>
 
-            
+
+            <!--部署ID取得-->
+            <?php include('get-did.php'); ?>
+
             <?php
             //SQL文組み立てには、プレースホルダ（バインド機構）を用いる。
             $employee_id = $_SESSION['employee_id'];
             $employee_code = $_SESSION['employee_code'];
             $employee_name = $_SESSION['employee_name'];
-            $department_id = $_SESSION['department_id'];
+            $department_name = $_SESSION['department_name'];
             $updated_at = date("Y-m-d");
             $flag = 0;
             $class = "";
-            
+
+
+            if (!empty($department_name)) {
+                if (preg_match('/^[ぁ-んァ-ヶー一-龠]+$/u', $department_name)) {
+                    $department_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $department_name);
+                    try {
+                        $sql2 = "SELECT department_id from company.departments WHERE department_name LIKE :department_name";
+                        $stmt2 = $pdo->prepare($sql2);
+                        $stmt2->bindParam(':department_name', $department_name, PDO::PARAM_STR);
+                        $stmt2->execute();
+                        $result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+                        if (empty($result2[0][department_id])) {
+                            $flag = 1;
+                            echo "<div class='error2'>部署ID:&nbsp;" . $department_id . "&nbspは未登録です。<a href='https://dev.jokazaki.biz:8443/employees-master-manual.php#about2'>マニュアル</a>を参照し、登録済み部署の中から指定してください。</div>";
+                        }
+                    } catch (PDOException $Exception) {
+                        die('接続エラー：' . $Exception->getMessage());
+                        echo "データベース処理時にエラーが発生しました。";
+                    }
+                } else {
+                    $flag = 1;
+                    echo "<div class='error2'>「部署ID」欄には、1～3桁の半角数字を入力してください。</div>";
+                }
+            } else {
+                $flag = 1;
+                echo "<div class ='error2'>「部署ID」欄が未入力です。</div>";
+            }
+
+            $department_id = $result2[0]['department_id'];
+
+
+
+
             //入力チェックと条件判定をし、問題なければSQL文組み立てと実行。
             if (!empty($employee_id)) {
                 if (preg_match('/^[0-9]{1,4}$/', $employee_id)) {
                     try {
                         $employee_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_id);
-                        $sql = "SELECT employee_id, employee_code, employee_name, department_id, updated_at FROM company.employees WHERE employee_id=:employee_id AND delete_flag=0";                        
+                        $sql = "SELECT employee_id, employee_code, employee_name, department_id, updated_at FROM company.employees WHERE employee_id=:employee_id AND delete_flag=0";
                         $stmt = $pdo->prepare($sql);
-                        $stmt->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);                        
+                        $stmt->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);
                         $stmt->execute();
                         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                        if(empty($result[0][employee_id])){
-                            $flag=1;
-                            echo "<div class=error2>従業員ID:&nbsp;".$employee_id."&nbsp;のレコードは存在しません。</div>";
+                        if (empty($result[0][employee_id])) {
+                            $flag = 1;
+                            echo "<div class=error2>従業員ID:&nbsp;" . $employee_id . "&nbsp;のレコードは存在しません。</div>";
                         }
                     } catch (PDOException $Exception) {
                         die('接続エラー：' . $Exception->getMessage());
@@ -117,17 +152,17 @@
                 echo "<div class ='error2'>「氏名」欄が未入力です。</div>";
             }
 
-            
+
             if (!empty($department_id)) {
-                if (preg_match('/^[0-9]{1,3}$/', $department_id)) {
+                if (preg_match('/^[0-9]{1,4}$/', $department_id)) {
                     $department_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $department_id);
-                    $sql2 = "SELECT department_id from company.departments WHERE department_id=:department_id AND delete_flag=0";
-                    $stmt2 = $pdo->prepare($sql2);
-                    $stmt2->bindParam(':department_id', $department_id, PDO::PARAM_INT);
-                    $stmt2->execute();
-                    $result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
-                    if(empty($result2[0][department_id])){
-                        $flag=1;
+                    $sql3 = "SELECT department_id from company.departments WHERE department_id=:department_id AND delete_flag=0";
+                    $stmt3 = $pdo->prepare($sql3);
+                    $stmt3->bindParam(':department_id', $department_id, PDO::PARAM_INT);
+                    $stmt3->execute();
+                    $result3 = $stmt3->fetchAll(PDO::FETCH_ASSOC);
+                    if (empty($result3[0][department_id])) {
+                        $flag = 1;
                         echo "<div class='error2'>部署ID:&nbsp;" . $department_id . "&nbspは未登録です。<a href='https://dev.jokazaki.biz:8443/employees-master-manual.php#about2'>マニュアル</a>を参照し、登録済み部署の中から指定してください。</div>";
                     }
                 } else {
@@ -138,8 +173,8 @@
                 $flag = 1;
                 echo "<div class ='error2'>「部署ID」欄が未入力です。</div>";
             }
-            
-            
+
+
             if ($flag == 1) {
                 $class = "hide";
             } else {
@@ -154,7 +189,7 @@
                         <th class="midashi">従業員ID</th>
                         <th class="midashi">従業員コード</th>
                         <th class="midashi">氏名</th>
-                        <th class="midashi">部署ID</th>
+                        <th class="midashi">部署名</th>
                         <th class="midashi">データ更新日時</th>
                     </tr>
                     <!--エスケープ処理とSQL文実行結果表示-->
@@ -162,7 +197,7 @@
                         <th><?= htmlspecialchars($employee_id) ?></th>
                         <th><?= htmlspecialchars($employee_code) ?></th>
                         <th><?= htmlspecialchars($employee_name) ?></th>
-                        <th><?= htmlspecialchars($department_id) ?></th>
+                        <th><?= htmlspecialchars($department_name) ?></th>
                         <th><?= htmlspecialchars($updated_at) ?></th>
                     </tr>
                 </tbody>

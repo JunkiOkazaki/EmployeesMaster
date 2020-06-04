@@ -54,14 +54,29 @@
             
             
             <?php
-            try {
                 //SQL文組み立てには、プレースホルダ（バインド機構）を使用する。
                 $employee_id = $_SESSION['employee_id'];
                 $employee_code = $_SESSION['employee_code'];
                 $employee_name = $_SESSION['employee_name'];
-                $department_id = $_SESSION['department_id'];
                 $updated_at = date("Y-m-d");
-
+                
+                
+            try{
+                //departmentsテーブルをdepartment_nameでSELECTし、department_idを得る。
+                $department_name = $_SESSION['department_name'];
+                $sql2 = "SELECT department_id from company.departments WHERE department_name LIKE :department_name";
+                $stmt2 = $pdo->prepare($sql2);
+                $stmt2->bindParam(':department_name', $department_name, PDO::PARAM_STR);
+                $stmt2->execute();
+                $result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+                $department_id=$result2[0]['department_id'];
+            }catch(PDOException $Exception){
+                die('接続エラー：' . $Exception->getMessage());
+                echo "データベース処理時にエラーが発生しました。";
+                echo '<input type="button" onclick="history.back()" value="戻る" class="button">';
+            }    
+                
+            try {
                 //--SQL文組み立てと実行
                 $sql = "UPDATE company.employees SET employee_code=:employee_code, employee_name=:employee_name, department_id=:department_id, updated_at=:updated_at WHERE employee_id=:employee_id";
                 $stmt = $pdo->prepare($sql);

@@ -104,8 +104,8 @@
             <form method="post" action="employees-list-filter.php">
                 <div  class="cp_iptxt"><input class="ef" type="text" name="employee_id" size="30" placeholder=""><label>従業員ID</label><span class="focus_line"></span></div>
                 <div  class="cp_iptxt"><input class="ef" type="text" name="employee_code" size="30" placeholder=""><label>従業員コード</label><span class="focus_line"></span></div>
-                <div  class="cp_iptxt"><input class="ef" type="text" name="employee_name" size="30" placeholder=""><label>氏&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</label><span class="focus_line"></span></div>             
-                <div  class="cp_iptxt"><select class="ef" name="department_name"><option label="部署名" value="">部署名を選択</option><?php foreach($result2 as $rows2){?><option label="部署名" value="<?= htmlspecialchars($rows2['department_name']) ?>"><?= htmlspecialchars($rows2['department_name']) ?></option><?php } $pdo2=null; ?></select><span class="focus_line"></span></div>
+                <div  class="cp_iptxt"><input class="ef" type="text" name="employee_name" size="30" placeholder=""><label>氏&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</label><span class="focus_line"></span></div>                             
+                <div  class="cp_iptxt"><select class="ef" name="department_name"><option label="部署名" value="">部署名を選択</option><?php foreach($result2 as $rows2){?><option label="部署名" value="<?= htmlspecialchars($rows2['department_name']) ?>"><?= htmlspecialchars($rows2['department_name']) ?></option><?php } ?></select><span class="focus_line"></span></div>
                 <div  class="cp_iptxt"><input class="ef" id="datepicker_ca" type="text" name="created_at" size="30" placeholder="" ><label>登録日時</label><span class="focus_line"></span></div>
                 <div  class="cp_iptxt"><input class="ef" id="datepicker_ua" type="text" name="updated_at" size="30" placeholder="" ><label>更新日時</label><span class="focus_line"></span></div>
                 <input type="submit" name="filter" value="フィルタ" class="button">
@@ -119,9 +119,9 @@
                             <th class="midashi">従業員ID</th>
                             <th class="midashi">従業員コード</th>
                             <th class="midashi">氏名</th>
-                            <th class="midashi">部署名</th>
+                            <th class="midashi">部署名</th>                            
                             <th class="midashi">データ登録日時</th>
-                            <th class="midashi">データ更新日時</th>
+                            <th class="midashi">データ更新日時</th>                            
                         </tr>
 
                         <?php
@@ -135,7 +135,7 @@
                                 <th><?= htmlspecialchars($rows['employee_name']) ?></th>
                                 <th><?= htmlspecialchars($rows['department_name']) ?></th>
                                 <th><?= htmlspecialchars($rows['created_at']) ?></th>
-                                <th><?= htmlspecialchars($rows['updated_at']) ?></th>
+                                <th><?= htmlspecialchars($rows['updated_at']) ?></th>                                
                             </tr>
 
                             <?php

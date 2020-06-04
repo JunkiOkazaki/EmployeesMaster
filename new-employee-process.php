@@ -59,13 +59,20 @@
                 $employee_id = $_SESSION['employee_id'];
                 $employee_code = $_SESSION['employee_code'];
                 $employee_name = $_SESSION['employee_name'];
-                $department_name = $_SESSION['department_name'];
                 $delete_flag = 0;
                 $created_at = date("Y-m-d");
                 $updated_at = date("Y-m-d");
                 
+                $department_name = $_SESSION['department_name'];
+                $sql2 = "SELECT department_id from company.departments WHERE department_name LIKE :department_name";
+                $stmt2 = $pdo->prepare($sql2);
+                $stmt2->bindParam(':department_name', $department_name, PDO::PARAM_STR);
+                $stmt2->execute();
+                $result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+                $department_id=$result2[0]['department_id'];                    
+
                 //SQL文組み立てと実行
-                $sql = "INSERT INTO company.employees(employee_id, employee_code, employee_name, department_id, delete_flag, created_at, updated_at) VALUES(:employee_id, :employee_code, :employee_name, :department_id, :delete_flag, :created_at, :updated_at)";
+                $sql = "INSERT INTO company.employees (employee_id, employee_code, employee_name, department_id, delete_flag, created_at, updated_at) VALUES (:employee_id, :employee_code, :employee_name, :department_id, :delete_flag, :created_at, :updated_at)";
                 $stmt = $pdo->prepare($sql);
                 $stmt->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);
                 $stmt->bindParam(':employee_code', $employee_code, PDO::PARAM_INT);
@@ -74,9 +81,9 @@
                 $stmt->bindParam(':delete_flag', $delete_flag, PDO::PARAM_INT);
                 $stmt->bindParam(':created_at', $created_at, PDO::PARAM_STR);
                 $stmt->bindParam(':updated_at', $updated_at, PDO::PARAM_STR);
-                $stmt->execute();
+                $stmt->execute();            
             } catch (PDOException $Exception) {
-                //die('接続エラー：' .$Exception->getMessage());
+                die('接続エラー：' .$Exception->getMessage());
                 exit("データベース処理時にエラーが発生しました。<div class ='error2'>従業員ID:&nbsp;$employee_id&nbsp;のレコードがすでに存在します。</div><br/>");
             }
             ?>

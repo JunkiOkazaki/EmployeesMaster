@@ -30,7 +30,7 @@
     </head>
     <body>
 
-        
+
         <!--ナビゲーションバー-->
         <ul>
             <li><a href="https://dev.jokazaki.biz:8443/employees-list.php">従業員一覧</a></li>
@@ -47,12 +47,28 @@
 
             <h1>従業員編集</h1>
 
+            <!--DBログイン-->
+            <?php include('db-login.php'); ?>
+            
+            <?php
+            try {
+                $sql2 = "SELECT department_name FROM departments";
+                $stmt2 = $pdo->prepare($sql2);
+                $stmt2->execute();
+                $result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+            } catch (PDOException $Exception) {
+                die('接続エラー：' . $Exception->getMessage());
+                echo "データベース処理時にエラーが発生しました。";
+                echo '<input type="button" onclick="history.back()" value="戻る" class="button">';
+            }
+            ?>
+
             <!--入力欄-->
             <form method="post" action="edit-employee-check.php">
                 <div  class="cp_iptxt"><input class="ef" type="text" name="employee_id" size="30" placeholder=""><label>従業員ID</label><span class="focus_line"></span></div>
                 <div  class="cp_iptxt"><input class="ef" type="text" name="employee_code" size="30" placeholder=""><label>従業員コード</label><span class="focus_line"></span></div>
                 <div  class="cp_iptxt"><input class="ef" type="text" name="employee_name" size="30" placeholder=""><label>氏　　名</label><span class="focus_line"></span></div>
-                <div  class="cp_iptxt"><select class="ef" name="department_name"><option label="部署名" value="">部署名を選択</option><?php foreach($result2 as $rows2){?><option label="部署名" value="<?= htmlspecialchars($rows2['department_name']) ?>"><?= htmlspecialchars($rows2['department_name']) ?></option><?php } $pdo2=null; ?></select><span class="focus_line"></span></div>
+                <div  class="cp_iptxt"><select class="ef" name="department_name"><option label="部署名" value="">部署名を選択</option><?php foreach ($result2 as $rows2) { ?><option label="部署名" value="<?= htmlspecialchars($rows2['department_name']) ?>"><?= htmlspecialchars($rows2['department_name']) ?></option><?php } $pdo2 = null; ?></select><span class="focus_line"></span></div>
                 <input type="submit" name="confirm" value="確認画面へ" class="button"><!--ボタン-->
                 <br/>
 
