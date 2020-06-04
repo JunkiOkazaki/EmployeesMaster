@@ -64,8 +64,8 @@
         <!--ナビゲーションバー-->
         <ul>
             <li><a class="active" href="https://dev.jokazaki.biz:8443/employees-list.php">従業員一覧</a></li>
-            <li><a href="https://dev.jokazaki.biz:8443/new-employee.html">従業員登録</a></li>
-            <li><a href="https://dev.jokazaki.biz:8443/edit-employee.html">従業員編集</a></li>
+            <li><a href="https://dev.jokazaki.biz:8443/new-employee.php">従業員登録</a></li>
+            <li><a href="https://dev.jokazaki.biz:8443/edit-employee.php">従業員編集</a></li>
             <li><a href="https://dev.jokazaki.biz:8443/delete-employee.html">従業員削除</a></li>
             <li><a href="https://dev.jokazaki.biz:8443/employees-master-manual.php">マニュアル</a></li>
         </ul>
@@ -84,7 +84,7 @@
             <!--SQL文組み立てと実行-->
             <?php
             try {
-                $sql = "SELECT employees.employee_id, employees.employee_code, employees.employee_name, departments.department_name, employees.created_at, employees.updated_at FROM employees LEFT JOIN departments ON employees.department_id = departments.department_id WHERE employees.delete_flag=0";
+                $sql = "SELECT employees.employee_id, employees.employee_code, employees.employee_name, departments.department_name, employees.created_at, employees.updated_at FROM company.employees LEFT JOIN company.departments ON employees.department_id = departments.department_id WHERE employees.delete_flag=0";
                 $sql2 = "SELECT department_name FROM departments";
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute();
@@ -105,7 +105,7 @@
                 <div  class="cp_iptxt"><input class="ef" type="text" name="employee_id" size="30" placeholder=""><label>従業員ID</label><span class="focus_line"></span></div>
                 <div  class="cp_iptxt"><input class="ef" type="text" name="employee_code" size="30" placeholder=""><label>従業員コード</label><span class="focus_line"></span></div>
                 <div  class="cp_iptxt"><input class="ef" type="text" name="employee_name" size="30" placeholder=""><label>氏&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</label><span class="focus_line"></span></div>             
-                <div  class="cp_iptxt"><select class="ef" name="department_name"><option label="部署名" value=""></option><?php foreach($result2 as $rows2){?><option label="部署名" value="<?= htmlspecialchars($rows2['department_name']) ?>"><?= htmlspecialchars($rows2['department_name']) ?></option><?php } $pdo2=null; ?></select><span class="focus_line"></span></div>
+                <div  class="cp_iptxt"><select class="ef" name="department_name"><option label="部署名" value="">部署名を選択</option><?php foreach($result2 as $rows2){?><option label="部署名" value="<?= htmlspecialchars($rows2['department_name']) ?>"><?= htmlspecialchars($rows2['department_name']) ?></option><?php } $pdo2=null; ?></select><span class="focus_line"></span></div>
                 <div  class="cp_iptxt"><input class="ef" id="datepicker_ca" type="text" name="created_at" size="30" placeholder="" ><label>登録日時</label><span class="focus_line"></span></div>
                 <div  class="cp_iptxt"><input class="ef" id="datepicker_ua" type="text" name="updated_at" size="30" placeholder="" ><label>更新日時</label><span class="focus_line"></span></div>
                 <input type="submit" name="filter" value="フィルタ" class="button">

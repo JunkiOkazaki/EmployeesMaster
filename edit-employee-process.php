@@ -37,8 +37,8 @@
         <!--ナビゲーションバー-->
         <ul>
             <li><a href="https://dev.jokazaki.biz:8443/employees-list.php">従業員一覧</a></li>
-            <li><a href="https://dev.jokazaki.biz:8443/new-employee.html">従業員登録</a></li>
-            <li><a class="active" href="https://dev.jokazaki.biz:8443/edit-employee.html">従業員編集</a></li>
+            <li><a href="https://dev.jokazaki.biz:8443/new-employee.php">従業員登録</a></li>
+            <li><a class="active" href="https://dev.jokazaki.biz:8443/edit-employee.php">従業員編集</a></li>
             <li><a href="https://dev.jokazaki.biz:8443/delete-employee.html">従業員削除</a></li>
             <li><a href="https://dev.jokazaki.biz:8443/employees-master-manual.php">マニュアル</a></li>
         </ul>
@@ -83,7 +83,7 @@
             ?>
             
             <!--ボタン-->
-            <input type="button" onclick="location.href = 'https://dev.jokazaki.biz:8443/edit-employee.html'" value="「従業員編集」に戻る" class="button">
+            <input type="button" onclick="location.href = 'https://dev.jokazaki.biz:8443/edit-employee.php'" value="「従業員編集」に戻る" class="button">
 
         </div>
     </body>

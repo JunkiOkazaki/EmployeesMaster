@@ -36,8 +36,8 @@
         <!--ナビゲーションバー-->
         <ul>
             <li><a href="https://dev.jokazaki.biz:8443/employees-list.php">従業員一覧</a></li>
-            <li><a class="active" href="https://dev.jokazaki.biz:8443/new-employee.html">従業員登録</a></li>
-            <li><a href="https://dev.jokazaki.biz:8443/edit-employee.html">従業員編集</a></li>
+            <li><a class="active" href="https://dev.jokazaki.biz:8443/new-employee.php">従業員登録</a></li>
+            <li><a href="https://dev.jokazaki.biz:8443/edit-employee.php">従業員編集</a></li>
             <li><a href="https://dev.jokazaki.biz:8443/delete-employee.html">従業員削除</a></li>
             <li><a href="https://dev.jokazaki.biz:8443/employees-master-manual.php">マニュアル</a></li>
         </ul>
@@ -59,7 +59,7 @@
                 $employee_id = $_SESSION['employee_id'];
                 $employee_code = $_SESSION['employee_code'];
                 $employee_name = $_SESSION['employee_name'];
-                $department_id = $_SESSION['department_id'];
+                $department_name = $_SESSION['department_name'];
                 $delete_flag = 0;
                 $created_at = date("Y-m-d");
                 $updated_at = date("Y-m-d");
@@ -87,7 +87,7 @@
             ?>
 
             <!--ボタン-->
-            <input type="button" onclick="location.href = 'https://dev.jokazaki.biz:8443/new-employee.html'" value="「従業員登録」に戻る" class="button">
+            <input type="button" onclick="location.href = 'https://dev.jokazaki.biz:8443/new-employee.php'" value="「従業員登録」に戻る" class="button">
 
         </div>
     </body>
