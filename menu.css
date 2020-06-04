@@ -279,3 +279,25 @@ iframe{
         width: 50%;
     }
 }
+
+select{
+    width: 100%;
+}
+
+
+.ef ~ option {
+    position: absolute;
+    z-index: -1;
+    top: 4px;
+    left: 0;
+    width: 100%;
+    transition: 0.3s;
+    letter-spacing: 0.5px;
+    color: #aaaaaa;
+}
+.ef:focus ~ option, .cp_iptxt.ef ~ option {
+    font-size: 12px;
+    top: -16px;
+    transition: 0.3s;
+    color: #da3c41;
+}

@@ -80,19 +80,7 @@
 
 
             <h1>フィルタ結果</h1>
-
-
-            <!--入力欄-->
-            <form method="post" action="employees-list-filter.php">
-                <div  class="cp_iptxt"><input class="ef" type="text" name="employee_id" size="30" placeholder=""><label>従業員ID</label><span class="focus_line"></span></div>
-                <div  class="cp_iptxt"><input class="ef" type="text" name="employee_code" size="30" placeholder=""><label>従業員コード</label><span class="focus_line"></span></div>
-                <div  class="cp_iptxt"><input class="ef" type="text" name="employee_name" size="30" placeholder=""><label>氏　　名</label><span class="focus_line"></span></div>
-                <div  class="cp_iptxt"><input class="ef" type="text" name="department_id" size="30" placeholder=""><label>部　署ID</label><span class="focus_line"></span></div>
-                <div  class="cp_iptxt"><input class="ef" id="datepicker_ca" type="text" name="created_at" size="30" placeholder="" ><label>登録日時</label><span class="focus_line"></span></div>
-                <div  class="cp_iptxt"><input class="ef" id="datepicker_ua" type="text" name="updated_at" size="30" placeholder="" ><label>更新日時</label><span class="focus_line"></span></div>
-                <input type="submit" name="filter" value="フィルタ再適用" class="button">
-                <input type="button" onclick="location.href = 'https://dev.jokazaki.biz:8443/employees-list.php'" value="「従業員一覧」に戻る" class="button">
-                <br/>
+           
 
                 <!--DBログイン-->
                 <?php include('db-login.php'); ?>
@@ -104,11 +92,18 @@
                 $employee_id = $_SESSION['employee_id'];
                 $employee_code = $_SESSION['employee_code'];
                 $employee_name = $_SESSION['employee_name'];
-                $department_id = $_SESSION['department_id'];
+                $department_name = $_SESSION['department_name'];
                 $delete_flag = $_SESSION['delete_flag'];
                 $created_at = $_SESSION['created_at'];
                 $updated_at = $_SESSION['updated_at'];
-
+                
+                $input_flag=0;
+                
+                $sql2 = "SELECT department_name FROM departments";
+                $stmt2 = $pdo->prepare($sql2);
+                $stmt2->execute();
+                $result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+                
                 //入力チェックで問題なければ、SQL文組み立てと実行。
                 if (!empty($employee_id)) {
                     if (preg_match('/^[0-9]{1,4}$/', $employee_id)) {
@@ -170,17 +165,17 @@
                     } else {
                         echo "<div class='error'>「氏名」欄には、1～30文字の全角文字列を入力してください。</div>";
                     }
-                } elseif (!empty($department_id)) {
-                    if (preg_match('/^[0-9]{1,4}$/', $department_id)) {
+                } elseif (!empty($department_name) && empty($created_at) && empty($updated_at)) {
+                    if (preg_match('/^[ぁ-んァ-ヶー一-龠]+$/u', $department_name)) {
                         try {
-                            $department_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $department_id);
-                            $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM company.employees WHERE department_id=:department_id AND delete_flag=0";
+                            $department_name = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $department_name);
+                            $sql = "SELECT employees.employee_id, employees.employee_code, employees.employee_name, departments.department_name, employees.created_at, employees.updated_at FROM company.employees LEFT JOIN company.departments ON employees.department_id=departments.department_id WHERE departments.department_name LIKE :department_name AND employees.delete_flag=0";
                             $stmt = $pdo->prepare($sql);
-                            $stmt->bindParam(':department_id', $department_id, PDO::PARAM_INT);
+                            $stmt->bindParam(':department_name', $department_name, PDO::PARAM_INT);
                             $stmt->execute();
                             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                            if (empty($result[0]['department_id'])) {
-                                echo "<div class='error2'>部署ID:&nbsp;" . $department_id . "&nbspは未登録です。<a href='https://dev.jokazaki.biz:8443/employees-master-manual.php#about2'>マニュアル</a>を参照し、登録済み部署の中から指定してください。</div>";
+                            if (empty($result[0]['department_name'])) {
+                                echo "<div class='error2'>部署名:&nbsp;" . $department_name . "&nbspは未登録です。<a href='https://dev.jokazaki.biz:8443/employees-master-manual.php#about2'>マニュアル</a>を参照し、登録済み部署の中から指定してください。</div>";
                             }
                         } catch (PDOException $Exception) {
                             die('接続エラー：' . $Exception->getMessage());
@@ -188,13 +183,13 @@
                             echo '<input type="button" onclick="history.back()" value="戻る" class="button">';
                         }
                     } else {
-                        echo "<div class='error'>「部署ID」欄には、1～3桁の半角数字を入力してください。</div>";
-                    }
+                        echo "<div class='error'>「部署名」欄には、1～10文字の全角文字列を入力してください。</div>";
+                    }                    
                 } elseif (!empty($created_at)) {
                     if (preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $created_at)) {
                         try {
                             $created_at = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $created_at);
-                            $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM company.employees WHERE created_at LIKE :created_at AND delete_flag=0";
+                            $sql = "SELECT employee_id, employee_code, employee_name, department_name, created_at, updated_at FROM company.employees WHERE created_at LIKE :created_at AND delete_flag=0";
                             $stmt = $pdo->prepare($sql);
                             $stmt->bindParam(':created_at', $created_at, PDO::PARAM_STR);
                             $stmt->execute();
@@ -214,7 +209,7 @@
                     if (preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $updated_at)) {
                         try {
                             $updated_at = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $updated_at);
-                            $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM company.employees WHERE updated_at LIKE :updated_at AND delete_flag=0";
+                            $sql = "SELECT employee_id, employee_code, employee_name, department_name, created_at, updated_at FROM company.employees WHERE updated_at LIKE :updated_at AND delete_flag=0";
                             $stmt = $pdo->prepare($sql);
                             $stmt->bindParam(':updated_at', $updated_at, PDO::PARAM_STR);
                             $stmt->execute();
@@ -229,11 +224,26 @@
                         }
                     } else {
                         echo "<div class='error'>「更新日時」欄は（例）&quot;2020-05-01&quot;&nbsp;のように半角で入力してください。</div>";
-                    }
+                    }                    
                 } else {
                     echo "<div class='error'>フィルタ条件が未入力です。</div>";
                 }
                 ?>
+                
+                
+                
+                <!--入力欄-->
+                <form method="post" action="employees-list-filter.php">
+                <div  class="cp_iptxt"><input class="ef" type="text" name="employee_id" size="30" placeholder=""><label>従業員ID</label><span class="focus_line"></span></div>
+                <div  class="cp_iptxt"><input class="ef" type="text" name="employee_code" size="30" placeholder=""><label>従業員コード</label><span class="focus_line"></span></div>
+                <div  class="cp_iptxt"><input class="ef" type="text" name="employee_name" size="30" placeholder=""><label>氏　　名</label><span class="focus_line"></span></div>
+                <div  class="cp_iptxt"><select class="ef" name="department_name"><option label="部署名" value=""></option><?php foreach($result2 as $rows2){?><option label="部署名" value="<?= htmlspecialchars($rows2['department_name']) ?>"><?= htmlspecialchars($rows2['department_name']) ?></option><?php } $pdo2=null; ?></select><span class="focus_line"></span></div>
+                <div  class="cp_iptxt"><input class="ef" id="datepicker_ca" type="text" name="created_at" size="30" placeholder="" ><label>登録日時</label><span class="focus_line"></span></div>
+                <div  class="cp_iptxt"><input class="ef" id="datepicker_ua" type="text" name="updated_at" size="30" placeholder="" ><label>更新日時</label><span class="focus_line"></span></div>
+                <input type="submit" name="filter" value="フィルタ再適用" class="button">
+                <input type="button" onclick="location.href = 'https://dev.jokazaki.biz:8443/employees-list.php'" value="「従業員一覧」に戻る" class="button">
+                <br/>
+                
 
                 <!--表見出し-->
                 <table>
@@ -242,7 +252,7 @@
                             <th class = "midashi">従業員ID</th>
                             <th class = "midashi">従業員コード</th>
                             <th class = "midashi">氏名</th>
-                            <th class = "midashi">部署ID</th>
+                            <th class = "midashi">部署名</th>
                             <th class = "midashi">データ登録日時</th>
                             <th class = "midashi">データ更新日時</th>
                         </tr>
