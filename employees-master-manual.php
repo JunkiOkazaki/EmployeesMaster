@@ -63,7 +63,7 @@
                     「従業員ID」は重複を許可しない設定となっているため、重複する従業員IDを登録しようとするとエラーになります。<br/>
                     各レコードについては論理削除をしているため、「従業員一覧」に表示されていなくても、過去に使用されていた従業員IDを入力するとエラーとなります。<br/>
                     エラーとなった場合は、異なる従業員IDを入力してください。<br/>
-                   <br/>
+                    <br/>
                     また従業員新規登録時は、すでに登録されている部署IDしか指定できません。<br/>
                     下記一覧に表示されているいずれかの部署IDを指定してください。<br/>
                     部署が一覧にない場合は、システム課へ登録を依頼してください。<br/>
@@ -71,7 +71,7 @@
 
                 <!--DBログイン-->
                 <?php include('db-login.php'); ?>
-                
+
                 <!--SQL文組み立てと実行-->
                 <?php
                 try {
@@ -84,12 +84,12 @@
                     echo '<input type="button" onclick="history.back()" value="戻る" class="button">';
                 }
                 ?>
-                
+
                 <!--SQL文実行結果表示部-->
                 <?php
                 echo "<h3>登録済み部署&nbsp;&#040;" . date("Y/m/d") . "現在&#041;</h3>";
                 ?>
-                
+
                 <!--表見出し-->
                 <table>
                     <tbody>
@@ -98,13 +98,13 @@
                             <th class="midashi2">部署コード</th>
                             <th class="midashi2">部署名</th>
                         </tr>
-                        
+
                         <!--SQL文実行結果表示部-->
                         <?php
                         while ($rows = $stmt->fetch(PDO::FETCH_ASSOC)) { //$rowに実行結果を格納し、順次実行。
                             ?>
-                        
-                        <!--SQL文実行結果表示部。サニタイズして表示。-->
+
+                            <!--SQL文実行結果表示部。サニタイズして表示。-->
                             <tr>
                                 <th><?= htmlspecialchars($rows['department_id']) ?></th>
                                 <th><?= htmlspecialchars($rows['department_code']) ?></th>
@@ -113,10 +113,10 @@
                                 <th><?= htmlspecialchars($rows['updated_at']) ?></th>
                             </tr>
 
-                        <?php
+                            <?php
                         }
                         $pdo = null; //PDOオブジェクト破棄
-                            ?>
+                        ?>
                     </tbody>
                 </table>
                 <br/>
@@ -156,6 +156,6 @@
                     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc_W3mrjvGmZOuT2_7dw3AnMTBF3cTZCtt1zZ_FURqSBaHBew/viewform?embedded=true" height="709" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
                 </p>
             </div>
-            
+
     </body>
 </html>

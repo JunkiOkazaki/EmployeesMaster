@@ -280,55 +280,12 @@ iframe{
     }
 }
 
-
-
 select{
     width: 100%;
 }
-
 
 option{
     font-size: 16px;
     letter-spacing: 0.5px;
     color: #aaaaaa;
 }
-
-
-
-.ef ~ option{
-    position: absolute;
-    z-index: -1;
-    top: 4px;
-    left: 0;
-    width: 100%;
-    transition: 0.3s;
-    letter-spacing: 0.5px;
-    color: #aaaaaa;
-}
-
-.ef:focus ~ option, .cp_iptxt.ef ~ option {
-    font-size: 20px;
-    top: -16px;
-    transition: 0.3s;
-    color: #da3c41;
-}
-
-
-/*
-.ef ~ label {
-    position: absolute;
-    z-index: -1;
-    top: 4px;
-    left: 0;
-    width: 100%;
-    transition: 0.3s;
-    letter-spacing: 0.5px;
-    color: #aaaaaa;
-}
-.ef:focus ~ label, .cp_iptxt.ef ~ label {
-    font-size: 12px;
-    top: -16px;
-    transition: 0.3s;
-    color: #da3c41;
-}
-*/

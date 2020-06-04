@@ -80,170 +80,173 @@
 
 
             <h1>フィルタ結果</h1>
-           
-
-                <!--DBログイン-->
-                <?php include('db-login.php'); ?>
 
 
-                <!--入力チェック-->
-                <?php
-                //SQL文組み立てには、プレースホルダ（バインド機構）を用いる。
-                $employee_id = $_SESSION['employee_id'];
-                $employee_code = $_SESSION['employee_code'];
-                $employee_name = $_SESSION['employee_name'];
-                $department_name = $_SESSION['department_name'];
-                $delete_flag = $_SESSION['delete_flag'];
-                $created_at = $_SESSION['created_at'];
-                $updated_at = $_SESSION['updated_at'];
-                
-                $input_flag=0;
-                
+            <!--DBログイン-->
+            <?php include('db-login.php'); ?>
+
+
+            <!--入力チェック-->
+            <?php
+            //SQL文組み立てには、プレースホルダ（バインド機構）を用いる。
+            $employee_id = $_SESSION['employee_id'];
+            $employee_code = $_SESSION['employee_code'];
+            $employee_name = $_SESSION['employee_name'];
+            $department_name = $_SESSION['department_name'];
+            $delete_flag = $_SESSION['delete_flag'];
+            $created_at = $_SESSION['created_at'];
+            $updated_at = $_SESSION['updated_at'];
+
+            //departmentsテーブルからdepartment_nameを取得
+            try {
                 $sql2 = "SELECT department_name FROM departments";
                 $stmt2 = $pdo->prepare($sql2);
                 $stmt2->execute();
                 $result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
-                
-                //入力チェックで問題なければ、SQL文組み立てと実行。
-                if (!empty($employee_id)) {
-                    if (preg_match('/^[0-9]{1,4}$/', $employee_id)) {
-                        $employee_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_id);
-                        try {
-                            $sql = "SELECT employees.employee_id, employees.employee_code, employees.employee_name, departments.department_name, employees.created_at, employees.updated_at FROM company.employees LEFT JOIN company.departments ON employees.department_id=departments.department_id WHERE employees.employee_id=:employee_id AND employees.delete_flag=0";
-                            $stmt = $pdo->prepare($sql);
-                            $stmt->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);
-                            $stmt->execute();
-                            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                            if (empty($result[0]['employee_id'])) {
-                                echo "<p class=error2>従業員ID:&nbsp;" . $employee_id . "&nbsp;のレコードは存在しません。</p>";
-                            }
-                        } catch (PDOException $Exception) {
-                            die('接続エラー：' . $Exception->getMessage());
-                            echo "データベース処理時にエラーが発生しました。";
-                            echo '<input type="button" onclick="history.back()" value="戻る" class="button">';
+            } catch (PDOException $Exception) {
+                die('接続エラー：' . $Exception->getMessage());
+                echo "データベース処理時にエラーが発生しました。";
+            }
+
+            //入力チェックで問題なければ、SQL文組み立てと実行。
+            if (!empty($employee_id)) {
+                if (preg_match('/^[0-9]{1,4}$/', $employee_id)) {
+                    $employee_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_id);
+                    try {
+                        $sql = "SELECT employees.employee_id, employees.employee_code, employees.employee_name, departments.department_name, employees.created_at, employees.updated_at FROM company.employees LEFT JOIN company.departments ON employees.department_id=departments.department_id WHERE employees.employee_id=:employee_id AND employees.delete_flag=0";
+                        $stmt = $pdo->prepare($sql);
+                        $stmt->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);
+                        $stmt->execute();
+                        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        if (empty($result[0]['employee_id'])) {
+                            echo "<p class=error2>従業員ID:&nbsp;" . $employee_id . "&nbsp;のレコードは存在しません。</p>";
                         }
-                    } else {
-                        echo "<div class ='error'>「従業員ID」欄には、1～3桁の半角数字を入力してください。</div>";
+                    } catch (PDOException $Exception) {
+                        die('接続エラー：' . $Exception->getMessage());
+                        echo "データベース処理時にエラーが発生しました。";
+                        echo '<input type="button" onclick="history.back()" value="戻る" class="button">';
                     }
-                } elseif (!empty($employee_code)) {
-                    if (preg_match('/^[0-9]{1,4}$/', $employee_code)) {
-                        $employee_code = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_code);
-                        try {
-                            $sql = "SELECT employees.employee_id, employees.employee_code, employees.employee_name, departments.department_name, employees.created_at, employees.updated_at FROM company.employees LEFT JOIN company.departments ON employees.department_id=departments.department_id WHERE employees.employee_code=:employee_code AND employees.delete_flag=0";
-                            $stmt = $pdo->prepare($sql);
-                            $stmt->bindParam(':employee_code', $employee_code, PDO::PARAM_INT);
-                            $stmt->execute();
-                            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                            if (empty($result[0]['employee_code'])) {
-                                echo "<p class=error2>従業員コード:&nbsp;" . $employee_code . "&nbsp;のレコードは存在しません。</p>";
-                            }
-                        } catch (PDOException $Exception) {
-                            die('接続エラー：' . $Exception->getMessage());
-                            echo "データベース処理時にエラーが発生しました。";
-                            echo '<input type="button" onclick="history.back()" value="戻る" class="button">';
-                        }
-                    } else {
-                        echo "<div class='error'>「従業員コード」欄には、1～3桁の半角数字を入力してください。</div>";
-                    }
-                } elseif (!empty($employee_name)) {
-                    if (preg_match('/^[ぁ-んァ-ヶー一-龠]+$/u', $employee_name)) {
-                        $employee_name = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_name);
-                        try {
-                            $sql = "SELECT employees.employee_id, employees.employee_code, employees.employee_name, departments.department_name, employees.created_at, employees.updated_at FROM company.employees LEFT JOIN company.departments ON employees.department_id=departments.department_id WHERE employees.employee_name LIKE :employee_name AND employees.delete_flag=0";
-                            $stmt = $pdo->prepare($sql);
-                            $stmt->bindValue(':employee_name', '%' . $employee_name . '%', PDO::PARAM_STR);
-                            $stmt->execute();
-                            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                            if (empty($result[0]['employee_name'])) {
-                                echo "<p class=error2>従業員名:&nbsp;" . $employee_name . "&nbsp;のレコードは存在しません。</p>";
-                            }
-                        } catch (PDOException $Exception) {
-                            die('接続エラー：' . $Exception->getMessage());
-                            echo "データベース処理時にエラーが発生しました。";
-                            echo '<input type="button" onclick="history.back()" value="戻る" class="button">';
-                        }
-                    } else {
-                        echo "<div class='error'>「氏名」欄には、1～30文字の全角文字列を入力してください。</div>";
-                    }
-                } elseif (!empty($department_name) && empty($created_at) && empty($updated_at)) {
-                    if (preg_match('/^[ぁ-んァ-ヶー一-龠]+$/u', $department_name)) {
-                        try {
-                            $department_name = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $department_name);
-                            $sql = "SELECT employees.employee_id, employees.employee_code, employees.employee_name, departments.department_name, employees.created_at, employees.updated_at FROM company.employees LEFT JOIN company.departments ON employees.department_id=departments.department_id WHERE departments.department_name LIKE :department_name AND employees.delete_flag=0";
-                            $stmt = $pdo->prepare($sql);
-                            $stmt->bindParam(':department_name', $department_name, PDO::PARAM_INT);
-                            $stmt->execute();
-                            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                            if (empty($result[0]['department_name'])) {
-                                echo "<div class='error2'>部署名:&nbsp;" . $department_name . "&nbspは未登録です。<a href='https://dev.jokazaki.biz:8443/employees-master-manual.php#about2'>マニュアル</a>を参照し、登録済み部署の中から指定してください。</div>";
-                            }
-                        } catch (PDOException $Exception) {
-                            die('接続エラー：' . $Exception->getMessage());
-                            echo "データベース処理時にエラーが発生しました。";
-                            echo '<input type="button" onclick="history.back()" value="戻る" class="button">';
-                        }
-                    } else {
-                        echo "<div class='error'>「部署名」欄には、1～10文字の全角文字列を入力してください。</div>";
-                    }                    
-                } elseif (!empty($created_at)) {
-                    if (preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $created_at)) {
-                        try {
-                            $created_at = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $created_at);
-                            $sql = "SELECT employees.employee_id, employees.employee_code, employees.employee_name, departments.department_name, employees.created_at, employees.updated_at FROM company.employees LEFT JOIN company.departments ON employees.department_id=departments.department_id WHERE employees.created_at LIKE :created_at AND employees.delete_flag=0";
-                            $stmt = $pdo->prepare($sql);
-                            $stmt->bindParam(':created_at', $created_at, PDO::PARAM_STR);
-                            $stmt->execute();
-                            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                            if (empty($result[0]['created_at'])) {
-                                echo "<p class=error2>登録日時:&nbsp;" . $created_at . "&nbsp;のレコードは存在しません。</p>";
-                            }
-                        } catch (PDOException $Exception) {
-                            die('接続エラー：' . $Exception->getMessage());
-                            echo "データベース処理時にエラーが発生しました。";
-                            echo '<input type="button" onclick="history.back()" value="戻る" class="button">';
-                        }
-                    } else {
-                        echo "<div class='error'>「登録日時」欄は（例）&quot;2020-05-01&quot;&nbsp;のように半角で入力してください。</div>";
-                    }
-                } elseif (!empty($updated_at)) {
-                    if (preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $updated_at)) {
-                        try {
-                            $updated_at = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $updated_at);
-                            $sql = "SELECT employees.employee_id, employees.employee_code, employees.employee_name, departments.department_name, employees.created_at, employees.updated_at FROM company.employees LEFT JOIN company.departments ON employees.department_id=departments.department_id WHERE employees.updated_at LIKE :updated_at AND employees.delete_flag=0";
-                            $stmt = $pdo->prepare($sql);
-                            $stmt->bindParam(':updated_at', $updated_at, PDO::PARAM_STR);
-                            $stmt->execute();
-                            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                            if (empty($result[0]['updated_at'])) {
-                                echo "<p class=error2>更新日時:&nbsp;" . $updated_at . "&nbsp;のレコードは存在しません。</p>";
-                            }
-                        } catch (PDOException $Exception) {
-                            die('接続エラー：' . $Exception->getMessage());
-                            echo "データベース処理時にエラーが発生しました。";
-                            echo '<input type="button" onclick="history.back()" value="戻る" class="button">';
-                        }
-                    } else {
-                        echo "<div class='error'>「更新日時」欄は（例）&quot;2020-05-01&quot;&nbsp;のように半角で入力してください。</div>";
-                    }                    
                 } else {
-                    echo "<div class='error'>フィルタ条件が未入力です。</div>";
+                    echo "<div class ='error'>「従業員ID」欄には、1～3桁の半角数字を入力してください。</div>";
                 }
-                ?>
-                
-                
-                
-                <!--入力欄-->
-                <form method="post" action="employees-list-filter.php">
+            } elseif (!empty($employee_code)) {
+                if (preg_match('/^[0-9]{1,4}$/', $employee_code)) {
+                    $employee_code = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_code);
+                    try {
+                        $sql = "SELECT employees.employee_id, employees.employee_code, employees.employee_name, departments.department_name, employees.created_at, employees.updated_at FROM company.employees LEFT JOIN company.departments ON employees.department_id=departments.department_id WHERE employees.employee_code=:employee_code AND employees.delete_flag=0";
+                        $stmt = $pdo->prepare($sql);
+                        $stmt->bindParam(':employee_code', $employee_code, PDO::PARAM_INT);
+                        $stmt->execute();
+                        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        if (empty($result[0]['employee_code'])) {
+                            echo "<p class=error2>従業員コード:&nbsp;" . $employee_code . "&nbsp;のレコードは存在しません。</p>";
+                        }
+                    } catch (PDOException $Exception) {
+                        die('接続エラー：' . $Exception->getMessage());
+                        echo "データベース処理時にエラーが発生しました。";
+                        echo '<input type="button" onclick="history.back()" value="戻る" class="button">';
+                    }
+                } else {
+                    echo "<div class='error'>「従業員コード」欄には、1～3桁の半角数字を入力してください。</div>";
+                }
+            } elseif (!empty($employee_name)) {
+                if (preg_match('/^[ぁ-んァ-ヶー一-龠]+$/u', $employee_name)) {
+                    $employee_name = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_name);
+                    try {
+                        $sql = "SELECT employees.employee_id, employees.employee_code, employees.employee_name, departments.department_name, employees.created_at, employees.updated_at FROM company.employees LEFT JOIN company.departments ON employees.department_id=departments.department_id WHERE employees.employee_name LIKE :employee_name AND employees.delete_flag=0";
+                        $stmt = $pdo->prepare($sql);
+                        $stmt->bindValue(':employee_name', '%' . $employee_name . '%', PDO::PARAM_STR);
+                        $stmt->execute();
+                        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        if (empty($result[0]['employee_name'])) {
+                            echo "<p class=error2>従業員名:&nbsp;" . $employee_name . "&nbsp;のレコードは存在しません。</p>";
+                        }
+                    } catch (PDOException $Exception) {
+                        die('接続エラー：' . $Exception->getMessage());
+                        echo "データベース処理時にエラーが発生しました。";
+                        echo '<input type="button" onclick="history.back()" value="戻る" class="button">';
+                    }
+                } else {
+                    echo "<div class='error'>「氏名」欄には、1～30文字の全角文字列を入力してください。</div>";
+                }
+            } elseif (!empty($department_name) && empty($created_at) && empty($updated_at)) {
+                if (preg_match('/^[ぁ-んァ-ヶー一-龠]+$/u', $department_name)) {
+                    try {
+                        $department_name = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $department_name);
+                        $sql = "SELECT employees.employee_id, employees.employee_code, employees.employee_name, departments.department_name, employees.created_at, employees.updated_at FROM company.employees LEFT JOIN company.departments ON employees.department_id=departments.department_id WHERE departments.department_name LIKE :department_name AND employees.delete_flag=0";
+                        $stmt = $pdo->prepare($sql);
+                        $stmt->bindParam(':department_name', $department_name, PDO::PARAM_INT);
+                        $stmt->execute();
+                        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        if (empty($result[0]['department_name'])) {
+                            echo "<div class='error2'>部署名:&nbsp;" . $department_name . "&nbspは未登録です。<a href='https://dev.jokazaki.biz:8443/employees-master-manual.php#about2'>マニュアル</a>を参照し、登録済み部署の中から指定してください。</div>";
+                        }
+                    } catch (PDOException $Exception) {
+                        die('接続エラー：' . $Exception->getMessage());
+                        echo "データベース処理時にエラーが発生しました。";
+                        echo '<input type="button" onclick="history.back()" value="戻る" class="button">';
+                    }
+                } else {
+                    echo "<div class='error'>「部署名」欄には、1～10文字の全角文字列を入力してください。</div>";
+                }
+            } elseif (!empty($created_at)) {
+                if (preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $created_at)) {
+                    try {
+                        $created_at = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $created_at);
+                        $sql = "SELECT employees.employee_id, employees.employee_code, employees.employee_name, departments.department_name, employees.created_at, employees.updated_at FROM company.employees LEFT JOIN company.departments ON employees.department_id=departments.department_id WHERE employees.created_at LIKE :created_at AND employees.delete_flag=0";
+                        $stmt = $pdo->prepare($sql);
+                        $stmt->bindParam(':created_at', $created_at, PDO::PARAM_STR);
+                        $stmt->execute();
+                        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        if (empty($result[0]['created_at'])) {
+                            echo "<p class=error2>登録日時:&nbsp;" . $created_at . "&nbsp;のレコードは存在しません。</p>";
+                        }
+                    } catch (PDOException $Exception) {
+                        die('接続エラー：' . $Exception->getMessage());
+                        echo "データベース処理時にエラーが発生しました。";
+                        echo '<input type="button" onclick="history.back()" value="戻る" class="button">';
+                    }
+                } else {
+                    echo "<div class='error'>「登録日時」欄は（例）&quot;2020-05-01&quot;&nbsp;のように半角で入力してください。</div>";
+                }
+            } elseif (!empty($updated_at)) {
+                if (preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $updated_at)) {
+                    try {
+                        $updated_at = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $updated_at);
+                        $sql = "SELECT employees.employee_id, employees.employee_code, employees.employee_name, departments.department_name, employees.created_at, employees.updated_at FROM company.employees LEFT JOIN company.departments ON employees.department_id=departments.department_id WHERE employees.updated_at LIKE :updated_at AND employees.delete_flag=0";
+                        $stmt = $pdo->prepare($sql);
+                        $stmt->bindParam(':updated_at', $updated_at, PDO::PARAM_STR);
+                        $stmt->execute();
+                        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        if (empty($result[0]['updated_at'])) {
+                            echo "<p class=error2>更新日時:&nbsp;" . $updated_at . "&nbsp;のレコードは存在しません。</p>";
+                        }
+                    } catch (PDOException $Exception) {
+                        die('接続エラー：' . $Exception->getMessage());
+                        echo "データベース処理時にエラーが発生しました。";
+                        echo '<input type="button" onclick="history.back()" value="戻る" class="button">';
+                    }
+                } else {
+                    echo "<div class='error'>「更新日時」欄は（例）&quot;2020-05-01&quot;&nbsp;のように半角で入力してください。</div>";
+                }
+            } else {
+                echo "<div class='error'>フィルタ条件が未入力です。</div>";
+            }
+            ?>
+
+
+            <!--入力欄-->
+            <form method="post" action="employees-list-filter.php">
                 <div  class="cp_iptxt"><input class="ef" type="text" name="employee_id" size="30" placeholder=""><label>従業員ID</label><span class="focus_line"></span></div>
                 <div  class="cp_iptxt"><input class="ef" type="text" name="employee_code" size="30" placeholder=""><label>従業員コード</label><span class="focus_line"></span></div>
                 <div  class="cp_iptxt"><input class="ef" type="text" name="employee_name" size="30" placeholder=""><label>氏　　名</label><span class="focus_line"></span></div>
-                <div  class="cp_iptxt"><select class="ef" name="department_name"><option label="部署名" value="">部署名を選択</option><?php foreach($result2 as $rows2){?><option label="部署名" value="<?= htmlspecialchars($rows2['department_name']) ?>"><?= htmlspecialchars($rows2['department_name']) ?></option><?php } ?></select><span class="focus_line"></span></div>
+                <div  class="cp_iptxt"><select class="ef" name="department_name"><option label="部署名" value="">部署名を選択</option><?php foreach ($result2 as $rows2) { ?><option label="部署名" value="<?= htmlspecialchars($rows2['department_name']) ?>"><?= htmlspecialchars($rows2['department_name']) ?></option><?php } ?></select><span class="focus_line"></span></div>
                 <div  class="cp_iptxt"><input class="ef" id="datepicker_ca" type="text" name="created_at" size="30" placeholder="" ><label>登録日時</label><span class="focus_line"></span></div>
                 <div  class="cp_iptxt"><input class="ef" id="datepicker_ua" type="text" name="updated_at" size="30" placeholder="" ><label>更新日時</label><span class="focus_line"></span></div>
                 <input type="submit" name="filter" value="フィルタ再適用" class="button">
                 <input type="button" onclick="location.href = 'https://dev.jokazaki.biz:8443/employees-list.php'" value="「従業員一覧」に戻る" class="button">
                 <br/>
-                
+
 
                 <!--表見出し-->
                 <table>
@@ -258,25 +261,25 @@
                         </tr>
 
 
-                    <?php foreach ($result as $rows) { ?> <!--$resultの配列各要素を$rowsとして取り出し、順次実行。-->
+                        <?php foreach ($result as $rows) { ?> <!--$resultの配列各要素を$rowsとして取り出し、順次実行。-->
 
-                        <!--エスケープ処理とSQL実行結果表示-->
-                        <tr>
-                            <th><?= htmlspecialchars($rows['employee_id']) ?></th>
-                            <th><?= htmlspecialchars($rows['employee_code']) ?></th>
-                            <th><?= htmlspecialchars($rows['employee_name']) ?></th>
-                            <th><?= htmlspecialchars($rows['department_name']) ?></th>
-                            <th><?= htmlspecialchars($rows['created_at']) ?></th>
-                            <th><?= htmlspecialchars($rows['updated_at']) ?></th>
-                        </tr>
+                            <!--エスケープ処理とSQL実行結果表示-->
+                            <tr>
+                                <th><?= htmlspecialchars($rows['employee_id']) ?></th>
+                                <th><?= htmlspecialchars($rows['employee_code']) ?></th>
+                                <th><?= htmlspecialchars($rows['employee_name']) ?></th>
+                                <th><?= htmlspecialchars($rows['department_name']) ?></th>
+                                <th><?= htmlspecialchars($rows['created_at']) ?></th>
+                                <th><?= htmlspecialchars($rows['updated_at']) ?></th>
+                            </tr>
 
-                    <?php
-                    }
-                    $pdo = null; //PDOオブジェクト破棄
-                    ?>
-                        
-                </tbody>
-            </table>
+                            <?php
+                        }
+                        $pdo = null; //PDOオブジェクト破棄
+                        ?>
+
+                    </tbody>
+                </table>
         </div>
     </body>
 </html>

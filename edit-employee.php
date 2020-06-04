@@ -50,6 +50,7 @@
             <!--DBログイン-->
             <?php include('db-login.php'); ?>
             
+            <!--departmentsテーブルからdepartment_nameを取得-->
             <?php
             try {
                 $sql2 = "SELECT department_name FROM departments";

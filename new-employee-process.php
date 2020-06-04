@@ -63,6 +63,7 @@
                 $created_at = date("Y-m-d");
                 $updated_at = date("Y-m-d");
                 
+                //$department_nameと一致するdepartment_idを取得
                 $department_name = $_SESSION['department_name'];
                 $sql2 = "SELECT department_id from company.departments WHERE department_name LIKE :department_name";
                 $stmt2 = $pdo->prepare($sql2);

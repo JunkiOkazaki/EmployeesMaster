@@ -54,7 +54,18 @@
 
 
             <!--部署ID取得-->
-            <?php include('get-did.php'); ?>
+            <?php
+            try {
+                $sql2 = "SELECT department_id from company.departments WHERE department_name LIKE :department_name";
+                $stmt2 = $pdo->prepare($sql2);
+                $stmt2->bindParam(':department_name', $department_name, PDO::PARAM_STR);
+                $stmt2->execute();
+                $result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+            } catch (PDOException $Exception) {
+                die('接続エラー：' . $Exception->getMessage());
+                echo "データベース処理時にエラーが発生しました。";
+            }
+            ?>
 
             <?php
             //SQL文組み立てには、プレースホルダ（バインド機構）を用いる。
@@ -66,7 +77,7 @@
             $flag = 0;
             $class = "";
 
-
+            //入力チェック後にdepartment_nameと一致するdepartment_idを取得
             if (!empty($department_name)) {
                 if (preg_match('/^[ぁ-んァ-ヶー一-龠]+$/u', $department_name)) {
                     $department_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $department_name);
@@ -94,8 +105,6 @@
             }
 
             $department_id = $result2[0]['department_id'];
-
-
 
 
             //入力チェックと条件判定をし、問題なければSQL文組み立てと実行。
@@ -206,7 +215,7 @@
             <!--ボタン-->
             <form method="post" action="edit-employee-process.php">
                 <input type="submit" name="filter" value="レコード更新" class="button <?PHP echo $class; ?>"><!--入力チェックで問題があった場合は非表示-->
-                <input type="button" onclick="history.back()" value="戻る" class="button">
+                <input type="button" onclick="history.back()" value="戻る" class="button"><!--「戻る」ボタン-->
                 <br/>
 
         </div>

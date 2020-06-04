@@ -26,11 +26,11 @@
         <meta name="msapplication-square310x310logo" content="large.jpg"/>
         <meta name="msapplication-TileColor" content="#FAA500"/>
 
-
         <title>従業員削除完了</title>
     </head>
     <body>
 
+        
         <!--セッション開始-->
         <?php include('session-start.php'); ?>
 
@@ -43,10 +43,8 @@
             <li><a href="https://dev.jokazaki.biz:8443/employees-master-manual.php">マニュアル</a></li>
         </ul>
 
-
         <!--メインコンテンツボックス-->
         <div class="mycontents">
-
 
             <h1>従業員削除完了</h1>
 
@@ -63,6 +61,7 @@
                 $stmt->execute();
             } catch (PDOException $Exception) {
                 die('接続エラー：' . $Exception->getMessage());
+                echo "データベース処理時にエラーが発生しました。";
             }
             ?>
 

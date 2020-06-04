@@ -75,7 +75,7 @@
                 $class = "hide";
             } else {
                 try {
-                    $sql = "SELECT employee_id, employee_code, employee_name, department_id, created_at, updated_at FROM company.employees WHERE delete_flag=0 AND employee_id=:employee_id";
+                    $sql = "SELECT employees.employee_id, employees.employee_code, employees.employee_name, departments.department_name, employees.created_at, employees.updated_at FROM company.employees LEFT JOIN company.departments ON employees.department_id=departments.department_id WHERE employees.delete_flag=0 AND employees.employee_id=:employee_id";
                     $stmt = $pdo->prepare($sql);
                     $stmt->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);
                     $stmt->execute();
@@ -83,7 +83,6 @@
                 } catch (PDOException $Exception) {
                     die('接続エラー：' . $Exception->getMessage());
                     echo "データベース処理時にエラーが発生しました。";
-                    echo '<input type="button" onclick="history.back()" value="戻る" class="button">';
                 }
 
                 if (empty($result[0]['employee_id'])) {
@@ -106,7 +105,7 @@
                         <th class="midashi">従業員ID</th>
                         <th class="midashi">従業員コード</th>
                         <th class="midashi">氏名</th>
-                        <th class="midashi">部署ID</th>
+                        <th class="midashi">部署名</th>
                         <th class="midashi">データ登録日時</th>
                         <th class="midashi">データ更新日時</th>
                     </tr>
@@ -117,7 +116,7 @@
                             <th><?= htmlspecialchars($rows['employee_id']) ?></th>
                             <th><?= htmlspecialchars($rows['employee_code']) ?></th>
                             <th><?= htmlspecialchars($rows['employee_name']) ?></th>
-                            <th><?= htmlspecialchars($rows['department_id']) ?></th>
+                            <th><?= htmlspecialchars($rows['department_name']) ?></th>
                             <th><?= htmlspecialchars($rows['created_at']) ?></th>
                             <th><?= htmlspecialchars($rows['updated_at']) ?></th>
                         </tr>

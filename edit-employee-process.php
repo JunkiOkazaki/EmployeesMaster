@@ -58,11 +58,10 @@
                 $employee_id = $_SESSION['employee_id'];
                 $employee_code = $_SESSION['employee_code'];
                 $employee_name = $_SESSION['employee_name'];
-                $updated_at = date("Y-m-d");
+                $updated_at = date("Y-m-d");               
                 
-                
-            try{
                 //departmentsテーブルをdepartment_nameでSELECTし、department_idを得る。
+            try{                
                 $department_name = $_SESSION['department_name'];
                 $sql2 = "SELECT department_id from company.departments WHERE department_name LIKE :department_name";
                 $stmt2 = $pdo->prepare($sql2);
@@ -74,7 +73,7 @@
                 die('接続エラー：' . $Exception->getMessage());
                 echo "データベース処理時にエラーが発生しました。";
                 echo '<input type="button" onclick="history.back()" value="戻る" class="button">';
-            }    
+            }
                 
             try {
                 //--SQL文組み立てと実行
@@ -97,7 +96,7 @@
                 $pdo = null; //PDOオブジェクト破棄
             ?>
             
-            <!--ボタン-->
+            <!--従業員編集ページに戻るボタン-->
             <input type="button" onclick="location.href = 'https://dev.jokazaki.biz:8443/edit-employee.php'" value="「従業員編集」に戻る" class="button">
 
         </div>
