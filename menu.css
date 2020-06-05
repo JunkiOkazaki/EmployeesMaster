@@ -280,14 +280,17 @@ iframe{
     }
 }
 
+/* ドロップダウンメニュー装飾 */
 select{
     width: 100%;
     font-size: 16px;
+    letter-spacing: 0.5px;
+    appearance:none;
     color: #aaaaaa;
 }
 
-option{
-    font-size: 16px;
-    letter-spacing: 0.5px;
-    color: #aaaaaa;
+option:enabled{
+    color: #000000;
 }
+
+
