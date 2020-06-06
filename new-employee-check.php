@@ -62,37 +62,8 @@
             $flag = 0;
             $class = "";
 
-            //入力チェック後にSQL文組み立てと実行
-            /*
-            if (!empty($employee_id)) {
-                if (preg_match('/^[0-9]{1,4}$/', $employee_id)) {
-                    try {
-                        $employee_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_id);
-                        $sql = "SELECT employee_id FROM company.employees WHERE employee_id=:employee_id AND delete_flag=0";
-                        $stmt = $pdo->prepare($sql);
-                        $stmt->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);
-                        $stmt->execute();
-                        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                        if ($result[0]['employee_id'] == $employee_id) {
-                            $flag = 1;
-                            echo "<div class=error2>従業員ID:&nbsp;" . $employee_id . "&nbsp;のレコードはすでに存在します。</div>";
-                        }
-                    } catch (PDOException $Exception) {
-                        die('接続エラー：' . $Exception->getMessage());
-                        echo "データベース処理時にエラーが発生しました。<br/>従業員ID:&nbsp;" . $employee_id . "&nbsp;はすでに使用されています。";
-                        echo '<input type="button" onclick="history.back()" value="戻る" class="button">';
-                    }
-                } else {
-                    $flag = 1;
-                    echo "<div class ='error2'>「従業員ID」欄には、1～4桁の半角数字を入力してください。</div>";
-                }
-            } else {
-                $flag = 1;
-                echo "<div class ='error2'>「従業員ID」欄が未入力です。</div>";
-            }
-             */
 
-
+            //入力チェックをして問題なければ、SQL文組み立てと実行
             if (!empty($employee_code)) {
                 if (preg_match('/^[0-9]{1,4}$/', $employee_code)) {
                     $employee_code = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_code);
@@ -160,9 +131,7 @@
                     die('接続エラー：' . $Exception->getMessage());
                 }
             }
-            var_dump($stmt);
-            var_dump($result);
-            var_dump($result[0]["MAX(employee_id)"]);
+
             
             $pdo = null; //PDOオブジェクト破棄
             ?>

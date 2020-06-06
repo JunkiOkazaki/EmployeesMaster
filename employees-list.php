@@ -85,10 +85,10 @@
             <?php
             try {
                 $sql = "SELECT employees.employee_id, employees.employee_code, employees.employee_name, departments.department_name, employees.created_at, employees.updated_at FROM company.employees LEFT JOIN company.departments ON employees.department_id = departments.department_id WHERE employees.delete_flag=0";
-                $sql2 = "SELECT department_name FROM departments";
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute();
                 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                $sql2 = "SELECT department_name FROM departments";
                 $stmt2 = $pdo->prepare($sql2);
                 $stmt2->execute();
                 $result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
