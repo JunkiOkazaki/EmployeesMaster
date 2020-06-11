@@ -78,7 +78,7 @@
 
 
             if (!empty($employee_name)) {
-                if (preg_match('/^[ぁ-んァ-ヶー一-龠]+$/u', $employee_name)) {
+                if (preg_match('/^[ぁ-んァ-ヶー一-龠]{1,30}+$/u', $employee_name)) {
                     $employee_name = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_name);
                 } else {
                     $flag = 1;
@@ -90,7 +90,7 @@
             }
 
             if (!empty($department_name)) {
-                if (preg_match('/^[ぁ-んァ-ヶー一-龠]+$/u', $department_name)) {
+                if (preg_match('/^[ぁ-んァ-ヶー一-龠]{1,10}+$/u', $department_name)) {
                     try {
                         $department_name = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $department_name);
                         $sql2 = "SELECT employees.employee_id, employees.employee_code, employees.employee_name, departments.department_name, employees.created_at, employees.updated_at FROM company.employees LEFT JOIN company.departments ON employees.department_id = departments.department_id WHERE employees.delete_flag=0";

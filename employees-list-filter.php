@@ -150,7 +150,7 @@
                     echo "<div class='error'>「従業員コード」欄には、1～3桁の半角数字を入力してください。</div>";
                 }
             } elseif (!empty($employee_name)) {
-                if (preg_match('/^[ぁ-んァ-ヶー一-龠]+$/u', $employee_name)) {
+                if (preg_match('/^[ぁ-んァ-ヶー一-龠]{1,30}+$/u', $employee_name)) {
                     $employee_name = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_name);
                     try {
                         $sql = "SELECT employees.employee_id, employees.employee_code, employees.employee_name, departments.department_name, employees.created_at, employees.updated_at FROM company.employees LEFT JOIN company.departments ON employees.department_id=departments.department_id WHERE employees.employee_name LIKE :employee_name AND employees.delete_flag=0";
@@ -170,7 +170,7 @@
                     echo "<div class='error'>「氏名」欄には、1～30文字の全角文字列を入力してください。</div>";
                 }
             } elseif (!empty($department_name)) {
-                if (preg_match('/^[ぁ-んァ-ヶー一-龠]+$/u', $department_name)) {
+                if (preg_match('/^[ぁ-んァ-ヶー一-龠]{1,10}+$/u', $department_name)) {
                     try {
                         $department_name = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $department_name);
                         $sql = "SELECT employees.employee_id, employees.employee_code, employees.employee_name, departments.department_name, employees.created_at, employees.updated_at FROM company.employees LEFT JOIN company.departments ON employees.department_id=departments.department_id WHERE departments.department_name LIKE :department_name AND employees.delete_flag=0";

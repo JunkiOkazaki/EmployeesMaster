@@ -77,35 +77,6 @@
             $flag = 0;
             $class = "";
 
-            //入力チェック後にdepartment_nameと一致するdepartment_idを取得
-            if (!empty($department_name)) {
-                if (preg_match('/^[ぁ-んァ-ヶー一-龠]+$/u', $department_name)) {
-                    $department_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $department_name);
-                    try {
-                        $sql2 = "SELECT department_id from company.departments WHERE department_name LIKE :department_name";
-                        $stmt2 = $pdo->prepare($sql2);
-                        $stmt2->bindParam(':department_name', $department_name, PDO::PARAM_STR);
-                        $stmt2->execute();
-                        $result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
-                        if (empty($result2[0][department_id])) {
-                            $flag = 1;
-                            echo "<div class='error2'>部署ID:&nbsp;" . $department_id . "&nbspは未登録です。<a href='https://dev.jokazaki.biz:8443/employees-master-manual.php#about2'>マニュアル</a>を参照し、登録済み部署の中から指定してください。</div>";
-                        }
-                    } catch (PDOException $Exception) {
-                        die('接続エラー：' . $Exception->getMessage());
-                        echo "データベース処理時にエラーが発生しました。";
-                    }
-                } else {
-                    $flag = 1;
-                    echo "<div class='error2'>「部署ID」欄には、1～3桁の半角数字を入力してください。</div>";
-                }
-            } else {
-                $flag = 1;
-                echo "<div class ='error2'>「部署ID」欄が未入力です。</div>";
-            }
-
-            $department_id = $result2[0]['department_id'];
-
 
             //入力チェックと条件判定をし、問題なければSQL文組み立てと実行。
             if (!empty($employee_id)) {
@@ -150,7 +121,7 @@
 
 
             if (!empty($employee_name)) {
-                if (preg_match('/^[ぁ-んァ-ヶー一-龠]+$/u', $employee_name)) {
+                if (preg_match('/^[ぁ-んァ-ヶー一-龠]{1,30}+$/u', $employee_name)) {
                     $employee_name = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $employee_name);
                 } else {
                     $flag = 1;
@@ -162,26 +133,33 @@
             }
 
 
-            if (!empty($department_id)) {
-                if (preg_match('/^[0-9]{1,4}$/', $department_id)) {
-                    $department_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $department_id);
-                    $sql3 = "SELECT department_id from company.departments WHERE department_id=:department_id AND delete_flag=0";
-                    $stmt3 = $pdo->prepare($sql3);
-                    $stmt3->bindParam(':department_id', $department_id, PDO::PARAM_INT);
-                    $stmt3->execute();
-                    $result3 = $stmt3->fetchAll(PDO::FETCH_ASSOC);
-                    if (empty($result3[0][department_id])) {
-                        $flag = 1;
-                        echo "<div class='error2'>部署ID:&nbsp;" . $department_id . "&nbspは未登録です。<a href='https://dev.jokazaki.biz:8443/employees-master-manual.php#about2'>マニュアル</a>を参照し、登録済み部署の中から指定してください。</div>";
+            //入力チェック後にdepartment_nameと一致するdepartment_idを取得
+            if (!empty($department_name)) {
+                if (preg_match('/^[ぁ-んァ-ヶー一-龠]{1,10}+$/u', $department_name)) {
+                    $department_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $department_name);
+                    try {
+                        $sql2 = "SELECT department_id from company.departments WHERE department_name LIKE :department_name AND delete_flag=0";
+                        $stmt2 = $pdo->prepare($sql2);
+                        $stmt2->bindParam(':department_name', $department_name, PDO::PARAM_STR);
+                        $stmt2->execute();
+                        $result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+                        if (empty($result2[0][department_id])) {
+                            $flag = 1;
+                            echo "<div class='error2'>部署名:&nbsp;" . $department_name . "&nbspは未登録です。<a href='https://dev.jokazaki.biz:8443/employees-master-manual.php#about2'>マニュアル</a>を参照し、登録済み部署の中から指定してください。</div>";
+                        }
+                    } catch (PDOException $Exception) {
+                        echo "データベース処理時にエラーが発生しました。";
                     }
                 } else {
                     $flag = 1;
-                    echo "<div class='error2'>「部署ID」欄には、1～3桁の半角数字を入力してください。</div>";
+                    echo "<div class='error2'>「部署名」欄には、1～10文字の全角文字列を入力してください。</div>";
                 }
             } else {
                 $flag = 1;
-                echo "<div class ='error2'>「部署ID」欄が未入力です。</div>";
+                echo "<div class ='error2'>「部署名」欄が未入力です。</div>";
             }
+            
+            $department_id = $result2[0]['department_id'];
 
 
             if ($flag == 1) {
@@ -191,6 +169,7 @@
             }
             ?>
 
+            
             <!--表見出し-->
             <table>
                 <tbody>
