@@ -163,7 +163,7 @@
             </table>
 
             <!--ボタン-->
-            <form method="post" action="new-employee-process.php">
+            <form method="post" autocomplete="off" action="new-employee-process.php">
                 <input type="submit" name="filter" value="登録" class="button <?PHP echo $class; ?>"> <!--入力チェックで問題がなかった場合のみ表示-->
                 <input type="button" onclick="history.back()" value="戻る" class="button">
                 <br/>

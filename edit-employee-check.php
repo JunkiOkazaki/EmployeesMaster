@@ -192,7 +192,7 @@
             </table>
 
             <!--ボタン-->
-            <form method="post" action="edit-employee-process.php">
+            <form method="post" autocomplete="off" action="edit-employee-process.php">
                 <input type="submit" name="filter" value="レコード更新" class="button <?PHP echo $class; ?>"><!--入力チェックで問題があった場合は非表示-->
                 <input type="button" onclick="history.back()" value="戻る" class="button"><!--「戻る」ボタン-->
                 <br/>

@@ -67,7 +67,7 @@
             ?>
 
             <!--入力欄-->
-            <form method="post" action="new-employee-check.php">
+            <form method="post" autocomplete="off" action="new-employee-check.php">
                 <!--<div class="cp_iptxt"><input class="ef" type="text" name="employee_id" size="30" placeholder=""><label>従業員ID</label><span class="focus_line"></span></div>-->
                 <div class="cp_iptxt"><input class="ef" type="text" name="employee_code" size="30" placeholder=""><label>従業員コード</label><span class="focus_line"></span></div>
                 <div class="cp_iptxt"><input class="ef" type="text" name="employee_name" size="30" placeholder=""><label>氏　　名</label><span class="focus_line"></span></div>

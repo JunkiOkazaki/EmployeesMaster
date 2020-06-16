@@ -130,7 +130,7 @@
             <br/>
 
             <!--ボタン-->
-            <form method="post" action="delete-employee-process.php">
+            <form method="post" autocomplete="off" action="delete-employee-process.php">
                 <input type="submit" name="delete" value="レコード削除" class="button <?php echo $class; ?>"><!--入力チェックで問題がなかった場合のみ表示-->
                 <input type="button" onclick="history.back()" value="戻る" class="button">
                 <br/>
