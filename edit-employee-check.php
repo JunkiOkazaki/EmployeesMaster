@@ -134,7 +134,7 @@
 
 
             //入力チェック後にdepartment_nameと一致するdepartment_idを取得
-            if (!empty($department_name)) {
+            if (strpos($department_name,'部署名を選択')===false&&!empty($department_name)) {
                 if (preg_match('/^[ぁ-んァ-ヶー一-龠]{1,10}+$/u', $department_name)) {
                     $department_id = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $department_name);
                     try {

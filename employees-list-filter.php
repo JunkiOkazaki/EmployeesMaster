@@ -169,7 +169,7 @@
                 } else {
                     echo "<div class='error'>「氏名」欄には、1～30文字の全角文字列を入力してください。</div>";
                 }
-            } elseif (!empty($department_name)) {
+            } elseif (strpos($department_name,'部署名を選択')===false && !empty($department_name)) {
                 if (preg_match('/^[ぁ-んァ-ヶー一-龠]{1,10}+$/u', $department_name)) {
                     try {
                         $department_name = preg_replace('/^[\s　]*(.*?)[\s　]*$/u', '$1', $department_name);
