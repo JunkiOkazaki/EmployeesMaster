@@ -1,8 +1,5 @@
 <html>
     <head>
-
-        <!-- ウェブクローラ拒否 -->
-        <meta name="robots" content="noindex">
         
         <!-- 文字コード -->
         <meta charset="utf-8">
