@@ -4,37 +4,37 @@
 
    <url>
       <loc>https://dev.jokazaki.biz:8443/</loc>
-      <lastmod>2020-07-24</lastmod>
-      <changefreq>monthly</changefreq>
       <priority>1.0</priority>
+      <changefreq>monthly</changefreq>
+      <lastmod>2020-07-24</lastmod>
    </url>
 
    <url>
       <loc>https://dev.jokazaki.biz:8443/new-employee.php</loc>
-      <lastmod>2020-07-24</lastmod>
-      <changefreq>monthly</changefreq>
       <priority>0.5</priority>
+      <changefreq>monthly</changefreq>
+      <lastmod>2020-07-24</lastmod>     
    </url>
 
    <url>
       <loc>https://dev.jokazaki.biz:8443/edit-employee.php</loc>
-      <lastmod>2020-07-24</lastmod>
-      <changefreq>monthly</changefreq>
       <priority>0.5</priority>
+      <changefreq>monthly</changefreq>      
+      <lastmod>2020-07-24</lastmod>  
    </url>
 
    <url>
       <loc>https://dev.jokazaki.biz:8443/delete-employee.html</loc>
-      <lastmod>2020-07-24</lastmod>
-      <changefreq>monthly</changefreq>
       <priority>0.5</priority>
+      <changefreq>monthly</changefreq>
+      <lastmod>2020-07-24</lastmod> 
    </url>
 
    <url>
       <loc>https://dev.jokazaki.biz:8443/employees-master-manual.php</loc>
-      <lastmod>2020-07-24</lastmod>
-      <changefreq>monthly</changefreq>
       <priority>0.5</priority>
+      <changefreq>monthly</changefreq>
+      <lastmod>2020-07-24</lastmod>
    </url>
 
 </urlset>
