@@ -36,11 +36,11 @@
 
         <!--トップメニュー-->
         <ul>
-            <li><a href="https://dev.jokazaki.net/employees-list.php">従業員一覧</a></li>
-            <li><a href="https://dev.jokazaki.net/new-employee.php">従業員登録</a></li>
-            <li><a href="https://dev.jokazaki.net/edit-employee.php">従業員編集</a></li>
-            <li><a class="active" href="https://dev.jokazaki.net/delete-employee.html">従業員削除</a></li>
-            <li><a href="https://dev.jokazaki.net/employees-master-manual.php">マニュアル</a></li>
+            <li><a href="https://www.jokazaki.net/dev/employees-list.php">従業員一覧</a></li>
+            <li><a href="https://www.jokazaki.net/dev/new-employee.php">従業員登録</a></li>
+            <li><a href="https://www.jokazaki.net/dev/edit-employee.php">従業員編集</a></li>
+            <li><a class="active" href="https://www.jokazaki.net/dev/delete-employee.html">従業員削除</a></li>
+            <li><a href="https://www.jokazaki.net/dev/employees-master-manual.php">マニュアル</a></li>
         </ul>
 
         <!--メインコンテンツボックス-->
