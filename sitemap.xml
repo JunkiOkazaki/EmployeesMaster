@@ -3,35 +3,35 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
    <url>
-      <loc>https://www.jokazaki.net/dev/</loc>
+      <loc>https://dev.jokazaki.net:8443/</loc>
       <priority>1.0</priority>
       <changefreq>monthly</changefreq>
       <lastmod>2020-07-24</lastmod>
    </url>
 
    <url>
-      <loc>https://www.jokazaki.net/dev/new-employee.php</loc>
+      <loc>https://dev.jokazaki.net:8443/new-employee.php</loc>
       <priority>0.5</priority>
       <changefreq>monthly</changefreq>
       <lastmod>2020-07-24</lastmod>     
    </url>
 
    <url>
-      <loc>https://www.jokazaki.net/dev/edit-employee.php</loc>
+      <loc>https://dev.jokazaki.net:8443/edit-employee.php</loc>
       <priority>0.5</priority>
       <changefreq>monthly</changefreq>      
       <lastmod>2020-07-24</lastmod>  
    </url>
 
    <url>
-      <loc>https://www.jokazaki.net/dev/delete-employee.html</loc>
+      <loc>https://dev.jokazaki.net:8443/delete-employee.html</loc>
       <priority>0.5</priority>
       <changefreq>monthly</changefreq>
       <lastmod>2020-07-24</lastmod> 
    </url>
 
    <url>
-      <loc>https://www.jokazaki.net/dev/employees-master-manual.php</loc>
+      <loc>https://dev.jokazaki.net:8443/employees-master-manual.php</loc>
       <priority>0.5</priority>
       <changefreq>monthly</changefreq>
       <lastmod>2020-07-24</lastmod>

@@ -68,11 +68,11 @@
 
         <!--ナビゲーションバー-->    
         <ul>
-            <li><a class="active" href="https://www.jokazaki.net/dev/employees-list.php">従業員一覧</a></li>
-            <li><a href="https://www.jokazaki.net/dev/new-employee.php">従業員登録</a></li>
-            <li><a href="https://www.jokazaki.net/dev/edit-employee.php">従業員編集</a></li>
-            <li><a href="https://www.jokazaki.net/dev/delete-employee.html">従業員削除</a></li>
-            <li><a href="https://www.jokazaki.net/dev/employees-master-manual.php">マニュアル</a></li>
+            <li><a class="active" href="https://dev.jokazaki.net:8443/employees-list.php">従業員一覧</a></li>
+            <li><a href="https://dev.jokazaki.net:8443/new-employee.php">従業員登録</a></li>
+            <li><a href="https://dev.jokazaki.net:8443/edit-employee.php">従業員編集</a></li>
+            <li><a href="https://dev.jokazaki.net:8443/delete-employee.html">従業員削除</a></li>
+            <li><a href="https://dev.jokazaki.net:8443/employees-master-manual.php">マニュアル</a></li>
         </ul>
 
 
@@ -180,7 +180,7 @@
                         $stmt->execute();
                         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         if (empty($result[0]['department_name'])) {
-                            echo "<div class='error2'>部署名:&nbsp;" . $department_name . "&nbspは未登録です。<a href='https://www.jokazaki.net/dev/employees-master-manual.php#about2'>マニュアル</a>を参照し、登録済み部署の中から指定してください。</div>";
+                            echo "<div class='error2'>部署名:&nbsp;" . $department_name . "&nbspは未登録です。<a href='https://dev.jokazaki.net:8443/employees-master-manual.php#about2'>マニュアル</a>を参照し、登録済み部署の中から指定してください。</div>";
                         }
                     } catch (PDOException $Exception) {
                         die('接続エラー：' . $Exception->getMessage());
@@ -245,7 +245,7 @@
                 <div  class="cp_iptxt"><input class="ef" id="datepicker_ca" type="text" name="created_at" size="30" placeholder="" ><label>登録日時</label><span class="focus_line"></span></div>
                 <div  class="cp_iptxt"><input class="ef" id="datepicker_ua" type="text" name="updated_at" size="30" placeholder="" ><label>更新日時</label><span class="focus_line"></span></div>
                 <input type="submit" name="filter" value="フィルタ再適用" class="button">
-                <input type="button" onclick="location.href = 'https://www.jokazaki.net/dev/employees-list.php'" value="「従業員一覧」に戻る" class="button">
+                <input type="button" onclick="location.href = 'https://dev.jokazaki.net:8443/employees-list.php'" value="「従業員一覧」に戻る" class="button">
                 <br/>
 
 
